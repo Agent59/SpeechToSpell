@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "speech_to_spell",
+  "version": "${version}",
+
+  "name": "SpeechToSpell",
+  "description": "Do magic with your voice",
+  "authors": [
+    "agent59"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "",
+  "icon": "assets/stp/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.agent59.stp.Main"
+    ],
+    "client": [
+      "net.agent59.stp.Client"
+    ]
+  },
+  "mixins": [
+    "stp.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17",
+    "fabric-key-binding-api-v1": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
