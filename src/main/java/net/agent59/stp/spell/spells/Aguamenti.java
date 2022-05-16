@@ -1,12 +1,12 @@
 package net.agent59.stp.spell.spells;
 
+import net.agent59.stp.spell.PlayerEntityInterface;
+import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.BlockPlayerIsFacing;
 import net.agent59.stp.Main;
-import net.agent59.stp.spell.SpellHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -14,13 +14,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Aguamenti implements SpellHandler.SpellInterface {
-
-    int RANGE = 40;
+public class Aguamenti implements SpellInterface {
+    private final String NAME = "Aguamenti";
+    private final int RANGE = 40;
+    private final int CASTING_COOLDOWN = 100;
 
     @Override
     public String getName() {
-        return "Aguamenti";
+        return NAME;
     }
 
     @Override
@@ -28,12 +29,22 @@ public class Aguamenti implements SpellHandler.SpellInterface {
         return new Identifier(Main.MOD_ID, "textures/spell/aguamenti.png");
     }
 
+    @Override
+    public int getRange() {
+        return RANGE;
+    }
+
+    @Override
+    public int getCastingCooldown() {
+        return CASTING_COOLDOWN;
+    }
+
     // TODO add waterlogging and add particles, when trying to place in the nether
     @Override
     public void execute(PlayerEntity player) {
         // places a water source block on the block the player is looking at
         // the block can't be further than 40 blocks away
-        BlockPos blockPos = BlockPlayerIsFacing.getBlockInFront(player, RANGE);
+        BlockPos blockPos = BlockPlayerIsFacing.getBlockInFront(player, getRange());
         if (blockPos != null) {
             World world = player.getWorld();
 
@@ -54,8 +65,8 @@ public class Aguamenti implements SpellHandler.SpellInterface {
                 world.setBlockState(blockPos, blockState);
 
                 //set cooldown
-                Item item = player.getActiveItem().getItem();
-                player.getItemCooldownManager().set(item, castingCooldown);
+                //PlayerEntityInterface player1 = (PlayerEntityInterface)player;
+                //player1.getSpellcooldownManager().set(this, getCastingCooldown());
             }
         }
     }

@@ -9,16 +9,7 @@ import java.util.HashMap;
 
 public class SpellHandler {
 
-    public interface SpellInterface {
-
-        // TODO redo cooldown system (cooldown only accounted for every single spell, not for the wand or all spells)
-        int castingCooldown = 100;
-
-        String getName();
-        Identifier getIconIdentifier();
-
-        void execute(PlayerEntity player);
-    }
+    // TODO redo cooldown system (cooldown only accounted for every single spell, not for the wand or all spells)
 
     public static void executeSpell(String spellString, PlayerEntity player) {
         spellString = spellString.toUpperCase();

@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import io.github.cottonmc.cotton.gui.widget.icon.ItemIcon;
 import net.agent59.stp.Main;
+import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.UpdateNbt;
 import net.agent59.stp.spell.SpellHandler;
 import net.minecraft.item.ItemStack;
@@ -76,9 +77,9 @@ public class WandSettingsGui extends LightweightGuiDescription {
         WLabel spellsLabel = new WLabel(new TranslatableText("Spells"));
         spellPanel.add(spellsLabel, 6, 0);
 
-        ArrayList<SpellHandler.SpellInterface> spells = SpellHandler.getSpellList();
+        ArrayList<SpellInterface> spells = SpellHandler.getSpellList();
         ArrayList<String> spellNames = new ArrayList<String>();
-        for (SpellHandler.SpellInterface spell : spells) {
+        for (SpellInterface spell : spells) {
             spellNames.add(spell.getName());
         }
 

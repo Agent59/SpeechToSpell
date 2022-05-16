@@ -4,6 +4,7 @@
   "package": "net.agent59.stp.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "PlayerEntityMixin"
   ],
   "client": [
     "BipedEntityModelMixin",

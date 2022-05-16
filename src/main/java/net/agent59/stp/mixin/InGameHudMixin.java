@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.agent59.stp.Main;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.SpellHandler;
+import net.agent59.stp.spell.SpellInterface;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
@@ -62,7 +63,7 @@ public abstract class InGameHudMixin extends DrawableHelper {
                     String spellName = wand.getNbt().getString(Main.MOD_ID + ".hotbarSpell" + i);
                     if (!Objects.equals(spellName, "")) {
 
-                        SpellHandler.SpellInterface spell = SpellHandler.getSpellNameHashmap().get(spellName);
+                        SpellInterface spell = SpellHandler.getSpellNameHashmap().get(spellName);
 
                         Identifier spellIcon_Texture = spell.getIconIdentifier();
                         RenderSystem.setShaderTexture(0, spellIcon_Texture);
