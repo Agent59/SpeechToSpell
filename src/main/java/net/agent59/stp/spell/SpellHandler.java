@@ -1,12 +1,40 @@
 package net.agent59.stp.spell;
 
+import net.agent59.stp.Main;
 import net.agent59.stp.item.ModItems;
+import net.agent59.stp.item.custom.WandItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SpellHandler {
+
+    public static void executeSpellIfAllowed(ServerPlayerEntity player, String spellString) {
+        ItemStack wand;
+
+        if (((wand = player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = player.getOffHandStack()).getItem() instanceof WandItem)) {
+
+            // executes the spell if the player is holding rightclick with a wand or has the spell selected in his Spell-hotbar
+            // and if the wand has no cooldown
+            assert wand.getNbt() != null;
+            int selectedSlot = wand.getNbt().getInt(Main.MOD_ID + ".spellHotbarSelectedSlot");
+            String selectedHotbarSpellName = wand.getNbt().getString(Main.MOD_ID + ".hotbarSpell" + selectedSlot);
+
+            // get the spell by the string
+            SpellInterface spell = SpellHandler.getSpellNameHashmap().get(spellString);
+            assert spell != null;
+
+            // check if cooling down
+            boolean coolingDown = player.getItemCooldownManager().isCoolingDown(spell.asItem());
+
+            if ((player.getActiveItem() == wand || spellString.equals(selectedHotbarSpellName)) && !coolingDown) {
+                spell.execute(player);
+            }
+        }
+    }
+
 
     // when adding spells don't forget to add them to the array
     public static ArrayList<SpellInterface> getSpellList() {

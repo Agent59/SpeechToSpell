@@ -13,30 +13,8 @@ public class Network {
     // executes the spell, the client has sent as a String, on the server
     public static final boolean SPELL = ServerPlayNetworking.registerGlobalReceiver(
             new Identifier(Main.MOD_ID, "spell"), ((server, player, handler, buf, responseSender) -> {
-
                 String spellString = buf.readString();
-                System.out.println("\n HERE: " + spellString);
-
-                ItemStack wand;
-                if (((wand = player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = player.getOffHandStack()).getItem() instanceof WandItem)) {
-
-                    // executes the spell if the player is holding rightclick with a wand or has the spell selected in his Spell-hotbar
-                    // and if the wand has no cooldown
-                    assert wand.getNbt() != null;
-                    int selectedSlot = wand.getNbt().getInt(Main.MOD_ID + ".spellHotbarSelectedSlot");
-                    String selectedHotbarSpellName = wand.getNbt().getString(Main.MOD_ID + ".hotbarSpell" + selectedSlot);
-
-                    // get the spell by the string
-                    SpellInterface spell = SpellHandler.getSpellNameHashmap().get(spellString);
-                    assert spell != null;
-
-                    // check if cooling down
-                    boolean coolingDown = player.getItemCooldownManager().isCoolingDown(spell.asItem());
-
-                    if ((player.getActiveItem() == wand || spellString.equals(selectedHotbarSpellName)) && !coolingDown) {
-                        spell.execute(player);
-                    }
-                }
+                SpellHandler.executeSpellIfAllowed(player, spellString);
             }));
 
     public static final boolean UPDATEWANDNBT = ServerPlayNetworking.registerGlobalReceiver(
