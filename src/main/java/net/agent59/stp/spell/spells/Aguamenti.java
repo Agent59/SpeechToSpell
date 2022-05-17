@@ -1,26 +1,30 @@
 package net.agent59.stp.spell.spells;
 
-import net.agent59.stp.spell.PlayerEntityInterface;
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.BlockPlayerIsFacing;
 import net.agent59.stp.Main;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Aguamenti implements SpellInterface {
-    private final String NAME = "Aguamenti";
-    private final int RANGE = 40;
-    private final int CASTING_COOLDOWN = 100;
+public class Aguamenti extends Item implements SpellInterface {
+    private static final String NAME = "Aguamenti";
+    private static final int RANGE = 40;
+    private static final int CASTING_COOLDOWN = 100;
+
+    public Aguamenti(Settings settings) {
+        super(settings);
+    }
 
     @Override
-    public String getName() {
+    public String getStringName() {
         return NAME;
     }
 
@@ -39,9 +43,10 @@ public class Aguamenti implements SpellInterface {
         return CASTING_COOLDOWN;
     }
 
+
     // TODO add waterlogging and add particles, when trying to place in the nether
     @Override
-    public void execute(PlayerEntity player) {
+    public void execute(ServerPlayerEntity player) {
         // places a water source block on the block the player is looking at
         // the block can't be further than 40 blocks away
         BlockPos blockPos = BlockPlayerIsFacing.getBlockInFront(player, getRange());
@@ -65,8 +70,7 @@ public class Aguamenti implements SpellInterface {
                 world.setBlockState(blockPos, blockState);
 
                 //set cooldown
-                //PlayerEntityInterface player1 = (PlayerEntityInterface)player;
-                //player1.getSpellcooldownManager().set(this, getCastingCooldown());
+                player.getItemCooldownManager().set(this.asItem(), getCastingCooldown());
             }
         }
     }

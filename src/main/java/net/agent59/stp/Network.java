@@ -2,6 +2,7 @@ package net.agent59.stp;
 
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.SpellHandler;
+import net.agent59.stp.spell.SpellInterface;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -9,12 +10,12 @@ import net.minecraft.util.Identifier;
 
 public class Network {
 
+    // executes the spell, the client has sent as a String, on the server
     public static final boolean SPELL = ServerPlayNetworking.registerGlobalReceiver(
             new Identifier(Main.MOD_ID, "spell"), ((server, player, handler, buf, responseSender) -> {
 
-                // executes the spell, the client has sent as a String, on the server
                 String spellString = buf.readString();
-                spellString = spellString.toUpperCase();
+                System.out.println("\n HERE: " + spellString);
 
                 ItemStack wand;
                 if (((wand = player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = player.getOffHandStack()).getItem() instanceof WandItem)) {
@@ -24,13 +25,16 @@ public class Network {
                     assert wand.getNbt() != null;
                     int selectedSlot = wand.getNbt().getInt(Main.MOD_ID + ".spellHotbarSelectedSlot");
                     String selectedHotbarSpellName = wand.getNbt().getString(Main.MOD_ID + ".hotbarSpell" + selectedSlot);
-                    selectedHotbarSpellName = selectedHotbarSpellName.toUpperCase();
 
+                    // get the spell by the string
+                    SpellInterface spell = SpellHandler.getSpellNameHashmap().get(spellString);
+                    assert spell != null;
 
-                    if ((player.getActiveItem() == wand || spellString.equals(selectedHotbarSpellName))
-                            && !player.getItemCooldownManager().isCoolingDown(player.getActiveItem().getItem())) {
+                    // check if cooling down
+                    boolean coolingDown = player.getItemCooldownManager().isCoolingDown(spell.asItem());
 
-                        SpellHandler.executeSpell(spellString, player);
+                    if ((player.getActiveItem() == wand || spellString.equals(selectedHotbarSpellName)) && !coolingDown) {
+                        spell.execute(player);
                     }
                 }
             }));

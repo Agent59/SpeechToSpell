@@ -13,6 +13,7 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
@@ -41,8 +42,9 @@ public class WandSettingsGui extends LightweightGuiDescription {
         for (int i = 1; i <= 5 ; i++) {
             WButton hotbarSpellButton = new WButton();
 
+            assert wand.getNbt() != null;
             String spellNameButton = wand.getNbt().getString(Main.MOD_ID + ".hotbarSpell" + i);
-            if (spellNameButton == "") {
+            if (Objects.equals(spellNameButton, "")) {
                 hotbarSpellButton.setLabel(new LiteralText("No spell selected"));
             } else {
                 hotbarSpellButton.setLabel(new LiteralText(spellNameButton));
@@ -78,9 +80,9 @@ public class WandSettingsGui extends LightweightGuiDescription {
         spellPanel.add(spellsLabel, 6, 0);
 
         ArrayList<SpellInterface> spells = SpellHandler.getSpellList();
-        ArrayList<String> spellNames = new ArrayList<String>();
+        ArrayList<String> spellNames = new ArrayList<>();
         for (SpellInterface spell : spells) {
-            spellNames.add(spell.getName());
+            spellNames.add(spell.getStringName());
         }
 
         BiConsumer<String, SpellButtonWidget> configurator = (String spellName, SpellButtonWidget spellButton) -> {

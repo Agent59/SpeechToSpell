@@ -1,13 +1,14 @@
 package net.agent59.stp.spell;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-public interface SpellInterface {
-    String getName();
+public interface SpellInterface extends ItemConvertible {
+    String getStringName();
     Identifier getIconIdentifier();
     int getRange();
     int getCastingCooldown();
 
-    void execute(PlayerEntity player);
+    void execute(ServerPlayerEntity player);
 }
