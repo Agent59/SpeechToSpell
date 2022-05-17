@@ -45,13 +45,14 @@ public class Sphinx4SpeechThread implements Runnable{
                 else if ((speechResult = recognizer.getResult()) != null && listening &&
                         this.user.getActiveItem().getItem() instanceof WandItem) {
                     String voice_command = speechResult.getHypothesis();
-                    System.out.println("Spell is: " + voice_command);
-                    this.user.sendMessage(new LiteralText(voice_command), true);
+                    String spellString = voice_command.charAt(0) + voice_command.substring(1).toLowerCase();
 
+                    System.out.println("Spell is: " + spellString);
+                    this.user.sendMessage(new LiteralText(spellString), true);
 
                     //create the packet for the spell to send to the server
                     PacketByteBuf buf = PacketByteBufs.create();
-                    buf.writeString(voice_command);
+                    buf.writeString(spellString);
                     //send the packaged spell to the server
                     ClientPlayNetworking.send(new Identifier(Main.MOD_ID, "spell"), buf);
                 }
