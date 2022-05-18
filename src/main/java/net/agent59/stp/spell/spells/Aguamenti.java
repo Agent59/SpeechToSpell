@@ -68,10 +68,10 @@ public class Aguamenti extends Item implements SpellInterface {
             } else {
                 BlockState blockState = Blocks.WATER.getDefaultState();
                 world.setBlockState(blockPos, blockState);
-
-                //set cooldown
-                player.getItemCooldownManager().set(this.asItem(), getCastingCooldown());
             }
+
+            //set cooldown
+            player.getItemCooldownManager().set(this.asItem(), getCastingCooldown());
         }
     }
 }
