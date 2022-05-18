@@ -5,10 +5,12 @@ import net.agent59.stp.Main;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.SpellHandler;
 import net.agent59.stp.spell.SpellInterface;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,18 +19,22 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Objects;
-
-// injects into the InGameHud and inserts the spell-hotbar to be rendered
 
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin extends DrawableHelper {
 
+    //inserts the spell-hotbar, which is to be rendered, behind minecrafts renderHotbar
     @Shadow
     protected abstract PlayerEntity getCameraPlayer();
 
     @Shadow
     private int scaledHeight;
+
+    @Shadow
+    protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed);
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbar(FLnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
     private void init(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
@@ -57,19 +63,29 @@ public abstract class InGameHudMixin extends DrawableHelper {
             this.drawTexture(matrices, hotbarX - 1, (hotbarY - 1) + 20 * (selectedSlot - 1), 22, 0, 24, 24);
 
 
+            ArrayList<SpellInterface> spellsInHotbar = new ArrayList<>();
             // spell-icons
-            for (int i = 1; i <= 5 ; i++){
+            int m = 1;
+            for (int i = 1; i <= 5; i++) {
                 if (wand.getNbt() != null) {
                     String spellName = wand.getNbt().getString(Main.MOD_ID + ".hotbarSpell" + i);
                     if (!Objects.equals(spellName, "")) {
-
                         SpellInterface spell = SpellHandler.getSpellNameHashmap().get(spellName);
 
-                        Identifier spellIcon_Texture = spell.getIconIdentifier();
-                        RenderSystem.setShaderTexture(0, spellIcon_Texture);
-
-                        this.drawTexture(matrices, hotbarX + 3, (hotbarY + 3) + 20 * (i - 1), 0, 0, 16, 16);
+                        this.renderHotbarItem(hotbarX + 3, (hotbarY + 3) + 20 * (i - 1), tickDelta, playerEntity, spell.asItem().getDefaultStack(), m++);
+                        spellsInHotbar.add(spell);
                     }
+                }
+            }
+
+            // spell-cooldown-icons
+            int i = 1;
+            for (SpellInterface spell: SpellHandler.getSpellList()) {
+                boolean isCoolingdown = playerEntity.getItemCooldownManager().isCoolingDown(spell.asItem());
+
+                if (isCoolingdown && !spellsInHotbar.contains(spell)) {
+                    this.renderHotbarItem(3 + 20 * (i - 1), 3, tickDelta, playerEntity, spell.asItem().getDefaultStack(), i);
+                    i++;
                 }
             }
         }
