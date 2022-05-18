@@ -45,6 +45,7 @@ public class Sphinx4SpeechThread implements Runnable{
                 else if ((speechResult = recognizer.getResult()) != null && listening &&
                         this.user.getActiveItem().getItem() instanceof WandItem) {
                     String voice_command = speechResult.getHypothesis();
+                    // voice_command is upperCase, so it has to be converted to titelCase
                     String spellString = voice_command.charAt(0) + voice_command.substring(1).toLowerCase();
 
                     System.out.println("Spell is: " + spellString);
