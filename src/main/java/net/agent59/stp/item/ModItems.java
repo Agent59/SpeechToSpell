@@ -13,7 +13,7 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
 
     public static final Item WAND = registerItem("wand",
-            new WandItem(new FabricItemSettings().group(ItemGroup.TOOLS)));
+            new WandItem(new FabricItemSettings()));
 
     public static final Item CRIMSON_WAND = registerItem("crimson_wand",
             new WandItem(new FabricItemSettings().group(ItemGroup.TOOLS)));
