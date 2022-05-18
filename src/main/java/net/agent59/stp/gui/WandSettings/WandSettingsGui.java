@@ -48,11 +48,13 @@ public class WandSettingsGui extends LightweightGuiDescription {
                 hotbarSpellButton.setLabel(new LiteralText("No spell selected"));
             } else {
                 hotbarSpellButton.setLabel(new LiteralText(spellNameButton));
+                hotbarSpellButton.setIcon(new ItemIcon(SpellHandler.getSpellNameHashmap().get(spellNameButton).asItem()));
             }
 
             int finalI = i;
             hotbarSpellButton.setOnClick(() -> {
                 hotbarSpellButton.setLabel(new LiteralText("No spell selected"));
+                hotbarSpellButton.setIcon(null);
                 UpdateNbt.updateWandNbtFromClient(".hotbarSpell" + finalI, "", 0);
 
                 selectedHotbarSpellButton.set(finalI);
@@ -87,12 +89,12 @@ public class WandSettingsGui extends LightweightGuiDescription {
 
         BiConsumer<String, SpellButtonWidget> configurator = (String spellName, SpellButtonWidget spellButton) -> {
             spellButton.button.setLabel(new LiteralText(spellName));
-            // TODO add spell icons
-            // spellButton.button.setIcon(new ItemIcon());
+            spellButton.button.setIcon(new ItemIcon(SpellHandler.getSpellNameHashmap().get(spellName).asItem()));
             spellButton.button.setOnClick(() -> {
                 if (selectedHotbarSpellButton.get() != 0) {
                     UpdateNbt.updateWandNbtFromClient(".hotbarSpell" + selectedHotbarSpellButton.get(), spellName, 0);
                     selectedHotbarSpellButtonObj.get().setLabel(new LiteralText(spellName));
+                    selectedHotbarSpellButtonObj.get().setIcon(new ItemIcon(SpellHandler.getSpellNameHashmap().get(spellName).asItem()));
                 }
             });
         };
