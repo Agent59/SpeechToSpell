@@ -37,9 +37,10 @@ public class Stupefy extends Item implements SpellInterface {
     public void execute(ServerPlayerEntity player) {
         World world = player.getWorld();
 
+        //RayEntity stupefyRay = new RayEntity(ModEntities.STUPEFY_RAY, world);
         RayEntity stupefyRay = new RayEntity(ModEntities.STUPEFY_RAY, world);
-        stupefyRay.setVelocity(player, RAY_SPEED, 0);
         stupefyRay.refreshPositionAndAngles(player);
+        stupefyRay.setVelocity(player, RAY_SPEED, 0);
 
         world.spawnEntity(stupefyRay);
 

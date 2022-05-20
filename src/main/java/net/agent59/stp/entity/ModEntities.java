@@ -4,6 +4,7 @@ import net.agent59.stp.Main;
 import net.agent59.stp.entity.custom.RayEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
@@ -13,13 +14,13 @@ import net.minecraft.util.registry.Registry;
 public class ModEntities {
 
     public static final EntityType<RayEntity> RAY = registerEntity("ray",
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).build());
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.4F)).build());
 
     public static final EntityType<RayEntity> AGUAMENTI_RAY = registerEntity("aguamenti_ray",
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).build());
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.4F)).build());
 
     public static final EntityType<RayEntity> STUPEFY_RAY = registerEntity("stupefy_ray",
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).build());
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.4F)).build());
 
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType<T> entityType) {
         return Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MOD_ID, name), entityType);
