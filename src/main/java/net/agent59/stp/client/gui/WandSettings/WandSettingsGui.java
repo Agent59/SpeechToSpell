@@ -1,4 +1,4 @@
-package net.agent59.stp.gui.WandSettings;
+package net.agent59.stp.client.gui.WandSettings;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
@@ -8,6 +8,8 @@ import net.agent59.stp.Main;
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.UpdateNbt;
 import net.agent59.stp.spell.SpellHandler;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
@@ -18,6 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 
+@Environment(EnvType.CLIENT)
 public class WandSettingsGui extends LightweightGuiDescription {
     public WandSettingsGui(ItemStack wand) {
         WGridPanel root = new WGridPanel();

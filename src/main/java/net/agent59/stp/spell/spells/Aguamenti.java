@@ -2,7 +2,6 @@ package net.agent59.stp.spell.spells;
 
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.BlockPlayerIsFacing;
-import net.agent59.stp.Main;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -10,7 +9,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -26,11 +24,6 @@ public class Aguamenti extends Item implements SpellInterface {
     @Override
     public String getStringName() {
         return NAME;
-    }
-
-    @Override
-    public Identifier getIconIdentifier() {
-        return new Identifier(Main.MOD_ID, "textures/spell/aguamenti.png");
     }
 
     @Override

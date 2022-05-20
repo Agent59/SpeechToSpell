@@ -3,6 +3,7 @@ package net.agent59.stp.item;
 import net.agent59.stp.Main;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.spells.Aguamenti;
+import net.agent59.stp.spell.spells.Stupefy;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -25,6 +26,9 @@ public class ModItems {
     // create a SpellItem for every spell: needed for the cooldown-system
     public static final Item AGUAMENTI = registerItem("aguamenti",
             new Aguamenti(new FabricItemSettings()));
+
+    public static final Item STUPEFY = registerItem("stupefy",
+            new Stupefy(new FabricItemSettings()));
 
 
     public static void registerModItems() {

@@ -22,7 +22,7 @@
       "net.agent59.stp.Main"
     ],
     "client": [
-      "net.agent59.stp.Client"
+      "net.agent59.stp.client.Client"
     ]
   },
   "mixins": [

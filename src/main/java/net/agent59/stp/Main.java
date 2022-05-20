@@ -1,6 +1,7 @@
 package net.agent59.stp;
 
 import net.agent59.stp.block.ModBlocks;
+import net.agent59.stp.entity.ModEntities;
 import net.agent59.stp.item.ModItems;
 import net.agent59.stp.util.FileHandler;
 import net.fabricmc.api.ModInitializer;
@@ -20,6 +21,7 @@ public class Main implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		Network.registerNetworkPackets();
+		ModEntities.registerModEntities();
 
 		LOGGER.info(Main.MOD_NAME + " mod in: " + FileHandler.PROJECT_DIRECTORY);
 	}

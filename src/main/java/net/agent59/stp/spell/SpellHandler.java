@@ -4,6 +4,7 @@ import net.agent59.stp.Main;
 import net.agent59.stp.item.ModItems;
 import net.agent59.stp.item.custom.WandItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class SpellHandler {
     public static ArrayList<SpellInterface> getSpellList() {
         ArrayList<SpellInterface> spellsArray = new ArrayList<>();
         spellsArray.add((SpellInterface) new ItemStack(ModItems.AGUAMENTI).getItem().asItem());
+        spellsArray.add((SpellInterface) new ItemStack(ModItems.STUPEFY).getItem().asItem());
 
         return spellsArray;
     }
