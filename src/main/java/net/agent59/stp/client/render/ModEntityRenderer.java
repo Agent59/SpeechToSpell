@@ -23,8 +23,6 @@ public class ModEntityRenderer {
 
         EntityRendererRegistry.register(ModEntities.RAY,
                 (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 1F, 1F, 1F, 0.2F));
-        EntityRendererRegistry.register(ModEntities.AGUAMENTI_RAY,
-                (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 0F, 0F, 1F, 0.2F));
         EntityRendererRegistry.register(ModEntities.STUPEFY_RAY,
                 (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 1F, 0F, 0F, 0.2F));
     }
