@@ -4,11 +4,12 @@ import net.agent59.stp.entity.ModEntities;
 import net.agent59.stp.entity.custom.RayEntity;
 import net.agent59.stp.spell.SpellInterface;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class Stupefy extends Item implements SpellInterface {
@@ -17,6 +18,7 @@ public class Stupefy extends Item implements SpellInterface {
     private static final int CASTING_COOLDOWN = 10;
     private static final float RAY_SPEED = 0.5F;
     private static final float DAMAGE = 2F;
+    private static final float KNOCKBACK_STRENGTH = 1.0F;
 
     public Stupefy(Settings settings) {
         super(settings);
@@ -45,8 +47,11 @@ public class Stupefy extends Item implements SpellInterface {
             protected void onEntityHit(EntityHitResult entityHitResult) {
                 Entity entity = entityHitResult.getEntity();
                 boolean bl = entity.damage(DamageSource.MAGIC, DAMAGE);
-                Direction direction = this.getMovementDirection().getOpposite();
-                entity.addVelocity(direction.getOffsetX(), direction.getOffsetY(), direction.getOffsetZ());
+                if (entity instanceof LivingEntity) {
+                    ((LivingEntity)entity).takeKnockback(KNOCKBACK_STRENGTH, MathHelper.sin((this.getYaw() + 180) * ((float)Math.PI / 180)), -MathHelper.cos((this.getYaw() + 180) * ((float)Math.PI / 180)));
+                } else {
+                    entity.addVelocity(-MathHelper.sin((this.getYaw() + 180) * ((float) Math.PI / 180)) * KNOCKBACK_STRENGTH, 0.1, MathHelper.cos((this.getYaw() + 180) * ((float) Math.PI / 180)) * KNOCKBACK_STRENGTH);
+                }
             }
         };
         stupefyRay.updatePositionAndAngles(player.getX(), player.getY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
