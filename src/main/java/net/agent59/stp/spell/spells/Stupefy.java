@@ -5,8 +5,6 @@ import net.agent59.stp.entity.custom.RayEntity;
 import net.agent59.stp.spell.SpellInterface;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.item.Item;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.EntityHitResult;
@@ -51,9 +49,8 @@ public class Stupefy extends Item implements SpellInterface {
                 entity.addVelocity(direction.getOffsetX(), direction.getOffsetY(), direction.getOffsetZ());
             }
         };
+        stupefyRay.updatePositionAndAngles(player.getX(), player.getY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
         stupefyRay.setVelocity(player, RAY_SPEED, 0);
-        stupefyRay.setRotationAndSpawnAndOwner(player);
-
         world.spawnEntity(stupefyRay);
 
         //set cooldown

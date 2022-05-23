@@ -3,7 +3,6 @@ package net.agent59.stp.entity.custom;
 
 import net.agent59.stp.ModParticles;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
 import net.minecraft.particle.ParticleEffect;
@@ -28,28 +27,27 @@ public class RayEntity extends ExplosiveProjectileEntity {
         float pitch = player.getPitch();
         float roll = player.getRoll();
 
-        float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-        float g = -MathHelper.sin((pitch + roll) * 0.017453292F);
-        float h = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-        this.setVelocity(f, g, h, speed, divergence);
+        float x = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+        float y = -MathHelper.sin((pitch + roll) * 0.017453292F);
+        float z = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+
+        Vec3d vec3d = (new Vec3d(x, y, z)).normalize().add(this.random.nextGaussian() * 0.007499999832361937 * (double)divergence, this.random.nextGaussian() * 0.007499999832361937 * (double)divergence, this.random.nextGaussian() * 0.007499999832361937 * (double)divergence).multiply(speed);
+        this.setVelocity(vec3d);
     }
 
-    public void setRotationAndSpawnAndOwner(LivingEntity entity) {
-        this.setOwner(entity);
-
-        float yaw = entity.getYaw();
-        //float yaw2 = (yaw >= ) ? yaw + 180 : yaw
-        float yaw3 = (0 - yaw);
-        float pitch = entity.getPitch();
-
-        this.setRotation(yaw3, pitch);
-        this.setPosition(entity.getPos());
-
+    @Override
+    public void setVelocityClient(double x, double y, double z) {
+        this.setVelocity(x, y, z);
+        if (this.prevPitch == 0.0F && this.prevYaw == 0.0F) {
+            this.prevPitch = this.getPitch();
+            this.prevYaw = this.getYaw();
+            this.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
+        }
     }
 
     @Override
     public void tick() {
-        //super.tick();
+        super.tick();
     }
 
     @Override
