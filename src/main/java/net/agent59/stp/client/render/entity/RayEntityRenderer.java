@@ -8,16 +8,20 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.client.render.entity.ShulkerBulletEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class RayEntityRenderer extends ShulkerBulletEntityRenderer {
+public class RayEntityRenderer extends EntityRenderer<RayEntity> {
 
     private static final Identifier TEXTURE = new Identifier("textures/entity/shulker/spark.png");
     private final RayEntityModel<RayEntity> model;
@@ -37,11 +41,11 @@ public class RayEntityRenderer extends ShulkerBulletEntityRenderer {
     }
 
     @Override
-    public void render(ShulkerBulletEntity shulkerBulletEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(RayEntity rayEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         matrixStack.push();
         matrixStack.scale(-1.0F, -1.0F, 1.0F);
-        float h = MathHelper.lerpAngle(shulkerBulletEntity.prevYaw, shulkerBulletEntity.getYaw(), g);
-        float j = MathHelper.lerp(g, shulkerBulletEntity.prevPitch, shulkerBulletEntity.getPitch());
+        float h = MathHelper.lerpAngle(rayEntity.prevYaw, rayEntity.getYaw(), g);
+        float j = MathHelper.lerp(g, rayEntity.prevPitch, rayEntity.getPitch());
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(TEXTURE));
         this.model.setRectangleRotation(h, j);
         this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, red, green, blue, alpha);
@@ -49,7 +53,7 @@ public class RayEntityRenderer extends ShulkerBulletEntityRenderer {
     }
 
     @Override
-    public Identifier getTexture(ShulkerBulletEntity shulkerBulletEntity) {
-        return TEXTURE;
+    public Identifier getTexture(RayEntity entity) {
+        return null;
     }
 }

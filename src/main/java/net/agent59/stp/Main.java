@@ -22,6 +22,7 @@ public class Main implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		Network.registerNetworkPackets();
 		ModEntities.registerModEntities();
+		ModParticles.registerModParticles();
 
 		LOGGER.info(Main.MOD_NAME + " mod in: " + FileHandler.PROJECT_DIRECTORY);
 	}
