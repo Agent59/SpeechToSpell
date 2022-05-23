@@ -7,6 +7,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+
+// TODO its usages with Entity.raycast
+
 public class BlockPlayerIsFacing {
     // calculates the block the player is facing at
     // this is Based on the raycast method of the Item class
