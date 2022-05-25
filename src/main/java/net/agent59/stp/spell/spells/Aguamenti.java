@@ -1,7 +1,6 @@
 package net.agent59.stp.spell.spells;
 
 import net.agent59.stp.spell.SpellInterface;
-import net.agent59.stp.util.BlockPlayerIsFacing;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
@@ -9,7 +8,11 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class Aguamenti extends Item implements SpellInterface {
@@ -41,9 +44,20 @@ public class Aguamenti extends Item implements SpellInterface {
     @Override
     public void execute(ServerPlayerEntity player) {
         // places a water source block on the block the player is looking at
-        // the block can't be further than 40 blocks away
-        BlockPos blockPos = BlockPlayerIsFacing.getBlockInFront(player, getRange());
-        if (blockPos != null) {
+
+        HitResult hitResult = player.getCameraEntity().raycast(RANGE, 0, true);
+        if (hitResult.getType() != HitResult.Type.MISS) {
+            BlockPos blockPos = null;
+
+            if (hitResult.getType() == HitResult.Type.BLOCK) {
+                BlockHitResult blockHitResult = (BlockHitResult)hitResult;
+                Direction direction = blockHitResult.getSide();
+                blockPos = new BlockPos((blockHitResult).getBlockPos().offset(direction));
+
+            } else if (hitResult.getType() == HitResult.Type.ENTITY) {
+                blockPos = new BlockPos(((EntityHitResult)hitResult).getPos());
+            }
+            assert blockPos != null;
             World world = player.getWorld();
 
             // water evaporates in nether (see BucketItem)
