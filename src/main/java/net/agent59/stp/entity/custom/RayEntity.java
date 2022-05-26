@@ -2,6 +2,7 @@ package net.agent59.stp.entity.custom;
 
 
 import net.agent59.stp.ModParticles;
+import net.agent59.stp.spell.SpellType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
@@ -16,6 +17,9 @@ public class RayEntity extends ExplosiveProjectileEntity {
     private ParticleEffect particleType = ModParticles.EMPTY_PARTICLE;
     private float drag = 1; // set to 1 for no drag
     private boolean collides = false;
+    private int maxLifetime = 1000;
+    private SpellType spellType;
+    private String spellName;
 
     public RayEntity(EntityType<? extends ExplosiveProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -48,6 +52,15 @@ public class RayEntity extends ExplosiveProjectileEntity {
     @Override
     public void tick() {
         super.tick();
+        this.tick2();
+
+        ++this.age;
+        if (this.age >= this.maxLifetime) {
+            this.kill();
+        }
+    }
+
+    public void tick2() {
     }
 
     @Override
@@ -88,5 +101,29 @@ public class RayEntity extends ExplosiveProjectileEntity {
 
     public void setCollides(boolean collides) {
         this.collides = collides;
+    }
+
+    public int getMaxLifetime() {
+        return this.maxLifetime;
+    }
+
+    public void setMaxLifetime(int maxLifetime) {
+        this.maxLifetime = maxLifetime;
+    }
+
+    public SpellType getSpellType() {
+        return this.spellType;
+    }
+
+    public void setSpellType(SpellType spellType) {
+        this.spellType = spellType;
+    }
+
+    public String getSpellName() {
+        return this.spellName;
+    }
+
+    public void setSpellName(String name) {
+        this.spellName = name;
     }
 }
