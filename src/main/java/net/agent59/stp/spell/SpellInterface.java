@@ -7,6 +7,7 @@ public interface SpellInterface extends ItemConvertible {
     String getStringName();
     int getRange();
     int getCastingCooldown();
+    SpellType getSpellType();
 
     void execute(ServerPlayerEntity player);
 }

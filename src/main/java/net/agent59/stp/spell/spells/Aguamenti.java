@@ -1,6 +1,7 @@
 package net.agent59.stp.spell.spells;
 
 import net.agent59.stp.spell.SpellInterface;
+import net.agent59.stp.spell.SpellType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidFillable;
@@ -21,6 +22,7 @@ public class Aguamenti extends Item implements SpellInterface {
     private static final String NAME = "Aguamenti";
     private static final int RANGE = 40;
     private static final int CASTING_COOLDOWN = 100;
+    private static final SpellType SPELLTYPE = SpellType.CHARM;
 
     public Aguamenti(Settings settings) {
         super(settings);
@@ -39,6 +41,11 @@ public class Aguamenti extends Item implements SpellInterface {
     @Override
     public int getCastingCooldown() {
         return CASTING_COOLDOWN;
+    }
+
+    @Override
+    public SpellType getSpellType() {
+        return SPELLTYPE;
     }
 
     @Override
