@@ -15,15 +15,17 @@ import net.minecraft.util.Identifier;
 public class ModEntityRenderer {
 
     public static final EntityModelLayer RAY_RECTANGLE_MODEL_LAYER = new EntityModelLayer(new Identifier(Main.MOD_ID, "ray_rectangle"), "main");
+    public static final EntityModelLayer RAY_WALL_MODEL_LAYER = new EntityModelLayer(new Identifier(Main.MOD_ID, "ray_wall"), "main");
 
     public static void registerModEntityRenderers() {
         Main.LOGGER.info("Registering Mod Entity Renderers for " + Main.MOD_ID);
 
-        EntityModelLayerRegistry.registerModelLayer(RAY_RECTANGLE_MODEL_LAYER, () -> RayEntityModel.getTexturedModelData(RayEntityModel.Shape.RECTANGLE));
+        EntityModelLayerRegistry.registerModelLayer(RAY_RECTANGLE_MODEL_LAYER, () -> RayEntityModel.getTexturedModelData(RayEntityModel.Shape.RAY));
+        EntityModelLayerRegistry.registerModelLayer(RAY_WALL_MODEL_LAYER, () -> RayEntityModel.getTexturedModelData(RayEntityModel.Shape.WALL));
 
-        EntityRendererRegistry.register(ModEntities.RAY,
-                (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 1F, 1F, 1F, 0.2F));
         EntityRendererRegistry.register(ModEntities.STUPEFY_RAY,
                 (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 1F, 0F, 0F, 0.2F));
+        EntityRendererRegistry.register(ModEntities.PROTEGO_WALL,
+                (context) -> new RayEntityRenderer(context, RAY_WALL_MODEL_LAYER, 211, 211, 211, 0.2F));
     }
 }

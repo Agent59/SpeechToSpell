@@ -26,14 +26,28 @@ public class RayEntityModel<T extends Entity> extends ShulkerBulletEntityModel<R
     }
 
     public static TexturedModelData getTexturedModelData(Shape shape) {
+        ModelData modelData = new ModelData();
+        ModelPartData modelPartData = modelData.getRoot();
+
+        int textureX = 0; int textureY = 0;
+        float offsetX = 0; float offsetY = 0; float offsetZ = 0;
+        float sizeX = 0; float sizeY = 0; float sizeZ = 0;
+        int textureWidth = 256; int textureHeight = 256;
 
         switch (shape) {
-            default: // default is rectangle
-                ModelData modelData = new ModelData();
-                ModelPartData modelPartData = modelData.getRoot();
-                modelPartData.addChild(MAIN, ModelPartBuilder.create().uv(0, 0).cuboid(-1.0F, -4.0F, -4.0F, 2.0F, 2.0F, 8.0F), ModelTransform.NONE);
-                return TexturedModelData.of(modelData, 64, 32);
+            case RAY -> {
+                offsetX = -1.0F; offsetY = -4.0F; offsetZ = -4.0F;
+                sizeX = 2.0F; sizeY = 2.0F; sizeZ = 8.0F;
+            }
+            case WALL -> {
+                offsetX = -12.0F; offsetY = -36.0F; offsetZ = -0.5F;
+                sizeX = 24.0F; sizeY = 36.0F; sizeZ = 1.0F;
+            }
         }
+
+        modelPartData.addChild(MAIN, ModelPartBuilder.create().uv(textureX, textureY).cuboid(offsetX, offsetY, offsetZ,
+                sizeX, sizeY, sizeZ), ModelTransform.NONE);
+        return TexturedModelData.of(modelData, textureWidth, textureHeight);
     }
 
     public void setRectangleRotation(float yaw, float pitch) {
@@ -42,6 +56,7 @@ public class RayEntityModel<T extends Entity> extends ShulkerBulletEntityModel<R
     }
 
     public enum Shape {
-        RECTANGLE
+        RAY,
+        WALL
     }
 }

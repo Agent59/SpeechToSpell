@@ -42,6 +42,7 @@ public class SpellHandler {
         ArrayList<SpellInterface> spellsArray = new ArrayList<>();
         spellsArray.add((SpellInterface) new ItemStack(ModItems.AGUAMENTI).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.STUPEFY).getItem().asItem());
+        spellsArray.add((SpellInterface) new ItemStack(ModItems.PROTEGO).getItem().asItem());
 
         return spellsArray;
     }
