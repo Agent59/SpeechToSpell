@@ -21,6 +21,7 @@ public class RayEntity extends ExplosiveProjectileEntity {
     private SpellType spellType;
     private String spellName;
 
+    // TODO add second constructor (reduce usage of setters after creating the RayEntity)
     public RayEntity(EntityType<? extends ExplosiveProjectileEntity> entityType, World world) {
         super(entityType, world);
         super.setNoGravity(true);
