@@ -3,6 +3,7 @@ package net.agent59.stp.item;
 import net.agent59.stp.Main;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.spells.Aguamenti;
+import net.agent59.stp.spell.spells.HomenumRevelio;
 import net.agent59.stp.spell.spells.Protego;
 import net.agent59.stp.spell.spells.Stupefy;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -33,6 +34,9 @@ public class ModItems {
 
     public static final Item PROTEGO = registerItem("protego",
             new Protego(new FabricItemSettings()));
+
+    public static final Item HOMENUM_REVELIO = registerItem("homenum_revelio",
+            new HomenumRevelio(new FabricItemSettings()));
 
 
     public static void registerModItems() {
