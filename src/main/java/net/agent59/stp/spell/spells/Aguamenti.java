@@ -104,9 +104,9 @@ public class Aguamenti extends Item implements SpellInterface {
     }
 
     private boolean canPlaceWater(BlockState blockState, BlockPos blockPos, World world) {
-        boolean bl = blockState.canBucketPlace(Fluids.WATER);
-        boolean bl2 = ((FluidFillable) blockState.getBlock()).canFillWithFluid(world, blockPos, blockState, Fluids.WATER);
-        return bl || blockState.getBlock() instanceof FluidFillable && bl2;
+        return blockState.canBucketPlace(Fluids.WATER) ||
+                blockState.getBlock() instanceof FluidFillable &&
+                        ((FluidFillable) blockState.getBlock()).canFillWithFluid(world, blockPos, blockState, Fluids.WATER);
 
     }
 }
