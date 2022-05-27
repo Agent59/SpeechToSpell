@@ -17,7 +17,7 @@ import java.util.List;
 public class HomenumRevelio extends Item implements SpellInterface {
     private static final String NAME = "Homenum Revelio";
     private static final int RANGE = 25;
-    private static final int CASTING_COOLDOWN = 0;
+    private static final int CASTING_COOLDOWN = 500;
     private static final SpellType SPELLTYPE = SpellType.CHARM;
     private static final int DURATION = 100;
 
