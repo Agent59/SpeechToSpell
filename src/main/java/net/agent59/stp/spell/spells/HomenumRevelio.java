@@ -47,26 +47,6 @@ public class HomenumRevelio extends Item implements SpellInterface {
 
     @Override
     public void execute(ServerPlayerEntity player) {
-        String voice_command = "HOMENUM REVELIO";
-
-        // voice_command is upperCase, so it has to be converted to Titel Case with spaces
-        String[] segments = voice_command.split(" ", 0);
-
-        System.out.println(Arrays.toString(segments));
-
-        String spellString = "";
-        for (String string: segments) {
-            string = string.charAt(0) + string.substring(1).toLowerCase();
-
-            System.out.println("firtsword: " + string);
-
-            spellString = spellString.concat(string + " ");
-        }
-        spellString = spellString.trim();
-
-        System.out.println("Spell is: " + spellString);
-
-
         World world = player.getWorld();
         Box box = player.getBoundingBox().expand(RANGE);
         List<Entity> list = world.getOtherEntities(null, box);
