@@ -66,7 +66,7 @@ public class Stupefy extends Item implements SpellInterface {
         stupefyRay.setMaxLifetime(MAX_LIFETIME);
         stupefyRay.setSpellType(SPELLTYPE);
         stupefyRay.setSpellName(NAME);
-        stupefyRay.updatePositionAndAngles(player.getX(), player.getY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
+        stupefyRay.updatePositionAndAngles(player.getX(), player.getCameraEntity().getY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
         stupefyRay.setVelocity(player, RAY_SPEED, 0);
         world.spawnEntity(stupefyRay);
 
