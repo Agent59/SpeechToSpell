@@ -44,6 +44,7 @@ public class SpellHandler {
         spellsArray.add((SpellInterface) new ItemStack(ModItems.STUPEFY).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.PROTEGO).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.HOMENUM_REVELIO).getItem().asItem());
+        spellsArray.add((SpellInterface) new ItemStack(ModItems.APPARATE).getItem().asItem());
 
         return spellsArray;
     }

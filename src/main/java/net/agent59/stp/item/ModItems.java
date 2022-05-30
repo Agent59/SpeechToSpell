@@ -2,10 +2,7 @@ package net.agent59.stp.item;
 
 import net.agent59.stp.Main;
 import net.agent59.stp.item.custom.WandItem;
-import net.agent59.stp.spell.spells.Aguamenti;
-import net.agent59.stp.spell.spells.HomenumRevelio;
-import net.agent59.stp.spell.spells.Protego;
-import net.agent59.stp.spell.spells.Stupefy;
+import net.agent59.stp.spell.spells.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -37,6 +34,9 @@ public class ModItems {
 
     public static final Item HOMENUM_REVELIO = registerItem("homenum_revelio",
             new HomenumRevelio(new FabricItemSettings()));
+
+    public static final Item APPARATE = registerItem("apparate",
+            new Apparate(new FabricItemSettings()));
 
 
     public static void registerModItems() {
