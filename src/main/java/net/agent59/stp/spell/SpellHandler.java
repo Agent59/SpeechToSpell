@@ -4,7 +4,6 @@ import net.agent59.stp.Main;
 import net.agent59.stp.item.ModItems;
 import net.agent59.stp.item.custom.WandItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.ArrayList;
@@ -45,6 +44,7 @@ public class SpellHandler {
         spellsArray.add((SpellInterface) new ItemStack(ModItems.PROTEGO).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.HOMENUM_REVELIO).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.APPARATE).getItem().asItem());
+        spellsArray.add((SpellInterface) new ItemStack(ModItems.ASCENDIO).getItem().asItem());
 
         return spellsArray;
     }
