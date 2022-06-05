@@ -10,10 +10,10 @@
   ],
   "contact": {
     "homepage": "",
-    "sources": ""
+    "sources": "https://github.com/Agent59/SpeechToSpell"
   },
 
-  "license": "",
+  "license": "BSD 3-Clause License",
   "icon": "assets/stp/icon.png",
 
   "environment": "*",
