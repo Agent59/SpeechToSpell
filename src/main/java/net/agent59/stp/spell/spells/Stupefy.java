@@ -18,7 +18,7 @@ public class Stupefy extends Item implements SpellInterface {
     private static final int RANGE = 40;
     private static final int CASTING_COOLDOWN = 50;
     private static final SpellType SPELLTYPE = SpellType.CHARM;
-    private static final float RAY_SPEED = 3F;
+    private static final float RAY_SPEED = 2F;
     private static final float DAMAGE = 2F;
     private static final float KNOCKBACK_STRENGTH = 1.0F;
     private static final int MAX_LIFETIME = 1000;
