@@ -44,6 +44,9 @@ public class ModItems {
     public static final Item EXPELLIARMUS = registerItem("expelliarmus",
             new Expelliarmus(new FabricItemSettings()));
 
+    public static final Item PETRIFICUS_TOTALUS = registerItem("petrificus_totalus",
+            new PetrificusTotalus(new FabricItemSettings()));
+
 
     public static void registerModItems() {
         Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);
