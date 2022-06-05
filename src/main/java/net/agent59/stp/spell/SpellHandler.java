@@ -47,6 +47,7 @@ public class SpellHandler {
         spellsArray.add((SpellInterface) new ItemStack(ModItems.ASCENDIO).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.EXPELLIARMUS).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.PETRIFICUS_TOTALUS).getItem().asItem());
+        spellsArray.add((SpellInterface) new ItemStack(ModItems.ACCIO).getItem().asItem());
 
         return spellsArray;
     }
