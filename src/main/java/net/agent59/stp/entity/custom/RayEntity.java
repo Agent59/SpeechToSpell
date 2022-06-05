@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -20,6 +21,7 @@ public class RayEntity extends ExplosiveProjectileEntity {
     private int maxLifetime = 1000;
     private SpellType spellType;
     private String spellName;
+    private int minProtegoType = 1; // if zero no protego spell is strong enough to protect against this spell
 
     // TODO add second constructor (reduce usage of setters after creating the RayEntity)
     public RayEntity(EntityType<? extends ExplosiveProjectileEntity> entityType, World world) {
@@ -62,6 +64,12 @@ public class RayEntity extends ExplosiveProjectileEntity {
     }
 
     public void tick2() {
+    }
+
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        super.onBlockHit(blockHitResult);
+        this.remove(RemovalReason.DISCARDED);
     }
 
     @Override
@@ -126,5 +134,13 @@ public class RayEntity extends ExplosiveProjectileEntity {
 
     public void setSpellName(String name) {
         this.spellName = name;
+    }
+
+    public int getMinProtegoType() {
+        return this.minProtegoType;
+    }
+
+    public void setMinProtegoType(int minProtegoType) {
+        this.minProtegoType = minProtegoType;
     }
 }

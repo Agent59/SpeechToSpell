@@ -2,7 +2,6 @@ package net.agent59.stp.spell.spells;
 
 import net.agent59.stp.entity.ModEntities;
 import net.agent59.stp.entity.custom.RayEntity;
-import net.agent59.stp.item.ModItems;
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.spell.SpellType;
 import net.minecraft.entity.Entity;
@@ -13,7 +12,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 
 import java.util.List;
-import java.util.Objects;
 
 
 public class Protego extends Item implements SpellInterface {
@@ -22,6 +20,7 @@ public class Protego extends Item implements SpellInterface {
     private static final int CASTING_COOLDOWN = 25;
     private static final SpellType SPELLTYPE = SpellType.CHARM;
     private static final int MAX_LIVETIME = 100;
+    private static final int PROTEGO_TYPE = 1;
 
     public Protego(Settings settings) {
         super(settings);
@@ -59,7 +58,7 @@ public class Protego extends Item implements SpellInterface {
 
                 for (Entity entity: list) {
                     if (entity instanceof RayEntity) {
-                        if (Objects.equals(((RayEntity) entity).getSpellName(), ((Stupefy)ModItems.STUPEFY).getStringName())) {
+                        if (((RayEntity) entity).getMinProtegoType() >= PROTEGO_TYPE) {
                             entity.kill();
                             this.kill();
                             break;
@@ -70,6 +69,7 @@ public class Protego extends Item implements SpellInterface {
         };
         protegoWall.setOwner(player);
         protegoWall.setMaxLifetime(MAX_LIVETIME);
+        protegoWall.setMinProtegoType(0);
         protegoWall.setSpellType(SPELLTYPE);
         protegoWall.setSpellName(NAME);
         HitResult hitResult = player.raycast(RANGE, 0, false);
