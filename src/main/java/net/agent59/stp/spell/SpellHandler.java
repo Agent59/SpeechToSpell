@@ -45,6 +45,7 @@ public class SpellHandler {
         spellsArray.add((SpellInterface) new ItemStack(ModItems.HOMENUM_REVELIO).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.APPARATE).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.ASCENDIO).getItem().asItem());
+        spellsArray.add((SpellInterface) new ItemStack(ModItems.EXPELLIARMUS).getItem().asItem());
 
         return spellsArray;
     }

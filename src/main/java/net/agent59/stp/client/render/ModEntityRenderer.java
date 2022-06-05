@@ -25,6 +25,8 @@ public class ModEntityRenderer {
 
         EntityRendererRegistry.register(ModEntities.STUPEFY_RAY,
                 (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 1F, 0F, 0F, 0.2F));
+        EntityRendererRegistry.register(ModEntities.EXPELLIARMUS_RAY,
+                (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 1F, 0F, 0F, 0.4F));
         EntityRendererRegistry.register(ModEntities.PROTEGO_WALL,
                 (context) -> new RayEntityRenderer(context, RAY_WALL_MODEL_LAYER, 211, 211, 211, 0.2F));
     }

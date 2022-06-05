@@ -41,6 +41,9 @@ public class ModItems {
     public static final Item ASCENDIO = registerItem("ascendio",
             new Ascendio(new FabricItemSettings()));
 
+    public static final Item EXPELLIARMUS = registerItem("expelliarmus",
+            new Expelliarmus(new FabricItemSettings()));
+
 
     public static void registerModItems() {
         Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);

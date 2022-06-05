@@ -16,6 +16,9 @@ public class ModEntities {
     public static final EntityType<RayEntity> STUPEFY_RAY = registerEntity("stupefy_ray",
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.4F)).build());
 
+    public static final EntityType<RayEntity> EXPELLIARMUS_RAY = registerEntity("expelliarmus_ray",
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.4F)).build());
+
     public static final EntityType<RayEntity> PROTEGO_WALL = registerEntity("protego_wall",
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(1.5F, 2.25F)).build());
 
