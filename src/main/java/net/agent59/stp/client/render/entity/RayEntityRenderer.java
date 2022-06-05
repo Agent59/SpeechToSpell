@@ -14,6 +14,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
@@ -26,14 +27,16 @@ public class RayEntityRenderer extends EntityRenderer<RayEntity> {
     private final float green;
     private final float blue;
     private final float alpha;
+    private final int blockLight; // set to -1 for default
 
-    public RayEntityRenderer(EntityRendererFactory.Context context, EntityModelLayer modelLayer, float red, float green, float blue, float alpha) {
+    public RayEntityRenderer(EntityRendererFactory.Context context, EntityModelLayer modelLayer, float red, float green, float blue, float alpha, int blockLight) {
         super(context);
         this.model = new RayEntityModel<>(context.getPart(modelLayer));
         this.red = red;
         this.green = green;
         this.blue = blue;
         this.alpha = alpha;
+        this.blockLight = blockLight;
     }
 
     @Override
@@ -51,5 +54,10 @@ public class RayEntityRenderer extends EntityRenderer<RayEntity> {
     @Override
     public Identifier getTexture(RayEntity entity) {
         return TEXTURE;
+    }
+
+    @Override
+    protected int getBlockLight(RayEntity rayEntity, BlockPos blockPos) {
+        return this.blockLight == -1 ? super.getBlockLight(rayEntity, blockPos) : this.blockLight;
     }
 }
