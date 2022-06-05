@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 public class Stupefy extends Item implements SpellInterface {
     private static final String NAME = "Stupefy";
     private static final int RANGE = 40;
-    private static final int CASTING_COOLDOWN = 100;
+    private static final int CASTING_COOLDOWN = 50;
     private static final SpellType SPELLTYPE = SpellType.CHARM;
-    private static final float RAY_SPEED = 0.5F;
+    private static final float RAY_SPEED = 3F;
     private static final float DAMAGE = 2F;
     private static final float KNOCKBACK_STRENGTH = 1.0F;
     private static final int MAX_LIFETIME = 1000;
@@ -60,13 +60,14 @@ public class Stupefy extends Item implements SpellInterface {
                 } else {
                     entity.addVelocity(-MathHelper.sin((this.getYaw() + 180) * ((float) Math.PI / 180)) * KNOCKBACK_STRENGTH, 0.1, MathHelper.cos((this.getYaw() + 180) * ((float) Math.PI / 180)) * KNOCKBACK_STRENGTH);
                 }
+                this.remove(RemovalReason.DISCARDED);
             }
         };
         stupefyRay.setOwner(player);
         stupefyRay.setMaxLifetime(MAX_LIFETIME);
         stupefyRay.setSpellType(SPELLTYPE);
         stupefyRay.setSpellName(NAME);
-        stupefyRay.updatePositionAndAngles(player.getX(), player.getCameraEntity().getY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
+        stupefyRay.updatePositionAndAngles(player.getX(), player.getEyeY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
         stupefyRay.setVelocity(player, RAY_SPEED, 0);
         world.spawnEntity(stupefyRay);
 
