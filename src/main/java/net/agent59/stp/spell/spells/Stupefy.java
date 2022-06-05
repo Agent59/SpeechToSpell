@@ -50,7 +50,7 @@ public class Stupefy extends Item implements SpellInterface {
     @Override
     public void execute(ServerPlayerEntity player) {
         World world = player.getWorld();
-        RayEntity stupefyRay = new RayEntity(ModEntities.STUPEFY_RAY, world) {
+        RayEntity ray = new RayEntity(ModEntities.STUPEFY_RAY, world) {
             @Override
             protected void onEntityHit(EntityHitResult entityHitResult) {
                 Entity entity = entityHitResult.getEntity();
@@ -63,13 +63,13 @@ public class Stupefy extends Item implements SpellInterface {
                 this.remove(RemovalReason.DISCARDED);
             }
         };
-        stupefyRay.setOwner(player);
-        stupefyRay.setMaxLifetime(MAX_LIFETIME);
-        stupefyRay.setSpellType(SPELLTYPE);
-        stupefyRay.setSpellName(NAME);
-        stupefyRay.updatePositionAndAngles(player.getX(), player.getEyeY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
-        stupefyRay.setVelocity(player, RAY_SPEED, 0);
-        world.spawnEntity(stupefyRay);
+        ray.setOwner(player);
+        ray.setMaxLifetime(MAX_LIFETIME);
+        ray.setSpellType(SPELLTYPE);
+        ray.setSpellName(NAME);
+        ray.updatePositionAndAngles(player.getX(), player.getEyeY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
+        ray.setVelocity(player, RAY_SPEED, 0);
+        world.spawnEntity(ray);
 
         //set cooldown
         player.getItemCooldownManager().set(this.asItem(), getCastingCooldown());
