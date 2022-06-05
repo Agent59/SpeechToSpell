@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Apparate extends Item implements SpellInterface {
     private static final String NAME = "Apparate";
-    private static final int RANGE = 160;
+    private static final int RANGE = 250;
     private static final int CASTING_COOLDOWN = 250;
     private static final SpellType SPELLTYPE = SpellType.JINX;
     private static final int BOX_SIZE = 2;
