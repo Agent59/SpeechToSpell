@@ -3,8 +3,7 @@
 grammar spells;
 public <ACCIO> = ACCIO;
 public <AGUAMENTI> = AGUAMENTI;
-public <ALARTE> = ALARTE;
-public <ASCENDARE> = ASCENDARE;
+public <ALARTE_ASCENDARE> = ALARTE ASCENDARE;
 public <ALOHOMORA> = ALOHOMORA;
 public <ANAPNEO> = ANAPNEO;
 public <APPARATE> = APPARATE;
