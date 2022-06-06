@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-// sets the arm pose, when right-clicking with a wand
+// sets the arm pose, when using a wand
 
 @Mixin(BipedEntityModel.class)
 public abstract class BipedEntityModelMixin<T extends LivingEntity> extends AnimalModel<T> implements ModelWithArms, ModelWithHead {
@@ -33,7 +33,7 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
 
     // hold the wand correctly
     @Redirect(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;positionLeftArm(Lnet/minecraft/entity/LivingEntity;)V"))
-    private void setLeftArm(BipedEntityModel instance, T entity) {
+    private void setLeftArm(BipedEntityModel<T> instance, T entity) {
         if (entity.getActiveItem().getItem() instanceof WandItem) {
             this.leftArm.pitch = MathHelper.clamp(this.head.pitch - 1.5707964F, -3.6199816F, 3.3F);
             this.leftArm.yaw = this.head.yaw;
@@ -44,7 +44,7 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
     }
 
     @Redirect(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;positionRightArm(Lnet/minecraft/entity/LivingEntity;)V"))
-    private void setRightArm(BipedEntityModel instance, T entity) {
+    private void setRightArm(BipedEntityModel<T> instance, T entity) {
         if (entity.getActiveItem().getItem() instanceof WandItem) {
             this.rightArm.pitch = MathHelper.clamp(this.head.pitch - 1.5707964F, -3.6199816F, 3.3F);
             this.rightArm.yaw = this.head.yaw;
@@ -57,7 +57,7 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> extends Anim
 
     // prevents the unwanted animation on use wand
     @Redirect(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/BipedEntityModel;animateArms(Lnet/minecraft/entity/LivingEntity;F)V"))
-    private void animateArms(BipedEntityModel instance, T entity, float animationProgress) {
+    private void animateArms(BipedEntityModel<T> instance, T entity, float animationProgress) {
         if (!(entity.getActiveItem().getItem() instanceof WandItem)) {
             this.animateArms(entity, animationProgress);
         }
