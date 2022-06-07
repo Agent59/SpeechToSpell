@@ -2,7 +2,6 @@ package net.agent59.stp.speech;
 
 import edu.cmu.sphinx.api.SpeechResult;
 import net.agent59.stp.Main;
-import net.agent59.stp.item.custom.WandItem;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,60 +9,71 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Identifier;
 
+import javax.sound.sampled.*;
 import java.io.IOException;
+import java.util.Arrays;
 
-public class Sphinx4SpeechThread implements Runnable{
+public class Sphinx4SpeechThread implements Runnable {
 
-    public volatile boolean listening;
+    // other values for audio format won't work (https://cmusphinx.github.io/wiki/tutorialsphinx4/#streamspeechrecognizer)
+    private final AudioFormat format = new AudioFormat(16000.0f, 16, 1, true, false);
+    private final TargetDataLine mic = AudioSystem.getTargetDataLine(format);
+    private final AudioInputStream inputStream = new AudioInputStream(mic);
+    private CustomStreamSpeechRecognizer recognizer;
+    private final PlayerEntity user;
 
-    PlayerEntity user;
-
-    public Sphinx4SpeechThread(PlayerEntity user) {
+    public Sphinx4SpeechThread(PlayerEntity user) throws LineUnavailableException {
         this.user = user;
     }
 
     @Override
     public void run() {
-        this.listening = true;
-        CustomLiveSpeechRecognizer recognizer = null;
         try {
-            recognizer = new CustomLiveSpeechRecognizer(Sphinx4Conf.returnConf());
-            // Start recognition process pruning previously cached data.
-            recognizer.startRecognition(true);
+            recognizer = new CustomStreamSpeechRecognizer(Sphinx4Conf.returnConf());
+            mic.open();
 
-            System.out.println("started speech Thread");
+            // This fixes the accumulating audio issue on some Linux systems
+            mic.start();
+            mic.stop();
+            mic.flush();
+
+            mic.start();
+            recognizer.startRecognition(inputStream);
 
             SpeechResult speechResult;
+            while ((speechResult = recognizer.getResult()) != null) {
+                String voice_command = speechResult.getHypothesis();
+                // voice_command is upperCase, so it has to be converted to titelCase
+                String spellString = voice_command.charAt(0) + voice_command.substring(1).toLowerCase();
 
-            while (listening) {
+                Main.LOGGER.info("Spell is: " + spellString);
+                this.user.sendMessage(new LiteralText(spellString), true);
 
-                if (!(this.user.getActiveItem().getItem() instanceof WandItem)) {
-                    this.user.sendMessage(new LiteralText("No active WandItem in Hand"), true);
-                    listening = false;
-                }
-
-                else if ((speechResult = recognizer.getResult()) != null && listening &&
-                        this.user.getActiveItem().getItem() instanceof WandItem) {
-                    String voice_command = speechResult.getHypothesis();
-                    // voice_command is upperCase, so it has to be converted to titelCase
-                    String spellString = voice_command.charAt(0) + voice_command.substring(1).toLowerCase();
-
-                    System.out.println("Spell is: " + spellString);
-                    this.user.sendMessage(new LiteralText(spellString), true);
-
-                    //create the packet for the spell to send to the server
-                    PacketByteBuf buf = PacketByteBufs.create();
-                    buf.writeString(spellString);
-                    //send the packaged spell to the server
-                    ClientPlayNetworking.send(new Identifier(Main.MOD_ID, "spell"), buf);
-                }
+                //create the packet for the spell to send to the server
+                PacketByteBuf buf = PacketByteBufs.create();
+                buf.writeString(spellString);
+                //send the packaged spell to the server
+                ClientPlayNetworking.send(new Identifier(Main.MOD_ID, "spell"), buf);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (LineUnavailableException | IOException e) {
+            throw new RuntimeException(e);
+        } catch (NullPointerException e) {
+            Main.LOGGER.info("THE FOLLOWING EXCEPTION WAS CAUSED WHILE STOPPING THE SPEECH THREAD" +
+                    " AND WAS PROBABLY INTENDED:\n\t" + Arrays.toString(e.getStackTrace()));
         }
-        assert recognizer != null;
-        recognizer.stopRecognition();
-        System.out.println("STOPPED SPEECH THREAD");
+        Main.LOGGER.info("SPEECH THREAD ENDING");
+    }
+
+    public void end(){
+        try {
+            inputStream.close();
+            mic.stop();
+            mic.flush();
+            recognizer.cancelRecognition();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

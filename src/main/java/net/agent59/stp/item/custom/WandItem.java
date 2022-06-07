@@ -14,6 +14,8 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
+import javax.sound.sampled.LineUnavailableException;
+
 
 public class WandItem extends Item {
 
@@ -27,7 +29,11 @@ public class WandItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (world.isClient()) {
-            this.sphinx4SpeechThread = new Sphinx4SpeechThread(user);
+            try {
+                this.sphinx4SpeechThread = new Sphinx4SpeechThread(user);
+            } catch (LineUnavailableException e) {
+                throw new RuntimeException(e);
+            }
             this.speechThread = new Thread(sphinx4SpeechThread);
             this.speechThread.start();
 
@@ -39,7 +45,7 @@ public class WandItem extends Item {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (world.isClient()) {
-            this.sphinx4SpeechThread.listening = false;
+            this.sphinx4SpeechThread.end();
         }
     }
 
@@ -54,6 +60,5 @@ public class WandItem extends Item {
 
             stacks.add(itemStack);
         }
-
     }
 }
