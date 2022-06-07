@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 
 import javax.sound.sampled.LineUnavailableException;
 
+// TODO prevent client crash when giving wandItem with give command
 
 public class WandItem extends Item {
 
