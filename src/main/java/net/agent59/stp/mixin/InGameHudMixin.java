@@ -23,7 +23,7 @@ import java.util.Objects;
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin extends DrawableHelper {
 
-    //inserts the spell-hotbar, which is to be rendered, behind minecrafts renderHotbar
+    // inserts the spell-hotbar, which is to be rendered, after minecrafts renderHotbar
     @Shadow
     protected abstract PlayerEntity getCameraPlayer();
 
@@ -33,6 +33,9 @@ public abstract class InGameHudMixin extends DrawableHelper {
     @Shadow
     protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed);
 
+    // used to check if the player stopped using a wand
+    private ItemStack usedWandLastTick = null;
+
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbar(FLnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
     private void init(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         PlayerEntity player = this.getCameraPlayer();
@@ -40,6 +43,15 @@ public abstract class InGameHudMixin extends DrawableHelper {
         // if the player is holding a wand
         if (((wand = player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = player.getOffHandStack()).getItem() instanceof WandItem)) {
             this.renderSpellHotbar(wand, player, matrices, tickDelta);
+
+            if (player.getActiveItem().getItem() instanceof WandItem) {
+                usedWandLastTick = wand;
+            }
+        }
+
+        if (!(player.getActiveItem() == usedWandLastTick) && usedWandLastTick != null) {
+            usedWandLastTick.onStoppedUsing(player.getWorld(), player, 0);
+            usedWandLastTick = null;
         }
     }
 
