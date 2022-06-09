@@ -20,7 +20,7 @@ public class Sphinx4SpeechThread implements Runnable {
     private final TargetDataLine mic = AudioSystem.getTargetDataLine(format);
     private final AudioInputStream inputStream = new AudioInputStream(mic);
     private CustomStreamSpeechRecognizer recognizer;
-    private boolean listeningState = false;
+    private volatile boolean listeningState = false; // used to check if the speech thread has reached a point, where it can be stopped
     private final PlayerEntity user;
 
     public Sphinx4SpeechThread(PlayerEntity user) throws LineUnavailableException {
@@ -54,7 +54,7 @@ public class Sphinx4SpeechThread implements Runnable {
                 String[] strings = voice_command.split(" ");
                 String spellString = "";
 
-                for (String string: strings) {
+                for (String string : strings) {
 
                     string = string.charAt(0) + string.substring(1).toLowerCase() + " ";
                     spellString = spellString.concat(string);
@@ -81,22 +81,23 @@ public class Sphinx4SpeechThread implements Runnable {
         Main.LOGGER.info("SPEECH THREAD ENDING");
     }
 
-    public void end(){
+    public void end() {
         try {
-            if (listeningState) {
-                inputStream.close();
-                mic.stop();
-                mic.flush();
-                recognizer.cancelRecognition();
+            while (!listeningState) {
+                Thread.onSpinWait();
             }
-        }
-        catch (IOException e) {
+            inputStream.close();
+            mic.stop();
+            mic.flush();
+            recognizer.cancelRecognition();
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    // used to check if the speech thread has reached a point, where it can be stopped
-    public boolean canEnd() {
-        return listeningState;
+    // creates a thread that waits for end() to finish executing
+    public void scheduleEnd() {
+        Thread thread = new Thread(this::end);
+        thread.start();
     }
 }

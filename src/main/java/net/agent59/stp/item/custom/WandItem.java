@@ -40,15 +40,7 @@ public class WandItem extends Item {
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (world.isClient()) {
-            this.sphinx4SpeechThread.end();
-        }
-    }
-
-    public boolean canStopSpeechThread(World world) {
-        if (world.isClient()) {
-            return this.sphinx4SpeechThread.canEnd();
-        } else {
-            throw new RuntimeException("There can't be a server side speechThread");
+            this.sphinx4SpeechThread.scheduleEnd();
         }
     }
 }
