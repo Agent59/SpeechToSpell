@@ -21,11 +21,13 @@ public class Network {
 
                 ItemStack wand;
                 if (((wand = player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = player.getOffHandStack()).getItem() instanceof WandItem)) {
-                    NbtCompound nbt = buf.readNbt();
+                    if (wand.getNbt() == null) {
+                        wand.setNbt(new NbtCompound());
+                    }
 
+                    NbtCompound nbt = buf.readNbt();
                     assert nbt != null;
                     for (String key : nbt.getKeys()) {
-                        assert wand.getNbt() != null;
                         wand.getNbt().put(key, nbt.get(key));
                     }
                 }

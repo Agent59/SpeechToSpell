@@ -5,11 +5,13 @@ import net.agent59.stp.Main;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.SpellHandler;
 import net.agent59.stp.spell.SpellInterface;
+import net.agent59.stp.util.UpdateNbt;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -66,8 +68,12 @@ public abstract class InGameHudMixin extends DrawableHelper {
             int hotbarX = 0;
             this.drawTexture(matrices, hotbarX, hotbarY, 0, 0, 22, 102);
 
-            //selected slot
-            assert wand.getNbt() != null;
+            if (wand.getNbt() == null) {
+                UpdateNbt.updateWandNbtFromClient(".spellHotbarSelectedSlot", null, 1);
+                NbtCompound nbt = new NbtCompound();
+                nbt.putInt(Main.MOD_ID + ".spellHotbarSelectedSlot", 1);
+                wand.setNbt(nbt);
+            }
             int selectedSlot = wand.getNbt().getInt(Main.MOD_ID + ".spellHotbarSelectedSlot");
             this.drawTexture(matrices, hotbarX - 1, (hotbarY - 1) + 20 * (selectedSlot - 1), 22, 0, 24, 24);
 
