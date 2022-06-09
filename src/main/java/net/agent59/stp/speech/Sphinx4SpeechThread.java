@@ -20,6 +20,7 @@ public class Sphinx4SpeechThread implements Runnable {
     private final TargetDataLine mic = AudioSystem.getTargetDataLine(format);
     private final AudioInputStream inputStream = new AudioInputStream(mic);
     private CustomStreamSpeechRecognizer recognizer;
+    private boolean listeningState = false;
     private final PlayerEntity user;
 
     public Sphinx4SpeechThread(PlayerEntity user) throws LineUnavailableException {
@@ -28,6 +29,7 @@ public class Sphinx4SpeechThread implements Runnable {
 
     @Override
     public void run() {
+        Main.LOGGER.info("SPEECH THREAD STARTING");
         try {
             recognizer = new CustomStreamSpeechRecognizer(Sphinx4Conf.returnConf());
             mic.open();
@@ -39,12 +41,25 @@ public class Sphinx4SpeechThread implements Runnable {
 
             mic.start();
             recognizer.startRecognition(inputStream);
+            Main.LOGGER.info("SPEECH THREAD STARTING RECOGNTITION");
+
+            listeningState = true;
 
             SpeechResult speechResult;
             while ((speechResult = recognizer.getResult()) != null) {
                 String voice_command = speechResult.getHypothesis();
-                // voice_command is upperCase, so it has to be converted to titelCase
-                String spellString = voice_command.charAt(0) + voice_command.substring(1).toLowerCase();
+
+                // voice_command is upperCase, so it has to be converted to every Word starting with upperCase
+                // and the rest to lowercase
+                String[] strings = voice_command.split(" ");
+                String spellString = "";
+
+                for (String string: strings) {
+
+                    string = string.charAt(0) + string.substring(1).toLowerCase() + " ";
+                    spellString = spellString.concat(string);
+                }
+                spellString = spellString.trim();
 
                 Main.LOGGER.info("Spell is: " + spellString);
                 this.user.sendMessage(new LiteralText(spellString), true);
@@ -57,6 +72,7 @@ public class Sphinx4SpeechThread implements Runnable {
             }
 
         } catch (LineUnavailableException | IOException e) {
+            Main.LOGGER.info("EXCEPTION " + Arrays.toString(e.getStackTrace()));
             throw new RuntimeException(e);
         } catch (NullPointerException e) {
             Main.LOGGER.info("THE FOLLOWING EXCEPTION WAS CAUSED WHILE STOPPING THE SPEECH THREAD" +
@@ -67,13 +83,20 @@ public class Sphinx4SpeechThread implements Runnable {
 
     public void end(){
         try {
-            inputStream.close();
-            mic.stop();
-            mic.flush();
-            recognizer.cancelRecognition();
+            if (listeningState) {
+                inputStream.close();
+                mic.stop();
+                mic.flush();
+                recognizer.cancelRecognition();
+            }
         }
         catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    // used to check if the speech thread has reached a point, where it can be stopped
+    public boolean canEnd() {
+        return listeningState;
     }
 }

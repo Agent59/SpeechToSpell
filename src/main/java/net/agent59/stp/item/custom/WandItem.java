@@ -50,6 +50,14 @@ public class WandItem extends Item {
         }
     }
 
+    public boolean canStopSpeechThread(World world) {
+        if (world.isClient()) {
+            return this.sphinx4SpeechThread.canEnd();
+        } else {
+            throw new RuntimeException("There can't be a server side speechThread");
+        }
+    }
+
     // adds nbt on item creation (needed to render spell-hotbar on client)
     @Override
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {

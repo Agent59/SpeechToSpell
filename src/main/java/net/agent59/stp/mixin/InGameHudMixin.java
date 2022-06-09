@@ -49,7 +49,7 @@ public abstract class InGameHudMixin extends DrawableHelper {
             }
         }
 
-        if (!(player.getActiveItem() == usedWandLastTick) && usedWandLastTick != null) {
+        if (usedWandLastTick != null && (player.getActiveItem() != usedWandLastTick) && ((WandItem) usedWandLastTick.getItem()).canStopSpeechThread(player.getWorld())) {
             usedWandLastTick.onStoppedUsing(player.getWorld(), player, 0);
             usedWandLastTick = null;
         }
