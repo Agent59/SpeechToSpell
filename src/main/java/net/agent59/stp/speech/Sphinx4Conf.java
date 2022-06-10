@@ -1,6 +1,7 @@
 package net.agent59.stp.speech;
 
 import edu.cmu.sphinx.api.Configuration;
+import net.agent59.stp.Main;
 import net.agent59.stp.util.FileHandler;
 
 import java.io.File;
@@ -428,10 +429,10 @@ public class Sphinx4Conf {
                     """);
             grammarModel.close();
 
-            System.out.println("created speech resources");
+            Main.LOGGER.info("created speech resources");
 
         } catch (IOException e) {
-            System.out.println("Couldn't create speech resources");
+            Main.LOGGER.error("Couldn't create speech resources");
             e.printStackTrace();
         }
     }
