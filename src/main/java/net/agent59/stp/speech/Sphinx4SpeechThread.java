@@ -75,15 +75,15 @@ public class Sphinx4SpeechThread implements Runnable {
                 spellString = spellString.trim();
 
                 Main.LOGGER.info("Spell is: " + spellString);
-                if (user != null) {
-                    this.user.sendMessage(new LiteralText(spellString), true);
 
-                    //create the packet for the spell to send to the server
-                    PacketByteBuf buf = PacketByteBufs.create();
-                    buf.writeString(spellString);
-                    //send the packaged spell to the server
-                    ClientPlayNetworking.send(new Identifier(Main.MOD_ID, "spell"), buf);
-                }
+                assert user != null;
+                user.sendMessage(new LiteralText(spellString), true);
+
+                //create the packet for the spell to send to the server
+                PacketByteBuf buf = PacketByteBufs.create();
+                buf.writeString(spellString);
+                //send the packaged spell to the server
+                ClientPlayNetworking.send(new Identifier(Main.MOD_ID, "spell"), buf);
             }
 
         } catch (LineUnavailableException | IOException e) {
