@@ -2,6 +2,8 @@ package net.agent59.stp.speech;
 
 import edu.cmu.sphinx.api.SpeechResult;
 import net.agent59.stp.Main;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,18 +15,32 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.Arrays;
 
+@Environment(EnvType.CLIENT)
 public class Sphinx4SpeechThread implements Runnable {
 
     // other values for audio format won't work (https://cmusphinx.github.io/wiki/tutorialsphinx4/#streamspeechrecognizer)
-    private final AudioFormat format = new AudioFormat(16000.0f, 16, 1, true, false);
-    private final TargetDataLine mic = AudioSystem.getTargetDataLine(format);
+    private final AudioFormat FORMAT = new AudioFormat(16000.0f, 16, 1, true, false);
+    private final TargetDataLine mic = AudioSystem.getTargetDataLine(FORMAT);
     private final AudioInputStream inputStream = new AudioInputStream(mic);
     private CustomStreamSpeechRecognizer recognizer;
     private volatile boolean listeningState = false; // used to check if the speech thread has reached a point, where it can be stopped
-    private final PlayerEntity user;
+    private PlayerEntity user = null;
+    private static Sphinx4SpeechThread instance = null;
 
-    public Sphinx4SpeechThread(PlayerEntity user) throws LineUnavailableException {
-        this.user = user;
+    private Sphinx4SpeechThread() throws LineUnavailableException {
+    }
+
+    public static Sphinx4SpeechThread getInstance() {
+        System.out.println("getInstance()");
+        if (instance == null) {
+            System.out.println("getInstance() instance == null");
+            try {
+                instance = new Sphinx4SpeechThread();
+            } catch (LineUnavailableException e) {
+                throw new RuntimeException(e);
+            }
+        } else {System.out.println("getInstance() instance != null");}
+        return instance;
     }
 
     @Override
@@ -39,10 +55,7 @@ public class Sphinx4SpeechThread implements Runnable {
             mic.stop();
             mic.flush();
 
-            mic.start();
             recognizer.startRecognition(inputStream);
-            Main.LOGGER.info("SPEECH THREAD STARTING RECOGNTITION");
-
             listeningState = true;
 
             SpeechResult speechResult;
@@ -62,13 +75,15 @@ public class Sphinx4SpeechThread implements Runnable {
                 spellString = spellString.trim();
 
                 Main.LOGGER.info("Spell is: " + spellString);
-                this.user.sendMessage(new LiteralText(spellString), true);
+                if (user != null) {
+                    this.user.sendMessage(new LiteralText(spellString), true);
 
-                //create the packet for the spell to send to the server
-                PacketByteBuf buf = PacketByteBufs.create();
-                buf.writeString(spellString);
-                //send the packaged spell to the server
-                ClientPlayNetworking.send(new Identifier(Main.MOD_ID, "spell"), buf);
+                    //create the packet for the spell to send to the server
+                    PacketByteBuf buf = PacketByteBufs.create();
+                    buf.writeString(spellString);
+                    //send the packaged spell to the server
+                    ClientPlayNetworking.send(new Identifier(Main.MOD_ID, "spell"), buf);
+                }
             }
 
         } catch (LineUnavailableException | IOException e) {
@@ -82,6 +97,7 @@ public class Sphinx4SpeechThread implements Runnable {
     }
 
     public void end() {
+        System.out.println("end()");
         try {
             while (!listeningState) {
                 Thread.onSpinWait();
@@ -95,9 +111,15 @@ public class Sphinx4SpeechThread implements Runnable {
         }
     }
 
-    // creates a thread that waits for end() to finish executing
-    public void scheduleEnd() {
-        Thread thread = new Thread(this::end);
-        thread.start();
+    public void pauseRecognition() {
+        System.out.println("pauseRecognition()");
+        mic.stop();
+    }
+
+    public void resumeRecognition(PlayerEntity player) {
+        System.out.println("resumeRecognition()");
+        user = player;
+        mic.flush();
+        mic.start();
     }
 }
