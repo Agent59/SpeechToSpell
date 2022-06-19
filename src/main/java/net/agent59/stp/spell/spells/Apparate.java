@@ -66,7 +66,7 @@ public class Apparate extends Item implements SpellInterface {
             }
             assert pos != null;
 
-            // teleports all players that are in the expanded box of the player TODO further testing needed
+            // teleports all players that are in the expanded box of the player
             Box box = player.getBoundingBox().expand(BOX_SIZE);
             List<Entity> list = world.getOtherEntities(null, box);
 
