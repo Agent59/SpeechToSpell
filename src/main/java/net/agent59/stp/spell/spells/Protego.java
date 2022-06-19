@@ -67,11 +67,8 @@ public class Protego extends Item implements SpellInterface {
                 }
             }
         };
-        protegoWall.setOwner(player);
-        protegoWall.setMaxLifetime(MAX_LIVETIME);
+        protegoWall.configureEntity(player, MAX_LIVETIME, SPELLTYPE, NAME);
         protegoWall.setMinProtegoType(0);
-        protegoWall.setSpellType(SPELLTYPE);
-        protegoWall.setSpellName(NAME);
         HitResult hitResult = player.raycast(RANGE, 0, false);
         protegoWall.setPosition(hitResult.getPos().getX(), hitResult.getPos().getY() -1, hitResult.getPos().getZ());
         protegoWall.setYaw(player.getYaw());

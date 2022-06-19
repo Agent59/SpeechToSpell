@@ -3,6 +3,7 @@ package net.agent59.stp.entity.custom;
 
 import net.agent59.stp.ModParticles;
 import net.agent59.stp.spell.SpellType;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
@@ -11,6 +12,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class RayEntity extends ExplosiveProjectileEntity {
 
@@ -23,10 +25,20 @@ public class RayEntity extends ExplosiveProjectileEntity {
     private String spellName;
     private int minProtegoType = 1; // if zero no protego spell is strong enough to protect against this spell
 
-    // TODO add second constructor (reduce usage of setters after creating the RayEntity)
     public RayEntity(EntityType<? extends ExplosiveProjectileEntity> entityType, World world) {
         super(entityType, world);
         super.setNoGravity(true);
+    }
+
+    public void configureEntity(@Nullable Entity owner, int maxLifetime, SpellType spellType, String name) {
+        this.setOwner(owner);
+        this.setMaxLifetime(maxLifetime);
+        this.setSpellType(spellType);
+        this.setSpellName(name);
+    }
+
+    public void updatePositionAndAngles(PlayerEntity player) {
+        this.updatePositionAndAngles(player.getX(), player.getEyeY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
     }
 
     public void setVelocity(PlayerEntity player, float speed, float divergence) {

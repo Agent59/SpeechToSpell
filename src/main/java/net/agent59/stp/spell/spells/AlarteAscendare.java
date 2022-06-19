@@ -61,11 +61,8 @@ public class AlarteAscendare extends Item implements SpellInterface {
                 this.remove(RemovalReason.DISCARDED);
             }
         };
-        ray.setOwner(player);
-        ray.setMaxLifetime(MAX_LIFETIME);
-        ray.setSpellType(SPELLTYPE);
-        ray.setSpellName(NAME);
-        ray.updatePositionAndAngles(player.getX(), player.getEyeY(), player.getZ(), player.getYaw() + 180, player.getPitch() * -1);
+        ray.configureEntity(player, MAX_LIFETIME, SPELLTYPE, NAME);
+        ray.updatePositionAndAngles(player);
         ray.setVelocity(player, RAY_SPEED, 0);
         world.spawnEntity(ray);
 
