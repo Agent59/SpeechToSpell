@@ -25,6 +25,9 @@ public class ModEntities {
     public static final EntityType<RayEntity> ALARTE_ASCENDARE_RAY = registerEntity("alarte_ascendare_ray",
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.4F)).build());
 
+    public static final EntityType<RayEntity> MELOFORS_RAY = registerEntity("melofors_ray",
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.4F)).build());
+
     public static final EntityType<RayEntity> PROTEGO_WALL = registerEntity("protego_wall",
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(1.5F, 2.25F)).build());
 

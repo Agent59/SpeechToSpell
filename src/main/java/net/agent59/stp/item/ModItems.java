@@ -53,6 +53,9 @@ public class ModItems {
     public static final Item ALARTE_ASCENDARE = registerItem("alarte_ascendare",
             new AlarteAscendare(new FabricItemSettings()));
 
+    public static final Item MELOFORS = registerItem("melofors",
+            new Melofors(new FabricItemSettings()));
+
 
     public static void registerModItems() {
         Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);
