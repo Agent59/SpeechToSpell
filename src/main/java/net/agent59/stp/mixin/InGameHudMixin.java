@@ -24,6 +24,7 @@ import java.util.Objects;
 
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin extends DrawableHelper {
+    // TODO make spellHotbarSlots transparent
 
     // inserts the spell-hotbar, which is to be rendered, after minecrafts renderHotbar
     @Shadow
