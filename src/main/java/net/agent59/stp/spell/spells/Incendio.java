@@ -46,7 +46,7 @@ public class Incendio extends Item implements SpellInterface {
         // see FlintAndStellItem
 
         HitResult hitResult = player.getCameraEntity().raycast(RANGE, 0, false);
-        if (hitResult.getType() != HitResult.Type.MISS && hitResult.getType() != HitResult.Type.ENTITY) {
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockHitResult blockHitResult = (BlockHitResult) hitResult;
             ServerWorld world = player.getWorld();
             BlockPos blockPos = blockHitResult.getBlockPos();
