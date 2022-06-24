@@ -59,6 +59,9 @@ public class ModItems {
     public static final Item FUMOS = registerItem("fumos",
             new Fumos(new FabricItemSettings()));
 
+    public static final Item INCENDIO = registerItem("incendio",
+            new Incendio(new FabricItemSettings()));
+
 
     public static void registerModItems() {
         Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);
