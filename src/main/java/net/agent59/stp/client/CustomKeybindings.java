@@ -1,10 +1,10 @@
 package net.agent59.stp.client;
 
 import net.agent59.stp.Main;
-import net.agent59.stp.util.UpdateNbt;
 import net.agent59.stp.client.gui.WandSettings.WandSettingsGui;
 import net.agent59.stp.client.gui.WandSettings.WandSettingsScreen;
 import net.agent59.stp.item.custom.WandItem;
+import net.agent59.stp.util.UpdateNbt;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -24,11 +24,11 @@ import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public class CustomKeybindings {
-    private static final KeyBinding WANDSETTINGS = registerKeybinding("wand_settings", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_N);
+    public static final KeyBinding WANDSETTINGS = registerKeybinding("wand_settings", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_N);
 
-    private static final KeyBinding CYCLESPELLHOTBAR = registerKeybinding("cycle_spell_hotbar", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R);
+    public static final KeyBinding CYCLESPELLHOTBAR = registerKeybinding("cycle_spell_hotbar", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R);
 
-    private static final KeyBinding EXECUTESPELLFROMSPELLHOTBAR = registerKeybinding("execute_spell_from_spell_hotbar", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G);
+    public static final KeyBinding EXECUTESPELLFROMSPELLHOTBAR = registerKeybinding("execute_spell_from_spell_hotbar", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G);
 
     private static KeyBinding registerKeybinding(String name, InputUtil.Type inputType, int keycode) {
 
