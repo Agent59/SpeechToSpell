@@ -6,6 +6,8 @@ import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.SpellHandler;
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.UpdateNbt;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
@@ -22,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.Objects;
 
+@Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin extends DrawableHelper {
     // TODO make spellHotbarSlots transparent

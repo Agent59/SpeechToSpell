@@ -1,6 +1,8 @@
 package net.agent59.stp.mixin;
 
 import net.agent59.stp.item.custom.WandItem;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.client.render.entity.model.BipedEntityModel;
@@ -16,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 // sets the arm pose, when using a wand
 
+@Environment(EnvType.CLIENT)
 @Mixin(BipedEntityModel.class)
 public abstract class BipedEntityModelMixin<T extends LivingEntity> extends AnimalModel<T> implements ModelWithArms, ModelWithHead {
 
