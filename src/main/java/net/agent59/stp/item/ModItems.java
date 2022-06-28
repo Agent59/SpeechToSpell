@@ -68,6 +68,9 @@ public class ModItems {
     public static final Item CISTEM_APERIO = registerItem("cistem_aperio",
             new CistemAperio(new FabricItemSettings()));
 
+    public static final Item FLIPENDO = registerItem("flipendo",
+            new Flipendo(new FabricItemSettings()));
+
 
     public static void registerModItems() {
         Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);

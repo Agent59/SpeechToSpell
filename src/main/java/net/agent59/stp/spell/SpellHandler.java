@@ -54,6 +54,7 @@ public class SpellHandler {
         spellsArray.add((SpellInterface) new ItemStack(ModItems.INCENDIO).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.HERBIVICUS).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.CISTEM_APERIO).getItem().asItem());
+        spellsArray.add((SpellInterface) new ItemStack(ModItems.FLIPENDO).getItem().asItem());
 
 
         return spellsArray;

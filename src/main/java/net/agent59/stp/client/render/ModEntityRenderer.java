@@ -33,6 +33,8 @@ public class ModEntityRenderer {
                 (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 1F, 1F, 1F, 0.1F, 12));
         EntityRendererRegistry.register(ModEntities.MELOFORS_RAY,
                 (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 1F, 0.5F, 0F, 0.4F, 15));
+        EntityRendererRegistry.register(ModEntities.FLIPENDO_RAY,
+                (context) -> new RayEntityRenderer(context, RAY_RECTANGLE_MODEL_LAYER, 0.7F, 0.7F, 1F, 0.4F, 15));
         EntityRendererRegistry.register(ModEntities.PROTEGO_WALL,
                 (context) -> new RayEntityRenderer(context, RAY_WALL_MODEL_LAYER, 211, 211, 211, 0.2F, -1));
     }
