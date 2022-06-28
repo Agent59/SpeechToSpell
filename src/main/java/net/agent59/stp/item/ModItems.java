@@ -65,6 +65,9 @@ public class ModItems {
     public static final Item HERBIVICUS = registerItem("herbivicus",
             new Herbivicus(new FabricItemSettings()));
 
+    public static final Item CISTEM_APERIO = registerItem("cistem_aperio",
+            new CistemAperio(new FabricItemSettings()));
+
 
     public static void registerModItems() {
         Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);
