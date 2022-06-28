@@ -13,24 +13,24 @@ public class Network {
     public static final boolean SPELL = ServerPlayNetworking.registerGlobalReceiver(
             new Identifier(Main.MOD_ID, "spell"), ((server, player, handler, buf, responseSender) -> {
                 String spellString = buf.readString();
-                SpellHandler.executeSpellIfAllowed(player, spellString);
+                server.execute(() -> SpellHandler.executeSpellIfAllowed(player, spellString));
             }));
 
-    public static final boolean UPDATEWANDNBT = ServerPlayNetworking.registerGlobalReceiver(
-            new Identifier(Main.MOD_ID, "update_wand_nbt"), ((server, player, handler, buf, responseSender) ->{
-
-                ItemStack wand;
-                if (((wand = player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = player.getOffHandStack()).getItem() instanceof WandItem)) {
-                    if (wand.getNbt() == null) {
-                        wand.setNbt(new NbtCompound());
+    public static final boolean UPDATE_WAND_NBT = ServerPlayNetworking.registerGlobalReceiver(
+            new Identifier(Main.MOD_ID, "update_wand_nbt"), ((server, player, handler, buf, responseSender) -> {
+                NbtCompound nbt = buf.readNbt();
+                server.execute(() -> {
+                    ItemStack wand;
+                    if (((wand = player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = player.getOffHandStack()).getItem() instanceof WandItem)) {
+                        if (wand.getNbt() == null) {
+                            wand.setNbt(new NbtCompound());
+                        }
+                        assert nbt != null;
+                        for (String key : nbt.getKeys()) {
+                            wand.getNbt().put(key, nbt.get(key));
+                        }
                     }
-
-                    NbtCompound nbt = buf.readNbt();
-                    assert nbt != null;
-                    for (String key : nbt.getKeys()) {
-                        wand.getNbt().put(key, nbt.get(key));
-                    }
-                }
+                });
             }));
 
     public static void registerNetworkPackets() {
