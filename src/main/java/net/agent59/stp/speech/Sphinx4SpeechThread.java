@@ -31,15 +31,13 @@ public class Sphinx4SpeechThread implements Runnable {
     }
 
     public static Sphinx4SpeechThread getInstance() {
-        System.out.println("getInstance()");
         if (instance == null) {
-            System.out.println("getInstance() instance == null");
             try {
                 instance = new Sphinx4SpeechThread();
             } catch (LineUnavailableException e) {
                 throw new RuntimeException(e);
             }
-        } else {System.out.println("getInstance() instance != null");}
+        }
         return instance;
     }
 
@@ -97,7 +95,6 @@ public class Sphinx4SpeechThread implements Runnable {
     }
 
     public void end() {
-        System.out.println("end()");
         try {
             while (!listeningState) {
                 Thread.onSpinWait();
@@ -112,12 +109,10 @@ public class Sphinx4SpeechThread implements Runnable {
     }
 
     public void pauseRecognition() {
-        System.out.println("pauseRecognition()");
         mic.stop();
     }
 
     public void resumeRecognition(PlayerEntity player) {
-        System.out.println("resumeRecognition()");
         user = player;
         mic.flush();
         mic.start();

@@ -20,8 +20,6 @@ public class MinecraftClientMixin {
     // creates a speech thread when joining a world
     @Inject(method = "joinWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;setWorld(Lnet/minecraft/client/world/ClientWorld;)V", shift = At.Shift.AFTER))
     public void injectJoinWorld(ClientWorld world, CallbackInfo ci) {
-        System.out.println("injectJoinWorld()");
-
         Sphinx4SpeechThread speechThread = Sphinx4SpeechThread.getInstance();
         Thread thread = new Thread(speechThread);
         thread.start();
@@ -32,7 +30,6 @@ public class MinecraftClientMixin {
     @Inject(method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;)V", at = @At("HEAD"))
     public void injectDisconnect(Screen screen, CallbackInfo ci) {
         if (inGame) {
-            System.out.println("injectDisconnect()");
             Sphinx4SpeechThread.getInstance().end();
         }
     }
