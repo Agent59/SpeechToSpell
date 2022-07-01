@@ -1,12 +1,16 @@
 package net.agent59.stp.entity.custom;
 
 
+import com.mojang.brigadier.StringReader;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.agent59.stp.ModParticles;
 import net.agent59.stp.spell.SpellType;
+import net.minecraft.command.argument.ParticleEffectArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.MathHelper;
@@ -86,6 +90,45 @@ public class RayEntity extends ExplosiveProjectileEntity {
 
     @Override
     protected void initDataTracker() {
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        this.writeCustomDataToNbt2(nbt);
+        super.writeCustomDataToNbt(nbt);
+        nbt.putBoolean("burning", this.burning);
+        nbt.putFloat("drag", this.drag);
+        nbt.putBoolean("collides", this.collides);
+        nbt.putInt("maxLifetime", this.maxLifetime);
+        nbt.putString("spellName", this.spellName);
+        nbt.putInt("minProtegoType", this.minProtegoType);
+
+        nbt.putString("spellType", this.spellType.toString());
+        nbt.putString("particleType", this.particleType.asString());
+    }
+
+    public void writeCustomDataToNbt2(NbtCompound nbtCompound) {
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        this.readCustomDataFromNbt2(nbt);
+        super.readCustomDataFromNbt(nbt);
+        this.burning = nbt.getBoolean("burning");
+        this.drag = nbt.getFloat("drag");
+        this.collides = nbt.getBoolean("collides");
+        this.maxLifetime = nbt.getInt("maxLifetime");
+        this.spellName = nbt.getString("spellName");
+        this.minProtegoType = nbt.getInt("minProtegoType");
+        this.spellType = SpellType.valueOf(nbt.getString("spellType"));
+        try {
+            this.particleType = ParticleEffectArgumentType.readParameters(new StringReader(nbt.getString("particleType")));
+        } catch (CommandSyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void readCustomDataFromNbt2(NbtCompound nbt){
     }
 
     @Override
