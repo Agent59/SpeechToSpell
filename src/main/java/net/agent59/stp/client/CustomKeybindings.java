@@ -86,6 +86,6 @@ public class CustomKeybindings {
             }
         });
 
-        System.out.println("Registering Keybindings for " + Main.MOD_ID);
+        Main.LOGGER.info("Registering Keybindings for " + Main.MOD_ID);
     }
 }

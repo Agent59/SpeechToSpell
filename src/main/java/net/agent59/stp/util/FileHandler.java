@@ -21,9 +21,9 @@ public class FileHandler {
         if (!(directory.isDirectory())) {
             boolean created_directory = directory.mkdir();
             if (!created_directory) {
-                System.out.println("Couldn't create " + folderName + " directory in " + path);
+                Main.LOGGER.error("Couldn't create " + folderName + " directory in " + path);
             } else {
-                System.out.println("Created " + folderName + " directory in " + path);
+                Main.LOGGER.info("Created " + folderName + " directory in " + path);
             }
         }
     }

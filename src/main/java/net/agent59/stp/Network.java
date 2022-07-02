@@ -34,6 +34,6 @@ public class Network {
             }));
 
     public static void registerNetworkPackets() {
-        System.out.println("Registering NetworkPackets for " + Main.MOD_ID);
+        Main.LOGGER.info("Registering NetworkPackets for " + Main.MOD_ID);
     }
 }
