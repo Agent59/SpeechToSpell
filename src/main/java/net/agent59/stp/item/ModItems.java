@@ -77,6 +77,9 @@ public class ModItems {
     public static final Item NOX = registerItem("nox",
             new Nox(new FabricItemSettings()));
 
+    public static final Item TEMPEST = registerItem("tempest",
+            new Tempest(new FabricItemSettings()));
+
 
 
     public static void registerModItems() {
