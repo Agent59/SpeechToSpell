@@ -71,6 +71,13 @@ public class ModItems {
     public static final Item FLIPENDO = registerItem("flipendo",
             new Flipendo(new FabricItemSettings()));
 
+    public static final Item LUMOS = registerItem("lumos",
+            new Lumos(new FabricItemSettings()));
+
+    public static final Item NOX = registerItem("nox",
+            new Nox(new FabricItemSettings()));
+
+
 
     public static void registerModItems() {
         Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);

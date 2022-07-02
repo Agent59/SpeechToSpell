@@ -1,6 +1,7 @@
 package net.agent59.stp.entity;
 
 import net.agent59.stp.Main;
+import net.agent59.stp.entity.custom.LumosEntity;
 import net.agent59.stp.entity.custom.RayEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
@@ -33,6 +34,9 @@ public class ModEntities {
 
     public static final EntityType<RayEntity> PROTEGO_WALL = registerEntity("protego_wall",
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, RayEntity::new).dimensions(EntityDimensions.fixed(1.5F, 2.25F)).build());
+
+    public static final EntityType<LumosEntity> LUMOS_ORB = registerEntity("lumos_orb",
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, LumosEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.4F)).build());
 
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType<T> entityType) {
         return Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MOD_ID, name), entityType);

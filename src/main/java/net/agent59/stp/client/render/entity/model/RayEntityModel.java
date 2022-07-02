@@ -3,12 +3,7 @@ package net.agent59.stp.client.render.entity.model;
 import net.agent59.stp.entity.custom.RayEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.ModelData;
-import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.model.ModelPartBuilder;
-import net.minecraft.client.model.ModelPartData;
-import net.minecraft.client.model.ModelTransform;
-import net.minecraft.client.model.TexturedModelData;
+import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.ShulkerBulletEntityModel;
 import net.minecraft.entity.Entity;
 
@@ -43,6 +38,10 @@ public class RayEntityModel<T extends Entity> extends ShulkerBulletEntityModel<R
                 offsetX = -12.0F; offsetY = -36.0F; offsetZ = -0.5F;
                 sizeX = 24.0F; sizeY = 36.0F; sizeZ = 1.0F;
             }
+            case CUBE -> {
+                offsetX = -4.0F; offsetY = -4.0F; offsetZ = -4.0F;
+                sizeX = 2.0F; sizeY = 2.0F; sizeZ = 2.0F;
+            }
         }
 
         modelPartData.addChild(MAIN, ModelPartBuilder.create().uv(textureX, textureY).cuboid(offsetX, offsetY, offsetZ,
@@ -57,6 +56,7 @@ public class RayEntityModel<T extends Entity> extends ShulkerBulletEntityModel<R
 
     public enum Shape {
         RAY,
-        WALL
+        WALL,
+        CUBE
     }
 }
