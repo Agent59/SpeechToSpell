@@ -59,7 +59,7 @@ public class Melofors extends Item implements SpellInterface {
                     entity.dropStack(stack);
                     entity.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.CARVED_PUMPKIN));
                 }
-                this.remove(RemovalReason.DISCARDED);
+                this.kill();
             }
         };
         ray.configureEntity(player, MAX_LIFETIME, SPELLTYPE, NAME);
