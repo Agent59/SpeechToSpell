@@ -18,6 +18,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class RayEntity extends ExplosiveProjectileEntity {
 
     private boolean burning = false;
@@ -120,11 +122,15 @@ public class RayEntity extends ExplosiveProjectileEntity {
         this.maxLifetime = nbt.getInt("maxLifetime");
         this.spellName = nbt.getString("spellName");
         this.minProtegoType = nbt.getInt("minProtegoType");
-        this.spellType = SpellType.valueOf(nbt.getString("spellType"));
-        try {
-            this.particleType = ParticleEffectArgumentType.readParameters(new StringReader(nbt.getString("particleType")));
-        } catch (CommandSyntaxException e) {
-            throw new RuntimeException(e);
+        if (!Objects.equals(nbt.getString("spellType"), "")) {
+            this.spellType = SpellType.valueOf(nbt.getString("spellType"));
+        }
+        if (!Objects.equals(nbt.getString("particleType"), "")) {
+            try {
+                this.particleType = ParticleEffectArgumentType.readParameters(new StringReader(nbt.getString("particleType")));
+            } catch (CommandSyntaxException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
