@@ -24,7 +24,6 @@ public class Sphinx4Conf {
         configuration.setDictionaryPath(Paths.get(speechResourcesPath + File.separatorChar + "spells.dic").toFile().toURI().toURL().toString());
         configuration.setLanguageModelPath(Paths.get(speechResourcesPath + File.separatorChar + "spells.lm").toFile().toURI().toURL().toString());
 
-        // TODO improve grammar
         configuration.setUseGrammar(true);
         configuration.setGrammarName("spells");
         configuration.setGrammarPath(Paths.get(speechResourcesPath).toFile().toURI().toString());
