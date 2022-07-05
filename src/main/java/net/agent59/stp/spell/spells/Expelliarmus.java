@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -73,9 +74,10 @@ public class Expelliarmus extends Item implements SpellInterface {
 
                         world1.spawnEntity(itemEntity);
                     }
-                    player1.getInventory().removeStack(EquipmentSlot.MAINHAND.getEntitySlotId());
-                    player1.getInventory().removeStack(EquipmentSlot.OFFHAND.getEntitySlotId());
-                    this.remove(RemovalReason.DISCARDED);
+                    PlayerInventory inventory = player1.getInventory();
+                    inventory.removeStack(inventory.selectedSlot);
+                    inventory.removeStack(PlayerInventory.OFF_HAND_SLOT);
+                    this.kill();
                 }
             }
         };
