@@ -80,6 +80,9 @@ public class ModItems {
     public static final Item TEMPEST = registerItem("tempest",
             new Tempest(new FabricItemSettings()));
 
+    public static final Item PORTUS = registerItem("portus",
+            new Portus(new FabricItemSettings()));
+
 
 
     public static void registerModItems() {

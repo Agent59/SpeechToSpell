@@ -58,6 +58,7 @@ public class SpellHandler {
         spellsArray.add((SpellInterface) new ItemStack(ModItems.LUMOS).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.NOX).getItem().asItem());
         spellsArray.add((SpellInterface) new ItemStack(ModItems.TEMPEST).getItem().asItem());
+        spellsArray.add((SpellInterface) new ItemStack(ModItems.PORTUS).getItem().asItem());
 
 
         return spellsArray;

@@ -21,4 +21,9 @@ public class WandSettingsScreen extends CottonClientScreen {
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
+
+    @Override
+    public boolean shouldPause() {
+        return false;
+    }
 }

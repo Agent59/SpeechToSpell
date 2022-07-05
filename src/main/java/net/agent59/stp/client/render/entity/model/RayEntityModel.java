@@ -42,6 +42,10 @@ public class RayEntityModel<T extends Entity> extends ShulkerBulletEntityModel<R
                 offsetX = -4.0F; offsetY = -4.0F; offsetZ = -4.0F;
                 sizeX = 2.0F; sizeY = 2.0F; sizeZ = 2.0F;
             }
+            case INVISIBLE -> {
+                offsetX = 0; offsetY = 0; offsetZ = 0;
+                sizeX = 0; sizeY = 0; sizeZ = 0;
+            }
         }
 
         modelPartData.addChild(MAIN, ModelPartBuilder.create().uv(textureX, textureY).cuboid(offsetX, offsetY, offsetZ,
@@ -57,6 +61,7 @@ public class RayEntityModel<T extends Entity> extends ShulkerBulletEntityModel<R
     public enum Shape {
         RAY,
         WALL,
-        CUBE
+        CUBE,
+        INVISIBLE
     }
 }
