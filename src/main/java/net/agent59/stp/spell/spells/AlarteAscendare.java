@@ -5,6 +5,7 @@ import net.agent59.stp.entity.custom.RayEntity;
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.spell.SpellType;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
@@ -57,6 +58,9 @@ public class AlarteAscendare extends Item implements SpellInterface {
                     ServerPlayerEntity player1 = (ServerPlayerEntity) entity;
                     player1.addVelocity(0, BOOST_HEIGHT, 0);
                     player1.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player1));
+                }
+                if (entity instanceof MobEntity) {
+                    entity.addVelocity(0, BOOST_HEIGHT, 0);
                 }
                 this.remove(RemovalReason.DISCARDED);
             }
