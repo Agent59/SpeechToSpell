@@ -54,7 +54,7 @@ public class Protego extends Item implements SpellInterface {
             @Override
             public void tick2() {
                 Box box = this.getBoundingBox();
-                List<Entity> list = this.world.getOtherEntities(null, box); // TODO test the size of the box in multiplayer
+                List<Entity> list = this.world.getOtherEntities(null, box);
 
                 for (Entity entity: list) {
                     if (entity instanceof RayEntity) {
