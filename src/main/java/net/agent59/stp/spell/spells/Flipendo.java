@@ -6,7 +6,9 @@ import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.spell.SpellType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.MathHelper;
@@ -54,6 +56,10 @@ public class Flipendo extends Item implements SpellInterface {
                 Entity entity = entityHitResult.getEntity();
                 if (entity instanceof LivingEntity) {
                     ((LivingEntity)entity).takeKnockback(KNOCKBACK_STRENGTH, MathHelper.sin((this.getYaw() + 180) * ((float)Math.PI / 180)), -MathHelper.cos((this.getYaw() + 180) * ((float)Math.PI / 180)));
+                    if (entity instanceof PlayerEntity) {
+                        ServerPlayerEntity player1 = (ServerPlayerEntity) entity;
+                        player1.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player1));
+                    }
                 } else {
                     entity.addVelocity(-MathHelper.sin((this.getYaw() + 180) * ((float) Math.PI / 180)) * KNOCKBACK_STRENGTH, 0.1, MathHelper.cos((this.getYaw() + 180) * ((float) Math.PI / 180)) * KNOCKBACK_STRENGTH);
                 }
