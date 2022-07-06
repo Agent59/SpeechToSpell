@@ -1,14 +1,10 @@
 package net.agent59.stp;
 
-import net.agent59.stp.client.gui.WandSettings.PortusGui;
-import net.agent59.stp.client.gui.WandSettings.WandSettingsScreen;
 import net.agent59.stp.item.ModItems;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.SpellHandler;
 import net.agent59.stp.spell.spells.Portus;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
@@ -48,12 +44,6 @@ public class Network {
                 }
                 server.execute(() -> ((Portus) ModItems.PORTUS).setPortkey(new BlockPos(coords[0], coords[1], coords[2]), player));
             })));
-
-
-    public static final boolean PORTUS_SCREEN = ClientPlayNetworking.registerGlobalReceiver(
-            new Identifier(Main.MOD_ID, "portus_screen"), ((client, handler, buf, responseSender) -> {
-                client.execute(() -> MinecraftClient.getInstance().setScreen(new WandSettingsScreen(new PortusGui(client.player))));
-            }));
 
     public static void registerNetworkPackets() {
         Main.LOGGER.info("Registering NetworkPackets for " + Main.MOD_ID);

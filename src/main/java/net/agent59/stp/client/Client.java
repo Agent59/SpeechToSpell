@@ -15,6 +15,7 @@ public class Client implements ClientModInitializer {
     public void onInitializeClient() {
         CustomKeybindings.registerCustomKeybindings();
         ModEntityRenderer.registerModEntityRenderers();
+        ClientNetwork.registerNetworkPackets();
 
         // create a folder with resources and configs in the mod folder
         FileHandler.createFolderIfNonexistent(Main.MOD_NAME, FileHandler.MODS_DIRECTORY);
