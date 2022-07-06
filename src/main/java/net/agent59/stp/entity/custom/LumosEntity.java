@@ -24,6 +24,9 @@ public class LumosEntity extends RayEntity {
         Entity owner = this.getOwner();
         if (owner == null) {
             this.discard();
+            if (oldBlockPos != null && (world1.getBlockState(oldBlockPos) == Blocks.LIGHT.getDefaultState())) {
+                world1.setBlockState(oldBlockPos, Blocks.AIR.getDefaultState());
+            }
             return;
         }
         this.setPosition(owner.getX(), owner.getEyeY(), owner.getZ());
