@@ -105,8 +105,16 @@ public class RayEntity extends ExplosiveProjectileEntity {
         nbt.putString("spellName", this.spellName);
         nbt.putInt("minProtegoType", this.minProtegoType);
 
-        nbt.putString("spellType", this.spellType.toString());
-        nbt.putString("particleType", this.particleType.asString());
+        if (this.spellType == null) {
+            this.discard();
+        } else {
+            nbt.putString("spellType", this.spellType.toString());
+        }
+        if (this.particleType == null) {
+            this.discard();
+        } else {
+            nbt.putString("particleType", this.particleType.asString());
+        }
     }
 
     public void writeCustomDataToNbt2(NbtCompound nbtCompound) {
