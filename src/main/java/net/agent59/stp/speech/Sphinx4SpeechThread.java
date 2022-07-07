@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import javax.sound.sampled.*;
@@ -75,7 +75,7 @@ public class Sphinx4SpeechThread implements Runnable {
                 Main.LOGGER.info("Spell is: " + spellString);
 
                 assert user != null;
-                user.sendMessage(new LiteralText(spellString), true);
+                user.sendMessage(Text.literal(spellString), true);
 
                 //create the packet for the spell to send to the server
                 PacketByteBuf buf = PacketByteBufs.create();

@@ -73,7 +73,7 @@ public class Aguamenti extends Item implements SpellInterface {
             assert blockPos != null;
 
             // water evaporates in nether (see BucketItem)
-            if (world.getDimension().isUltrawarm()) {
+            if (world.getDimension().ultrawarm()) {
 
                 world.playSound(null, blockPos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,
                         0.5f, 2.6f + (world.random.nextFloat() - world.random.nextFloat()) * 0.8f);

@@ -5,14 +5,13 @@ import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import io.github.cottonmc.cotton.gui.widget.icon.ItemIcon;
 import net.agent59.stp.Main;
+import net.agent59.stp.spell.SpellHandler;
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.UpdateNbt;
-import net.agent59.stp.spell.SpellHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -38,7 +37,7 @@ public class WandSettingsGui extends LightweightGuiDescription {
         //left panel
         WPlainPanel hotbarPanel = new WPlainPanel();
 
-        WLabel hotbarLabel = new WLabel(new TranslatableText("Spell-Hotbar"));
+        WLabel hotbarLabel = new WLabel(Text.translatable("Spell-Hotbar"));
         hotbarPanel.add(hotbarLabel, 2, 0);
 
         // hotbarSpellButtons
@@ -48,15 +47,15 @@ public class WandSettingsGui extends LightweightGuiDescription {
             assert wand.getNbt() != null;
             String spellNameButton = wand.getNbt().getString(Main.MOD_ID + ".hotbarSpell" + i);
             if (Objects.equals(spellNameButton, "")) {
-                hotbarSpellButton.setLabel(new LiteralText("No spell selected"));
+                hotbarSpellButton.setLabel(Text.literal("No spell selected"));
             } else {
-                hotbarSpellButton.setLabel(new LiteralText(spellNameButton));
+                hotbarSpellButton.setLabel(Text.literal(spellNameButton));
                 hotbarSpellButton.setIcon(new ItemIcon(SpellHandler.getSpellNameHashmap().get(spellNameButton).asItem()));
             }
 
             int finalI = i;
             hotbarSpellButton.setOnClick(() -> {
-                hotbarSpellButton.setLabel(new LiteralText("No spell selected"));
+                hotbarSpellButton.setLabel(Text.literal("No spell selected"));
                 hotbarSpellButton.setIcon(null);
                 UpdateNbt.updateWandNbtFromClient(".hotbarSpell" + finalI, "", 0);
 
@@ -81,7 +80,7 @@ public class WandSettingsGui extends LightweightGuiDescription {
         //right panel
         WPlainPanel spellPanel = new WPlainPanel();
 
-        WLabel spellsLabel = new WLabel(new TranslatableText("Spells"));
+        WLabel spellsLabel = new WLabel(Text.translatable("Spells"));
         spellPanel.add(spellsLabel, 6, 0);
 
         ArrayList<SpellInterface> spells = SpellHandler.getSpellList();
@@ -91,12 +90,12 @@ public class WandSettingsGui extends LightweightGuiDescription {
         }
 
         BiConsumer<String, SpellButtonWidget> configurator = (String spellName, SpellButtonWidget spellButton) -> {
-            spellButton.button.setLabel(new LiteralText(spellName));
+            spellButton.button.setLabel(Text.translatable(spellName));
             spellButton.button.setIcon(new ItemIcon(SpellHandler.getSpellNameHashmap().get(spellName).asItem()));
             spellButton.button.setOnClick(() -> {
                 if (selectedHotbarSpellButton.get() != 0) {
                     UpdateNbt.updateWandNbtFromClient(".hotbarSpell" + selectedHotbarSpellButton.get(), spellName, 0);
-                    selectedHotbarSpellButtonObj.get().setLabel(new LiteralText(spellName));
+                    selectedHotbarSpellButtonObj.get().setLabel(Text.translatable(spellName));
                     selectedHotbarSpellButtonObj.get().setIcon(new ItemIcon(SpellHandler.getSpellNameHashmap().get(spellName).asItem()));
                 }
             });

@@ -13,8 +13,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -27,30 +26,30 @@ public class PortusGui extends LightweightGuiDescription {
         root.setSize(256, 230);
         root.setInsets(Insets.ROOT_PANEL);
 
-        WLabel guiLabel = new WLabel(new TranslatableText("Portus target location"));
+        WLabel guiLabel = new WLabel(Text.translatable("Portus target location"));
         root.add(guiLabel, 0, 0);
 
 
-        WLabel xLabel = new WLabel(new TranslatableText("X:"));
+        WLabel xLabel = new WLabel(Text.translatable("X:"));
         root.add(xLabel, 0  , 1);
         WTextField xTextField = new WTextField();
         root.add(xTextField, 0, 2, 13, 2);
 
-        WLabel yLabel = new WLabel(new TranslatableText("Y:"));
+        WLabel yLabel = new WLabel(Text.translatable("Y:"));
         root.add(yLabel, 0, 4);
         WTextField yTextField = new WTextField();
         root.add(yTextField, 0, 5, 13, 2);
 
-        WLabel zLabel = new WLabel(new TranslatableText("Z:"));
+        WLabel zLabel = new WLabel(Text.translatable("Z:"));
         root.add(zLabel, 0, 7);
         WTextField zTextField = new WTextField();
         root.add(zTextField, 0, 8, 13, 2);
 
 
-        WLabel errorLabel = new WLabel(new TranslatableText(""));
+        WLabel errorLabel = new WLabel(Text.translatable(""));
         root.add(errorLabel, 0, 10);
 
-        WButton doneButton = new WButton(new TranslatableText("Done"));
+        WButton doneButton = new WButton(Text.translatable("Done"));
         doneButton.setOnClick(() -> {
             String errorMessage = "";
             boolean isIntConvertible = true;
@@ -67,7 +66,7 @@ public class PortusGui extends LightweightGuiDescription {
                 errorMessage = errorMessage + " invalid Z";
                 isIntConvertible = false;
             }
-            errorLabel.setText(new LiteralText(errorMessage));
+            errorLabel.setText(Text.translatable(errorMessage));
 
             if (isIntConvertible) {
                 try {
