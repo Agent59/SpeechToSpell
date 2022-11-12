@@ -1,8 +1,8 @@
 package net.agent59.stp.client;
 
 import net.agent59.stp.Main;
-import net.agent59.stp.client.gui.WandSettings.WandSettingsGui;
-import net.agent59.stp.client.gui.WandSettings.WandSettingsScreen;
+import net.agent59.stp.client.gui.WandScreen;
+import net.agent59.stp.client.gui.cottonguis.WandSettingsGui;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.util.UpdateNbt;
 import net.fabricmc.api.EnvType;
@@ -44,7 +44,7 @@ public class CustomKeybindings {
                 // if the player holds a wand
                 assert client.player != null;
                 if (((wand = client.player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = client.player.getOffHandStack()).getItem() instanceof WandItem)) {
-                    MinecraftClient.getInstance().setScreen(new WandSettingsScreen(new WandSettingsGui(wand)));
+                    MinecraftClient.getInstance().setScreen(new WandScreen(new WandSettingsGui(wand)));
                 }
             }
 

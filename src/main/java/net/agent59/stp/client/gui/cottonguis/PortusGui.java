@@ -1,4 +1,4 @@
-package net.agent59.stp.client.gui.WandSettings;
+package net.agent59.stp.client.gui.cottonguis;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model":  "speech_to_spell:block/wandmaker" }
+  }
+}
