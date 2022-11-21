@@ -2,8 +2,8 @@
   "parent": "block/block",
   "texture_size": [64, 64],
   "textures": {
-    "0": "speech_to_spell:block/wandmaker",
-    "particle": "speech_to_spell:block/wandmaker"
+    "0": "speech_to_spell:block/wand_maker",
+    "particle": "speech_to_spell:block/wand_maker"
   },
   "elements": [
     {

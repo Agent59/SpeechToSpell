@@ -15,7 +15,7 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
 
-    public static final Block WANDMAKER_BLOCK = registerBlock("wandmaker",
+    public static final Block WANDMAKER_BLOCK = registerBlock("wand_maker",
             new WandMakerBlock(FabricBlockSettings.of(Material.WOOD).strength(2.5f).sounds(BlockSoundGroup.WOOD)),
             ItemGroup.DECORATIONS);
 

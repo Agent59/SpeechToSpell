@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "W": {
+      "item": "minecraft:warped_stem"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PSP",
+    "WWW"
+  ],
+  "result": {
+    "item": "speech_to_spell:wand_maker"
+  }
+}

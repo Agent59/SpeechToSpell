@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(value=EnvType.CLIENT)
 public class WandMakerScreen extends CottonInventoryScreen<WandMakerScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("speech_to_spell:textures/gui/wandmaker.png");
+    private static final Identifier TEXTURE = new Identifier("speech_to_spell:textures/gui/wand_maker.png");
     public WandMakerScreen(WandMakerScreenHandler gui, PlayerInventory inventory, Text title) {
         super(gui, inventory.player, title);
     }
