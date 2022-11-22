@@ -1,10 +1,11 @@
-package net.agent59.stp.client.gui.WandSettings;
+package net.agent59.stp.client.gui.cottonguis;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import io.github.cottonmc.cotton.gui.widget.icon.ItemIcon;
 import net.agent59.stp.Main;
+import net.agent59.stp.client.gui.cottonguis.widgets.SpellButtonWidget;
 import net.agent59.stp.spell.SpellHandler;
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.UpdateNbt;
