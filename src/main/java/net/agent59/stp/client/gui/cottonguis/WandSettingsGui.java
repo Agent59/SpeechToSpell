@@ -1,13 +1,14 @@
-package net.agent59.stp.client.gui.WandSettings;
+package net.agent59.stp.client.gui.cottonguis;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import io.github.cottonmc.cotton.gui.widget.icon.ItemIcon;
 import net.agent59.stp.Main;
+import net.agent59.stp.client.gui.cottonguis.widgets.SpellButtonWidget;
+import net.agent59.stp.spell.SpellHandler;
 import net.agent59.stp.spell.SpellInterface;
 import net.agent59.stp.util.UpdateNbt;
-import net.agent59.stp.spell.SpellHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
@@ -91,12 +92,12 @@ public class WandSettingsGui extends LightweightGuiDescription {
         }
 
         BiConsumer<String, SpellButtonWidget> configurator = (String spellName, SpellButtonWidget spellButton) -> {
-            spellButton.button.setLabel(new LiteralText(spellName));
+            spellButton.button.setLabel(new TranslatableText(spellName));
             spellButton.button.setIcon(new ItemIcon(SpellHandler.getSpellNameHashmap().get(spellName).asItem()));
             spellButton.button.setOnClick(() -> {
                 if (selectedHotbarSpellButton.get() != 0) {
                     UpdateNbt.updateWandNbtFromClient(".hotbarSpell" + selectedHotbarSpellButton.get(), spellName, 0);
-                    selectedHotbarSpellButtonObj.get().setLabel(new LiteralText(spellName));
+                    selectedHotbarSpellButtonObj.get().setLabel(new TranslatableText(spellName));
                     selectedHotbarSpellButtonObj.get().setIcon(new ItemIcon(SpellHandler.getSpellNameHashmap().get(spellName).asItem()));
                 }
             });

@@ -1,4 +1,4 @@
-package net.agent59.stp.client.gui.WandSettings;
+package net.agent59.stp.client.gui.cottonguis.widgets;
 
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
@@ -7,7 +7,7 @@ import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public class SpellButtonWidget extends WPlainPanel {
-    WButton button;
+    public WButton button;
 
     public SpellButtonWidget() {
         button = new WButton();

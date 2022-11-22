@@ -39,27 +39,26 @@ public class SpellHandler {
     // when adding spells don't forget to add them to the array
     public static ArrayList<SpellInterface> getSpellList() {
         ArrayList<SpellInterface> spellsArray = new ArrayList<>();
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.AGUAMENTI).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.STUPEFY).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.PROTEGO).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.HOMENUM_REVELIO).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.APPARATE).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.ASCENDIO).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.EXPELLIARMUS).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.PETRIFICUS_TOTALUS).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.ACCIO).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.ALARTE_ASCENDARE).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.MELOFORS).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.FUMOS).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.INCENDIO).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.HERBIVICUS).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.CISTEM_APERIO).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.FLIPENDO).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.LUMOS).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.NOX).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.TEMPEST).getItem().asItem());
-        spellsArray.add((SpellInterface) new ItemStack(ModItems.PORTUS).getItem().asItem());
-
+        spellsArray.add((SpellInterface) ModItems.AGUAMENTI);
+        spellsArray.add((SpellInterface) ModItems.STUPEFY);
+        spellsArray.add((SpellInterface) ModItems.PROTEGO);
+        spellsArray.add((SpellInterface) ModItems.HOMENUM_REVELIO);
+        spellsArray.add((SpellInterface) ModItems.APPARATE);
+        spellsArray.add((SpellInterface) ModItems.ASCENDIO);
+        spellsArray.add((SpellInterface) ModItems.EXPELLIARMUS);
+        spellsArray.add((SpellInterface) ModItems.PETRIFICUS_TOTALUS);
+        spellsArray.add((SpellInterface) ModItems.ACCIO);
+        spellsArray.add((SpellInterface) ModItems.ALARTE_ASCENDARE);
+        spellsArray.add((SpellInterface) ModItems.MELOFORS);
+        spellsArray.add((SpellInterface) ModItems.FUMOS);
+        spellsArray.add((SpellInterface) ModItems.INCENDIO);
+        spellsArray.add((SpellInterface) ModItems.HERBIVICUS);
+        spellsArray.add((SpellInterface) ModItems.CISTEM_APERIO);
+        spellsArray.add((SpellInterface) ModItems.FLIPENDO);
+        spellsArray.add((SpellInterface) ModItems.LUMOS);
+        spellsArray.add((SpellInterface) ModItems.NOX);
+        spellsArray.add((SpellInterface) ModItems.TEMPEST);
+        spellsArray.add((SpellInterface) ModItems.PORTUS);
 
         return spellsArray;
     }

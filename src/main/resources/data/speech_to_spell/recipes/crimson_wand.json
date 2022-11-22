@@ -1,0 +1,15 @@
+{
+  "type": "speech_to_spell:wand_maker",
+  "ingredients": {
+    "wood": {
+      "item": "minecraft:crimson_planks"
+    },
+    "core": {
+      "item": "minecraft:string"
+    }
+  },
+  "crafting_time": 400,
+  "result": {
+    "item": "speech_to_spell:crimson_wand"
+  }
+}

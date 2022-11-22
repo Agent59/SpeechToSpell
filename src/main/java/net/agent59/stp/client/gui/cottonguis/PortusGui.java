@@ -1,4 +1,4 @@
-package net.agent59.stp.client.gui.WandSettings;
+package net.agent59.stp.client.gui.cottonguis;
 
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -67,7 +66,7 @@ public class PortusGui extends LightweightGuiDescription {
                 errorMessage = errorMessage + " invalid Z";
                 isIntConvertible = false;
             }
-            errorLabel.setText(new LiteralText(errorMessage));
+            errorLabel.setText(new TranslatableText(errorMessage));
 
             if (isIntConvertible) {
                 try {
