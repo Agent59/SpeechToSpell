@@ -25,7 +25,7 @@ public class RayEntity extends ExplosiveProjectileEntity {
     private boolean burning = false;
     private ParticleEffect particleType = ModParticles.EMPTY_PARTICLE;
     private float drag = 1; // set to 1 for no drag
-    private boolean collides = false;
+    private boolean canHit = false;
     private int maxLifetime = 1000;
     private SpellType spellType;
     private String spellName;
@@ -100,7 +100,7 @@ public class RayEntity extends ExplosiveProjectileEntity {
         super.writeCustomDataToNbt(nbt);
         nbt.putBoolean("burning", this.burning);
         nbt.putFloat("drag", this.drag);
-        nbt.putBoolean("collides", this.collides);
+        nbt.putBoolean("canHit", this.canHit);
         nbt.putInt("maxLifetime", this.maxLifetime);
         nbt.putString("spellName", this.spellName);
         nbt.putInt("minProtegoType", this.minProtegoType);
@@ -126,7 +126,7 @@ public class RayEntity extends ExplosiveProjectileEntity {
         super.readCustomDataFromNbt(nbt);
         this.burning = nbt.getBoolean("burning");
         this.drag = nbt.getFloat("drag");
-        this.collides = nbt.getBoolean("collides");
+        this.canHit = nbt.getBoolean("canHit");
         this.maxLifetime = nbt.getInt("maxLifetime");
         this.spellName = nbt.getString("spellName");
         this.minProtegoType = nbt.getInt("minProtegoType");
@@ -173,12 +173,12 @@ public class RayEntity extends ExplosiveProjectileEntity {
     }
 
     @Override
-    public boolean collides() {
-        return this.collides;
+    public boolean canHit() {
+        return this.canHit;
     }
 
-    public void setCollides(boolean collides) {
-        this.collides = collides;
+    public void setCanHit(boolean canHit) {
+        this.canHit = canHit;
     }
 
     public int getMaxLifetime() {
