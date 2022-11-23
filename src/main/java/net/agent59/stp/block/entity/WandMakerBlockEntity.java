@@ -163,12 +163,24 @@ public class WandMakerBlockEntity extends LockableContainerBlockEntity implement
 
     @Override
     public ItemStack removeStack(int slot, int amount) {
-        return Inventories.splitStack(this.inventory, slot, amount);
+        ItemStack stack = Inventories.splitStack(this.inventory, slot, amount);
+        updateCrafting();
+        if (slot == RESULT_SLOT) {
+            updateRender();
+        }
+        this.markDirty();
+        return stack;
     }
 
     @Override
     public ItemStack removeStack(int slot) {
-        return Inventories.removeStack(this.inventory, slot);
+        ItemStack stack = Inventories.removeStack(this.inventory, slot);
+        updateCrafting();
+        if (slot == RESULT_SLOT) {
+            updateRender();
+        }
+        this.markDirty();
+        return stack;
     }
 
     @Override
@@ -177,15 +189,22 @@ public class WandMakerBlockEntity extends LockableContainerBlockEntity implement
         if (stack.getCount() > this.getMaxCountPerStack()) {
             stack.setCount(this.getMaxCountPerStack());
         }
-        this.craftingTime = getCraftingTime(this.world, this);
-        this.craftingTimeTotal = getCraftingTime(this.world, this);
-
+        updateCrafting();
         if (slot == RESULT_SLOT) {
-            assert this.world != null;
-            BlockState state = world.getBlockState(pos);
-            world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
+            updateRender();
         }
         this.markDirty();
+    }
+
+    private void updateCrafting() {
+        this.craftingTime = getCraftingTime(this.world, this);
+        this.craftingTimeTotal = getCraftingTime(this.world, this);
+    }
+
+    private void updateRender() {
+        assert this.world != null;
+        BlockState state = world.getBlockState(pos);
+        world.updateListeners(pos, state, state, Block.NOTIFY_LISTENERS);
     }
 
     @Override
@@ -202,12 +221,15 @@ public class WandMakerBlockEntity extends LockableContainerBlockEntity implement
         if (slot == RESULT_SLOT) {
             return stack.getItem() instanceof WandItem;
         }
-        return true;
+        return !(stack.getItem() instanceof WandItem);
     }
 
     @Override
     public void clear() {
         this.inventory.clear();
+        updateCrafting();
+        updateRender();
+        this.markDirty();
     }
 
     @Override
