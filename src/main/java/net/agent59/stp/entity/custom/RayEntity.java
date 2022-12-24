@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ExplosiveProjectileEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -135,7 +136,7 @@ public class RayEntity extends ExplosiveProjectileEntity {
         }
         if (!Objects.equals(nbt.getString("particleType"), "")) {
             try {
-                this.particleType = ParticleEffectArgumentType.readParameters(new StringReader(nbt.getString("particleType")));
+                this.particleType = ParticleEffectArgumentType.readParameters(new StringReader(nbt.getString("particleType")), Registries.PARTICLE_TYPE.getReadOnlyWrapper());
             } catch (CommandSyntaxException e) {
                 throw new RuntimeException(e);
             }

@@ -5,10 +5,14 @@ import net.agent59.stp.item.custom.GuideBookItem;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.spells.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 
 public class ModItems {
@@ -17,13 +21,21 @@ public class ModItems {
             new WandItem(new FabricItemSettings()));
 
     public static final Item CRIMSON_WAND = registerItem("crimson_wand",
-            new WandItem(new FabricItemSettings().group(ItemGroup.TOOLS)));
+            new WandItem(new FabricItemSettings()), ItemGroups.TOOLS);
 
     public static final Item GUIDE_BOOK = registerItem("guide_book",
-            new GuideBookItem(new FabricItemSettings().group(ItemGroup.MISC)));
+            new GuideBookItem(new FabricItemSettings()), ItemGroups.TOOLS);
+
+    private static Item registerItem(String name, Item item, @Nullable ItemGroup group) {
+        Item item1 = Registry.register(Registries.ITEM, new Identifier(Main.MOD_ID, name), item);
+        if (group != null) {
+            ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item1));
+        }
+        return item1;
+    }
 
     private static Item registerItem(String name, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(Main.MOD_ID, name), item);
+        return registerItem(name, item, null);
     }
 
     // create a SpellItem for every spell: needed for the cooldown-system

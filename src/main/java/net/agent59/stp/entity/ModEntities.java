@@ -9,8 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 
 public class ModEntities {
@@ -43,7 +44,7 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, PortkeyEntity::new).dimensions(EntityDimensions.fixed(0.1F, 0.1F)).build());
 
     private static <T extends Entity> EntityType<T> registerEntity(String name, EntityType<T> entityType) {
-        return Registry.register(Registry.ENTITY_TYPE, new Identifier(Main.MOD_ID, name), entityType);
+        return Registry.register(Registries.ENTITY_TYPE, new Identifier(Main.MOD_ID, name), entityType);
     }
 
     public static void registerModEntities() {
