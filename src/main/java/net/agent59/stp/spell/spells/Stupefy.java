@@ -33,6 +33,11 @@ public class Stupefy extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Shoots a magical ray that gives little damage and knockback.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

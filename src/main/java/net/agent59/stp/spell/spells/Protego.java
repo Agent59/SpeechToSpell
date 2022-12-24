@@ -32,6 +32,11 @@ public class Protego extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Creates a magical wall in front of you that blocks magical rays. When the protego wall is hit, it will be destroyed.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

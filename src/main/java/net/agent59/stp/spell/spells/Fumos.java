@@ -24,6 +24,11 @@ public class Fumos extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Creates a cloud of smoke around you.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

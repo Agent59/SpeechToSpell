@@ -1,6 +1,7 @@
 package net.agent59.stp.item;
 
 import net.agent59.stp.Main;
+import net.agent59.stp.item.custom.GuideBookItem;
 import net.agent59.stp.item.custom.WandItem;
 import net.agent59.stp.spell.spells.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -17,6 +18,9 @@ public class ModItems {
 
     public static final Item CRIMSON_WAND = registerItem("crimson_wand",
             new WandItem(new FabricItemSettings().group(ItemGroup.TOOLS)));
+
+    public static final Item GUIDE_BOOK = registerItem("guide_book",
+            new GuideBookItem(new FabricItemSettings().group(ItemGroup.MISC)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(Main.MOD_ID, name), item);

@@ -31,6 +31,11 @@ public class Herbivicus extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Lets you place a random flower.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

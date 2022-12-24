@@ -27,6 +27,11 @@ public class Accio extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Lets you collect all items on the ground that are near you.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

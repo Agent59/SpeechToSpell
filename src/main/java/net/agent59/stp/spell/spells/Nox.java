@@ -27,6 +27,11 @@ public class Nox extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Extinguishes the Light source you created with the Lumos spell.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

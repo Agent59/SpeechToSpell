@@ -26,6 +26,11 @@ public class Lumos extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "A light source will follow you through the air.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

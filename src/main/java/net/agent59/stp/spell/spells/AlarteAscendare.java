@@ -32,6 +32,11 @@ public class AlarteAscendare extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Shoots a magical ray that launches entities into the air.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

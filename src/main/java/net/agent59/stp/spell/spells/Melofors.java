@@ -32,6 +32,11 @@ public class Melofors extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Shoots a magical ray that puts a carved pumpkin on the entity it hits.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

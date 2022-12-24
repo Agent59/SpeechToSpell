@@ -36,6 +36,11 @@ public class Expelliarmus extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Shoots a magical ray that makes an entity drop the item its holding.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

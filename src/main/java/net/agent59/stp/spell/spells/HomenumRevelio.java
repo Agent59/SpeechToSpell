@@ -11,7 +11,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class HomenumRevelio extends Item implements SpellInterface {
@@ -28,6 +27,11 @@ public class HomenumRevelio extends Item implements SpellInterface {
     @Override
     public String getStringName() {
         return NAME;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Adds glowing to all entities near your.";
     }
 
     @Override

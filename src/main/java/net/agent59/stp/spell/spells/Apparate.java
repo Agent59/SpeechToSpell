@@ -32,6 +32,11 @@ public class Apparate extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Teleports you and players standing really close to you to the block you are looking at.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

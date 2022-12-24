@@ -31,6 +31,11 @@ public class Tempest extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Strikes a random player or mob, that has no block above them, with a lightning.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

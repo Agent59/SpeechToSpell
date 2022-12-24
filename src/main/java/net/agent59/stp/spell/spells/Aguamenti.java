@@ -34,6 +34,11 @@ public class Aguamenti extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Places a water source.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

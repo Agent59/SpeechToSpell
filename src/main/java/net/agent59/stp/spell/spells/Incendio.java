@@ -27,6 +27,11 @@ public class Incendio extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Lets you create a fire.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

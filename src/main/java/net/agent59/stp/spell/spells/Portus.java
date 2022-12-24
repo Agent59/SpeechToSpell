@@ -37,6 +37,11 @@ public class Portus extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Lets you place a portkey into a block. If you then hit or use the block it will teleport you and players close to you to the given location. After teleportation the portkey will be destroyed.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

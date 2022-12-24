@@ -23,6 +23,11 @@ public class Ascendio extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Launches you into the air. Because a value is added to your current velocity, the spell will not work well while you are in the air.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

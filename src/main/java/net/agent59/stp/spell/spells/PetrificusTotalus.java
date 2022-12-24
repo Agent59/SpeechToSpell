@@ -32,6 +32,11 @@ public class PetrificusTotalus extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Shoots a magical ray that gives maximum slowness to an entity.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

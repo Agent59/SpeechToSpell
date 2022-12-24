@@ -33,6 +33,11 @@ public class Flipendo extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Shoots a magical ray that knocks entities back.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }

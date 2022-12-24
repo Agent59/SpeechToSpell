@@ -29,6 +29,11 @@ public class CistemAperio extends Item implements SpellInterface {
     }
 
     @Override
+    public String getDescription() {
+        return "Lets you open chests from a greater distance.";
+    }
+
+    @Override
     public int getRange() {
         return RANGE;
     }
