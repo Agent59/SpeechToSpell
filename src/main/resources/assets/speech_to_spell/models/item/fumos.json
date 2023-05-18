@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:particle/big_smoke_5"
+    "layer0": "speech_to_spell:item/fumos"
   }
 }

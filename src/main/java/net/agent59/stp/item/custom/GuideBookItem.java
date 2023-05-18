@@ -1,12 +1,13 @@
 package net.agent59.stp.item.custom;
 
+import net.agent59.stp.Main;
 import net.agent59.stp.spell.SpellHandler;
 import net.agent59.stp.spell.SpellInterface;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LecternBlock;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.BookScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,9 +15,11 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.WrittenBookItem;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -49,9 +52,10 @@ public class GuideBookItem extends Item {
         if (itemStack.getNbt() == null) {
             createNbtData(itemStack);
         }
-        if (world.isClient) {
-            WrittenBookItem.resolve(itemStack, user.getCommandSource(), user);
-            MinecraftClient.getInstance().setScreen(new BookScreen(new BookScreen.WrittenBookContents(itemStack)));
+        if (!world.isClient()) {
+            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) user;
+            WrittenBookItem.resolve(itemStack, serverPlayer.getCommandSource(), serverPlayer);
+            ServerPlayNetworking.send(serverPlayer, new Identifier(Main.MOD_ID, "book_screen"), PacketByteBufs.create());
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
