@@ -56,11 +56,9 @@ dependencies {
 	modImplementation include(group: 'edu.cmu.sphinx', name: 'sphinx4-core', version:'5prealpha-SNAPSHOT')
 	modImplementation include(group: 'edu.cmu.sphinx', name: 'sphinx4-data', version:'5prealpha-SNAPSHOT')
 
-
 	// LibGui
-	modImplementation include("io.github.cottonmc:LibGui:8.0.1+1.20")
+	modImplementation include("io.github.cottonmc:LibGui:${libgui_version}")
 }
-
 
 processResources {
 	inputs.property "version", project.version
