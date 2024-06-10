@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.agent59.mixin.client",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "BipedEntityModelMixin",
+    "ClientPlayerEntityMixin",
+    "InGameHudMixin",
+    "MinecraftClientMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

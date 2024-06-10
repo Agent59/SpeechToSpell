@@ -19,22 +19,26 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.agent59.stp.Main"
+      "net.agent59.Main"
     ],
     "client": [
-      "net.agent59.stp.client.Client"
+      "net.agent59.Client"
     ]
   },
   "mixins": [
-    "stp.mixins.json"
+    "stp.mixins.json",
+    {
+      "config": "stp.client.mixins.json",
+      "environment": "client"
+    }
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.8",
+    "fabricloader": ">=0.15.11",
     "fabric": "*",
-    "minecraft": "~1.19",
-    "java": ">=17",
-    "fabric-key-binding-api-v1": "*"
+    "minecraft": "~1.20",
+    "java": ">=21",
+    "fabric-api": "*"
   },
   "suggests": {
     "another-mod": "*"
