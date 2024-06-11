@@ -15,7 +15,6 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class RayEntityRenderer extends EntityRenderer<RayEntity> {
@@ -40,14 +39,12 @@ public class RayEntityRenderer extends EntityRenderer<RayEntity> {
     }
 
     @Override
-    public void render(RayEntity rayEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(RayEntity rayEntity, float yaw, float tick_delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
         matrixStack.push();
         matrixStack.scale(-1.0F, -1.0F, 1.0F);
-        float h = MathHelper.lerpAngleDegrees(rayEntity.prevYaw, rayEntity.getYaw(), g);
-        float j = MathHelper.lerp(g, rayEntity.prevPitch, rayEntity.getPitch());
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(getTexture(rayEntity)));
-        this.model.setRectangleRotation(h, j);
-        this.model.render(matrixStack, vertexConsumer, i, OverlayTexture.DEFAULT_UV, red, green, blue, alpha);
+        this.model.setRectangleRotation(rayEntity.getYaw(), rayEntity.getPitch());
+        this.model.render(matrixStack, vertexConsumer, light, OverlayTexture.DEFAULT_UV, red, green, blue, alpha);
         matrixStack.pop();
     }
 

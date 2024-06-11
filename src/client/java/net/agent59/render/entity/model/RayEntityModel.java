@@ -11,12 +11,10 @@ import net.minecraft.entity.Entity;
 public class RayEntityModel<T extends Entity> extends ShulkerBulletEntityModel<RayEntity> {
 
     private static final String MAIN = "main";
-    private final ModelPart root;
     private final ModelPart rectangle;
 
     public RayEntityModel(ModelPart root) {
         super(root);
-        this.root = root;
         this.rectangle = root.getChild(MAIN);
     }
 
@@ -54,6 +52,7 @@ public class RayEntityModel<T extends Entity> extends ShulkerBulletEntityModel<R
     }
 
     public void setRectangleRotation(float yaw, float pitch) {
+        // pi / 180 = 0.017453292F
         this.rectangle.yaw = yaw * 0.017453292F;
         this.rectangle.pitch = pitch * 0.017453292F;
     }

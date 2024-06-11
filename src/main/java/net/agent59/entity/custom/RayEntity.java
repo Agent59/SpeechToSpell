@@ -53,6 +53,7 @@ public class RayEntity extends ExplosiveProjectileEntity {
         float pitch = player.getPitch();
         float roll = player.getRoll();
 
+        // pi / 180 = 0.017453292F
         float x = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
         float y = -MathHelper.sin((pitch + roll) * 0.017453292F);
         float z = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
@@ -89,10 +90,6 @@ public class RayEntity extends ExplosiveProjectileEntity {
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
         this.remove(RemovalReason.DISCARDED);
-    }
-
-    @Override
-    protected void initDataTracker() {
     }
 
     @Override
