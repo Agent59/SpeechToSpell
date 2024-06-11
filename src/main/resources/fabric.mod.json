@@ -14,7 +14,7 @@
   },
 
   "license": "BSD 3-Clause License",
-  "icon": "assets/speech_to_spell/stp-icon.png",
+  "icon": "stp-icon.png",
 
   "environment": "*",
   "entrypoints": {
