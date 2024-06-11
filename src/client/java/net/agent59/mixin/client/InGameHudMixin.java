@@ -14,7 +14,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -30,7 +29,6 @@ import java.util.Objects;
 public abstract class InGameHudMixin {
     // TODO make spellHotbarSlots transparent
 
-    // inserts the spell-hotbar, which is to be rendered, after minecrafts renderHotbar
     @Shadow
     protected abstract PlayerEntity getCameraPlayer();
 
@@ -40,12 +38,10 @@ public abstract class InGameHudMixin {
     @Shadow
     protected abstract void renderHotbarItem(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed);
 
-    @Shadow @Final private static Identifier WIDGETS_TEXTURE;
-
-    // used to check if the player stopped using a wand
     @Unique
-    private ItemStack usedWandLastTick = null;
+    private static final Identifier SPELLHOTBAR_TEXTURE = new Identifier(Main.MOD_ID, "textures/gui/spell_hotbar.png");
 
+    // inserts the spell-hotbar, which is to be rendered, after minecrafts renderHotbar function
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbar(FLnet/minecraft/client/gui/DrawContext;)V", shift = At.Shift.AFTER))
     private void init(DrawContext context, float tickDelta, CallbackInfo ci) {
         PlayerEntity player = this.getCameraPlayer();
@@ -53,15 +49,6 @@ public abstract class InGameHudMixin {
         // if the player is holding a wand
         if (((wand = player.getMainHandStack()).getItem() instanceof WandItem) || ((wand = player.getOffHandStack()).getItem() instanceof WandItem)) {
             this.renderSpellHotbar(wand, player, tickDelta, context);
-
-            if (player.getActiveItem().getItem() instanceof WandItem) {
-                usedWandLastTick = wand;
-            }
-        }
-
-        if (usedWandLastTick != null && (player.getActiveItem() != usedWandLastTick)) {
-            usedWandLastTick.onStoppedUsing(player.getWorld(), player, 0);
-            usedWandLastTick = null;
         }
     }
 
@@ -72,12 +59,11 @@ public abstract class InGameHudMixin {
         }
 
         // hotbar
-        Identifier SPELLHOTBAR_TEXTURE = new Identifier(Main.MOD_ID, "textures/gui/spell_hotbar.png");
         RenderSystem.setShaderTexture(0, SPELLHOTBAR_TEXTURE);
 
         int hotbarY = this.scaledHeight / 2 - 51;
         int hotbarX = 0;
-        context.drawTexture(WIDGETS_TEXTURE, hotbarX, hotbarY, 0, 0, 22, 102);
+        context.drawTexture(SPELLHOTBAR_TEXTURE, hotbarX, hotbarY, 0, 0, 22, 102);
 
         if (wand.getNbt() == null) {
             UpdateNbt.updateWandNbtFromClient(".spellHotbarSelectedSlot", null, 1);
@@ -86,8 +72,7 @@ public abstract class InGameHudMixin {
             wand.setNbt(nbt);
         }
         int selectedSlot = wand.getNbt().getInt(Main.MOD_ID + ".spellHotbarSelectedSlot");
-        context.drawTexture(WIDGETS_TEXTURE, hotbarX - 1, (hotbarY - 1) + 20 * (selectedSlot - 1), 22, 0, 24, 24);
-
+        context.drawTexture(SPELLHOTBAR_TEXTURE, hotbarX - 1, (hotbarY - 1) + 20 * (selectedSlot - 1), 22, 0, 24, 24);
 
         ArrayList<SpellInterface> spellsInHotbar = new ArrayList<>();
         // spell-icons
