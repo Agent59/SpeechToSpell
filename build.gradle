@@ -17,12 +17,6 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 
-	// Sphinx4
-	maven {
-		name = "sphinx4"
-		url = "https://oss.sonatype.org/content/repositories/snapshots"
-	}
-
 	// LibGui
 	maven {
 		name = "CottonMC"
@@ -57,10 +51,6 @@ dependencies {
 
 	// Fabric API
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-	// Sphinx4
-	modImplementation include(group: 'edu.cmu.sphinx', name: 'sphinx4-core', version:'5prealpha-SNAPSHOT')
-	modImplementation include(group: 'edu.cmu.sphinx', name: 'sphinx4-data', version:'5prealpha-SNAPSHOT')
 
 	// LibGui
 	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
