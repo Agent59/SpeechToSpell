@@ -7,6 +7,7 @@ import net.agent59.item.ModItems;
 import net.agent59.recipe.ModRecipes;
 import net.agent59.screen.ModScreenHandlers;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,5 +29,13 @@ public class Main implements ModInitializer {
 		Network.registerNetworkPackets();
 		ModEntities.registerModEntities();
 		ModParticles.registerModParticles();
+	}
+
+	/**
+	 * @param path The path the returned identifier should have.
+	 * @return An identifier with the namespace of the SpeechToSpell mod.
+	 */
+	public static Identifier id(String path) {
+		return new Identifier(Main.MOD_ID, path);
 	}
 }
