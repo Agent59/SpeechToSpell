@@ -1,9 +1,6 @@
 package net.agent59.spell;
 
 import com.mojang.serialization.Codec;
-import net.agent59.Main;
-import net.agent59.registry.ModRegistries;
-import net.agent59.spell.spells.Spell;
 import net.agent59.StSMain;
 import net.agent59.registry.StSRegistries;
 import net.agent59.spell.spells.*;
