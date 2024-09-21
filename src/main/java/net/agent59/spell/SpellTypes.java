@@ -4,6 +4,9 @@ import com.mojang.serialization.Codec;
 import net.agent59.Main;
 import net.agent59.registry.ModRegistries;
 import net.agent59.spell.spells.Spell;
+import net.agent59.StSMain;
+import net.agent59.registry.StSRegistries;
+import net.agent59.spell.spells.*;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
@@ -26,7 +29,7 @@ public class SpellTypes {
      * This method may only be used to register the spells the SpeechToSpell mod implements directly.
      */
     private static <T extends Spell> SpellType<T> register(String name, Codec<T> spellCodec) {
-        return register(Main.id(name), spellCodec);
+        return register(StSMain.id(name), spellCodec);
     }
 
     /**
@@ -37,11 +40,11 @@ public class SpellTypes {
      * @param <T> The class of the spell.
      */
     public static <T extends Spell> SpellType<T> register(Identifier identifier, Codec<T> spellCodec) {
-        return Registry.register(ModRegistries.SPELL_TYPE, identifier, new SpellType<>(spellCodec));
+        return Registry.register(StSRegistries.SPELL_TYPE, identifier, new SpellType<>(spellCodec));
     }
 
     public static void initialize() {
-        Main.LOGGER.info("Registering Spells for " + Main.MOD_NAME);
+        StSMain.LOGGER.info("Registering Spells for " + StSMain.MOD_NAME);
     }
 
     /**

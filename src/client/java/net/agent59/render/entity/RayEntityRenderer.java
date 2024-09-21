@@ -1,6 +1,6 @@
 package net.agent59.render.entity;
 
-import net.agent59.Main;
+import net.agent59.StSMain;
 import net.agent59.entity.custom.RayEntity;
 import net.agent59.render.entity.model.RayEntityModel;
 import net.fabricmc.api.EnvType;
@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 @Environment(EnvType.CLIENT)
 public class RayEntityRenderer extends EntityRenderer<RayEntity> {
 
-    private static final Identifier TEXTURE = new Identifier(Main.MOD_ID, "textures/entity/white_plane.png");
+    private static final Identifier TEXTURE = StSMain.id("textures/entity/white_plane.png");
     private final RayEntityModel<RayEntity> model;
 
     private final float red;

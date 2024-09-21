@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.agent59.Main"
+      "net.agent59.StSMain"
     ],
     "client": [
       "net.agent59.StSClient"

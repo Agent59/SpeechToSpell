@@ -17,12 +17,12 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class StSClientNetwork {
 
     public static final boolean PORTUS_SCREEN = ClientPlayNetworking.registerGlobalReceiver(
-            Main.id("portus_screen"), ((client, handler, buf, responseSender) -> {
+            StSMain.id("portus_screen"), ((client, handler, buf, responseSender) -> {
                 client.execute(() -> MinecraftClient.getInstance().setScreen(new WandScreen(new PortusGui(client.player))));
             }));
 
     public static final boolean BOOK_SCREEN = ClientPlayNetworking.registerGlobalReceiver(
-            Main.id("book_screen"), ((client, handler, buf, responseSender) -> {
+            StSMain.id("book_screen"), ((client, handler, buf, responseSender) -> {
                 client.execute(() -> {
                     MinecraftClient clientInstance = MinecraftClient.getInstance();
                     ItemStack itemStack = clientInstance.player.getStackInHand(clientInstance.player.getActiveHand());
@@ -56,6 +56,6 @@ public class StSClientNetwork {
     );
 
     public static void registerNetworkPackets() {
-        Main.LOGGER.info("Registering ClientNetworkPackets for " + Main.MOD_NAME);
+        StSMain.LOGGER.info("Registering ClientNetworkPackets for " + StSMain.MOD_NAME);
     }
 }

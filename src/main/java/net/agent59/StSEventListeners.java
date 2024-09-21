@@ -24,7 +24,7 @@ public class StSEventListeners {
 
             ServerPlayerMagicComponent playerMagicComp = ServerPlayerMagicComponent.getInstance(player);
             if (!joined) {
-                Main.LOGGER.debug("Reloading and syncing PlayerData for player {}", player);
+                StSMain.LOGGER.debug("Reloading and syncing PlayerData for player {}", player);
                 playerMagicComp.onDataPacksReloaded();
             }
             playerMagicComp.fullSync();
@@ -34,6 +34,6 @@ public class StSEventListeners {
         ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resManager, success) -> reloadInProgress = false);
 
 
-        Main.LOGGER.info("Registering event listeners for " + Main.MOD_NAME);
+        StSMain.LOGGER.info("Registering event listeners for " + StSMain.MOD_NAME);
     }
 }

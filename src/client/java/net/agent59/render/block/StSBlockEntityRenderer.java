@@ -1,7 +1,7 @@
 package net.agent59.render.block;
 
-import net.agent59.Main;
-import net.agent59.block.entity.ModBlockEntities;
+import net.agent59.StSMain;
+import net.agent59.block.entity.StSBlockEntities;
 import net.agent59.render.block.entity.WandMakerBlockEntityRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,8 +11,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 public class StSBlockEntityRenderer {
 
     public static void registerModBlockEntityRenderers() {
-        Main.LOGGER.info("Registering Mod Block Entity Renderers for " + Main.MOD_NAME);
+        StSMain.LOGGER.info("Registering Mod Block Entity Renderers for " + StSMain.MOD_NAME);
 
-        BlockEntityRendererFactories.register(ModBlockEntities.WANDMAKER_BLOCK_ENTITY, WandMakerBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(StSBlockEntities.WANDMAKER_BLOCK_ENTITY, WandMakerBlockEntityRenderer::new);
     }
 }

@@ -6,10 +6,10 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
-import net.agent59.Main;
 import net.agent59.StSEventListeners;
+import net.agent59.StSMain;
 import net.agent59.codecs.OptionalFieldCodec;
-import net.agent59.registry.ModRegistries;
+import net.agent59.registry.StSRegistries;
 import net.agent59.resource.MergingJsonDataLoader;
 import net.agent59.resource.StSReloadChangesEvents;
 import net.agent59.spell.spells.Spell;
@@ -40,17 +40,17 @@ import java.util.*;
  * @see StSReloadChangesEvents
  */
 public class SpellManager extends MergingJsonDataLoader implements IdentifiableResourceReloadListener {
-    private static final Set<Identifier> DEPENDENCIES = Set.of(new Identifier(Main.MOD_ID, SpellSchoolManager.PATH));
+    private static final Set<Identifier> DEPENDENCIES = Set.of(StSMain.id(SpellSchoolManager.PATH));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     public static final String PATH = "spells";
-    public static final Identifier SYNC_CHANNEL_NAME = Main.id("sync_spell_manager");
+    public static final Identifier SYNC_CHANNEL_NAME = StSMain.id("sync_spell_manager");
     /**
      * The ServerPlayerMagicComponent uses this to check whether a parsing error was an expected one.
      * @see net.agent59.cardinal_component.player_magic_comp.ServerPlayerMagicComponent#onDataPacksReloaded()
      */
     public static final String NO_SUCH_REGISTERED_SPELL_ERROR = "No such registered spell: ";
 
-    private static final Codec<Spell> DISPATCHER = ModRegistries.SPELL_TYPE.getCodec()
+    private static final Codec<Spell> DISPATCHER = StSRegistries.SPELL_TYPE.getCodec()
             .dispatch("spell_type", Spell::getType, SpellTypes.SpellType::codec);
 
     private static HashMap<Identifier, Spell> spells = new HashMap<>();
@@ -96,7 +96,7 @@ public class SpellManager extends MergingJsonDataLoader implements IdentifiableR
     }
 
     public static Codec<Optional<Spell>> getOptionalCodec() {
-        return new OptionalFieldCodec<>(Main.id("spell").toString(), getCodec(), false).codec();
+        return new OptionalFieldCodec<>(StSMain.id("spell").toString(), getCodec(), false).codec();
     }
 
     @SuppressWarnings("unchecked")
@@ -123,7 +123,7 @@ public class SpellManager extends MergingJsonDataLoader implements IdentifiableR
      */
     @Override
     protected void apply(Map<Identifier, JsonObject> prepared, ResourceManager manager, Profiler profiler) {
-        Main.LOGGER.info("Attempting to load the spells {}.", prepared.keySet());
+        StSMain.LOGGER.info("Attempting to load the spells {}.", prepared.keySet());
         unAppliedSpells = new HashMap<>();
         unAppliedIncantations = new HashMap<>();
 
@@ -132,7 +132,7 @@ public class SpellManager extends MergingJsonDataLoader implements IdentifiableR
             MergingJsonDataLoader.addIdField(jsonObj, spellId);
 
             DISPATCHER.parse(JsonOps.INSTANCE, jsonObj)
-                    .resultOrPartial((errMsg) -> Main.LOGGER.warn("""
+                    .resultOrPartial((errMsg) -> StSMain.LOGGER.warn("""
                             Could not parse the Codec for the spell {} when attempting to load it from json {}\
                             due to the following error:
                             {}
@@ -140,7 +140,7 @@ public class SpellManager extends MergingJsonDataLoader implements IdentifiableR
                     ).ifPresent(spell -> {
                         String incantation = spell.getIncantation();
                         if (unAppliedIncantations.containsKey(incantation)) {
-                            Main.LOGGER.warn("Spell {} and spell {} have the same incantation {}. " +
+                            StSMain.LOGGER.warn("Spell {} and spell {} have the same incantation {}. " +
                                             "Not loading the spell {}.", spell,
                                     unAppliedIncantations.get(incantation), incantation, spell
                             );
@@ -167,7 +167,7 @@ public class SpellManager extends MergingJsonDataLoader implements IdentifiableR
         incantations = unAppliedIncantations;
         unAppliedSpells = null;
         unAppliedIncantations = null;
-        Main.LOGGER.info("Successfully loaded the spells {}.", spells.keySet());
+        StSMain.LOGGER.info("Successfully loaded the spells {}.", spells.keySet());
     }
 
     /**
@@ -193,7 +193,7 @@ public class SpellManager extends MergingJsonDataLoader implements IdentifiableR
 
     @Override
     public Identifier getFabricId() {
-        return Main.id(PATH);
+        return StSMain.id(PATH);
     }
 
     /**

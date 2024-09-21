@@ -1,6 +1,6 @@
 package net.agent59.command;
 
-import net.agent59.Main;
+import net.agent59.StSMain;
 import net.agent59.cardinal_component.player_magic_comp.ServerPlayerMagicComponent;
 import net.fabricmc.fabric.api.gamerule.v1.CustomGameRuleCategory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
@@ -12,7 +12,7 @@ import net.minecraft.world.GameRules;
 public class StSGameRules {
 
     public static final CustomGameRuleCategory MAGIC =
-            new CustomGameRuleCategory(Main.id("magic"), Text.translatable("gamerule.category.magic"));
+            new CustomGameRuleCategory(StSMain.id("magic"), Text.translatable("gamerule.category.magic"));
 
     /**
      * Determines how many slots a players spell-hotbar has.
@@ -27,6 +27,6 @@ public class StSGameRules {
     );
 
     public static void initialize() {
-        Main.LOGGER.info("Registering gamerule categories and gamerules for " + Main.MOD_NAME);
+        StSMain.LOGGER.info("Registering gamerule categories and gamerules for " + StSMain.MOD_NAME);
     }
 }

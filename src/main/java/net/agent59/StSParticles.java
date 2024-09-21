@@ -10,9 +10,9 @@ public class StSParticles {
     public static final DefaultParticleType EMPTY_PARTICLE = FabricParticleTypes.simple();
 
     public static void registerModParticles() {
-        Main.LOGGER.info("Registering Mod Particles for " + Main.MOD_NAME);
+        StSMain.LOGGER.info("Registering Mod Particles for " + StSMain.MOD_NAME);
 
-        Registry.register(Registries.PARTICLE_TYPE, Main.id("empty"), EMPTY_PARTICLE);
+        Registry.register(Registries.PARTICLE_TYPE, StSMain.id("empty"), EMPTY_PARTICLE);
     }
 
 }

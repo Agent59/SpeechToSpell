@@ -2,7 +2,7 @@ package net.agent59.block.entity;
 
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.agent59.item.custom.WandItem;
-import net.agent59.recipe.ModRecipes;
+import net.agent59.recipe.StSRecipes;
 import net.agent59.recipe.WandMakerRecipe;
 import net.agent59.screen.WandMakerScreenHandler;
 import net.minecraft.block.Block;
@@ -46,8 +46,8 @@ public class WandMakerBlockEntity extends LockableContainerBlockEntity implement
     private final RecipeManager.MatchGetter<Inventory, WandMakerRecipe> matchGetter;
 
     public WandMakerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.WANDMAKER_BLOCK_ENTITY, pos, state);
-        this.matchGetter = RecipeManager.createCachedMatchGetter(ModRecipes.WAND_MAKER_RECIPE_TYPE);
+        super(StSBlockEntities.WANDMAKER_BLOCK_ENTITY, pos, state);
+        this.matchGetter = RecipeManager.createCachedMatchGetter(StSRecipes.WAND_MAKER_RECIPE_TYPE);
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {

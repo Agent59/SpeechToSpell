@@ -6,8 +6,8 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
-import net.agent59.Main;
 import net.agent59.StSEventListeners;
+import net.agent59.StSMain;
 import net.agent59.codecs.OptionalFieldCodec;
 import net.agent59.resource.MergingJsonDataLoader;
 import net.agent59.resource.StSReloadChangesEvents;
@@ -41,7 +41,7 @@ import java.util.Random;
 public class SpellSchoolManager extends MergingJsonDataLoader implements IdentifiableResourceReloadListener {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     public static final String PATH = "schools";
-    public static final Identifier SYNC_CHANNEL_NAME = Main.id("sync_spell_school_manager");
+    public static final Identifier SYNC_CHANNEL_NAME = StSMain.id("sync_spell_school_manager");
     /**
      * The ServerPlayerMagicComponent uses this to check whether a parsing error was an expected one.
      * @see net.agent59.cardinal_component.player_magic_comp.ServerPlayerMagicComponent#onDataPacksReloaded()
@@ -88,7 +88,7 @@ public class SpellSchoolManager extends MergingJsonDataLoader implements Identif
     }
 
     public static Codec<Optional<SpellSchool>> getOptionalCodec() {
-        return new OptionalFieldCodec<>(Main.id("spell_school").toString(), getCodec(), false).codec();
+        return new OptionalFieldCodec<>(StSMain.id("spell_school").toString(), getCodec(), false).codec();
     }
 
     /**
@@ -105,7 +105,7 @@ public class SpellSchoolManager extends MergingJsonDataLoader implements Identif
      */
     @Override
     protected void apply(Map<Identifier, JsonObject> prepared, ResourceManager manager, Profiler profiler) {
-        Main.LOGGER.info("Attempting to load the spellSchools {}.", prepared.keySet());
+        StSMain.LOGGER.info("Attempting to load the spellSchools {}.", prepared.keySet());
         unAppliedSpellSchools = new HashMap<>();
 
         prepared.forEach((schoolId, jsonObj) -> {
@@ -113,7 +113,7 @@ public class SpellSchoolManager extends MergingJsonDataLoader implements Identif
             MergingJsonDataLoader.addIdField(jsonObj, schoolId);
 
             SpellSchool.CODEC.parse(JsonOps.INSTANCE, jsonObj)
-                    .resultOrPartial((errMsg) -> Main.LOGGER.warn("""
+                    .resultOrPartial((errMsg) -> StSMain.LOGGER.warn("""
                             Could not parse the Codec for the spellSchool {} when attempting to load it from json \
                             due to the following error:
                             {}
@@ -134,7 +134,7 @@ public class SpellSchoolManager extends MergingJsonDataLoader implements Identif
         assert unAppliedSpellSchools != null;
         spellSchools = unAppliedSpellSchools;
         unAppliedSpellSchools = null;
-        Main.LOGGER.info("Successfully loaded the spellSchools {}.", spellSchools.keySet());
+        StSMain.LOGGER.info("Successfully loaded the spellSchools {}.", spellSchools.keySet());
     }
 
     /**
@@ -159,6 +159,6 @@ public class SpellSchoolManager extends MergingJsonDataLoader implements Identif
 
     @Override
     public Identifier getFabricId() {
-        return Main.id(PATH);
+        return StSMain.id(PATH);
     }
 }

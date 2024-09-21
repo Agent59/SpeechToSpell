@@ -5,7 +5,7 @@ import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
-import net.agent59.Main;
+import net.agent59.StSMain;
 import net.agent59.cardinal_component.player_magic_comp.ServerPlayerMagicComponent;
 
 /**
@@ -15,7 +15,7 @@ import net.agent59.cardinal_component.player_magic_comp.ServerPlayerMagicCompone
 public final class Components implements EntityComponentInitializer {
 
     public static final ComponentKey<MagicComponent> MAGICIAN =
-            ComponentRegistry.getOrCreate(Main.id( "magic"), MagicComponent.class);
+            ComponentRegistry.getOrCreate(StSMain.id("magic"), MagicComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {

@@ -1,7 +1,7 @@
 package net.agent59;
 
-import net.agent59.gui.ModScreens;
-import net.agent59.render.ModEntityRenderer;
+import net.agent59.gui.StSScreens;
+import net.agent59.render.StSEntityRenderer;
 import net.agent59.render.block.StSBlockEntityRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -13,9 +13,9 @@ public class StSClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         CustomKeybindings.registerCustomKeybindings();
-        ModEntityRenderer.registerModEntityRenderers();
+        StSEntityRenderer.registerModEntityRenderers();
         StSBlockEntityRenderer.registerModBlockEntityRenderers();
         StSClientNetwork.registerNetworkPackets();
-        ModScreens.registerModScreens();
+        StSScreens.registerModScreens();
     }
 }

@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.mojang.serialization.JsonOps;
-import net.agent59.Main;
+import net.agent59.StSMain;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceFinder;
 import net.minecraft.resource.ResourceManager;
@@ -184,7 +184,7 @@ public abstract class MergingJsonDataLoader extends SinglePreparationResourceRel
      */
     public static void addIdField(JsonObject jsonObj, Identifier id) {
         jsonObj.add(ID_FIELD, Identifier.CODEC.encodeStart(JsonOps.INSTANCE, id)
-                .resultOrPartial((errMsg) -> Main.LOGGER.error("""
+                .resultOrPartial((errMsg) -> StSMain.LOGGER.error("""
                         Could not encode id {} when trying to add an "id" field to jsonObject {},\
                         due to the following error:
                         {}

@@ -1,13 +1,13 @@
 package net.agent59;
 
-import net.agent59.block.ModBlocks;
-import net.agent59.block.entity.ModBlockEntities;
+import net.agent59.block.StSBlocks;
+import net.agent59.block.entity.StSBlockEntities;
 import net.agent59.command.StSGameRules;
-import net.agent59.entity.ModEntities;
-import net.agent59.item.ModItems;
+import net.agent59.entity.StSEntities;
+import net.agent59.item.StSItems;
 import net.agent59.network.StSNetwork;
-import net.agent59.recipe.ModRecipes;
-import net.agent59.screen.ModScreenHandlers;
+import net.agent59.recipe.StSRecipes;
+import net.agent59.screen.StSScreenHandlers;
 import net.agent59.spell.SpellManager;
 import net.agent59.spell.SpellTypes;
 import net.agent59.spell.component.SpellStateComponentTypes;
@@ -20,7 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // TODO README.md
-public class Main implements ModInitializer {
+public class StSMain implements ModInitializer {
 
 	public static final String MOD_ID = "speech_to_spell";
 	public static final String MOD_NAME = "SpeechToSpell";
@@ -30,14 +30,14 @@ public class Main implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-		ModItems.registerModItems();
-		ModBlocks.registerModBlocks();
-		ModBlockEntities.registerModBlockEntities();
-		ModScreenHandlers.registerModScreenHandlers();
-		ModRecipes.registerModRecipes();
+		StSItems.registerModItems();
+		StSBlocks.registerModBlocks();
+		StSBlockEntities.registerModBlockEntities();
+		StSScreenHandlers.registerModScreenHandlers();
+		StSRecipes.registerModRecipes();
 		StSNetwork.registerNetworkPackets();
-		ModEntities.registerModEntities();
-		ModParticles.registerModParticles();
+		StSEntities.registerModEntities();
+		StSParticles.registerModParticles();
 
 		StSGameRules.initialize();
 

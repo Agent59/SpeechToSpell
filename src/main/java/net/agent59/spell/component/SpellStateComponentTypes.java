@@ -1,9 +1,9 @@
 package net.agent59.spell.component;
 
 import com.mojang.serialization.Codec;
-import net.agent59.Main;
+import net.agent59.StSMain;
 import net.agent59.codecs.ErrorSkippingDispatchedMapCodec;
-import net.agent59.registry.ModRegistries;
+import net.agent59.registry.StSRegistries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
@@ -22,7 +22,7 @@ public class SpellStateComponentTypes {
      * This method may only be used to register the component types the SpeechToSpell mod implements directly.
      */
     private static <T> SpellStateComponentType<T> register(String path, Codec<T> codec) {
-        return register(Main.id(path), codec);
+        return register(StSMain.id(path), codec);
     }
 
     /**
@@ -33,11 +33,11 @@ public class SpellStateComponentTypes {
      * @param <T> The type object that is stored for the component type.
      */
     public static <T> SpellStateComponentType<T> register(Identifier id, Codec<T> codec) {
-        return Registry.register(ModRegistries.SPELL_STATE_COMPONENT_TYPE, id, new SpellStateComponentType<>(codec));
+        return Registry.register(StSRegistries.SPELL_STATE_COMPONENT_TYPE, id, new SpellStateComponentType<>(codec));
     }
 
     public static void initialize() {
-        Main.LOGGER.info("Registering SpellStateComponentTypes for " + Main.MOD_NAME);
+        StSMain.LOGGER.info("Registering SpellStateComponentTypes for " + StSMain.MOD_NAME);
     }
 
     /**
@@ -49,13 +49,13 @@ public class SpellStateComponentTypes {
     public record SpellStateComponentType<T>(Codec<T> codec) {
         public static final Codec<Map<SpellStateComponentType<?>, Object>> ERROR_SKIPPING_TYPE_TO_VALUE_MAP_CODEC =
                 new ErrorSkippingDispatchedMapCodec<>(
-                        ModRegistries.SPELL_STATE_COMPONENT_TYPE.getCodec(),
+                        StSRegistries.SPELL_STATE_COMPONENT_TYPE.getCodec(),
                         SpellStateComponentType::codec
                 );
 
         @Override
         public String toString() {
-            Identifier identifier = ModRegistries.SPELL_STATE_COMPONENT_TYPE.getId(this);
+            Identifier identifier = StSRegistries.SPELL_STATE_COMPONENT_TYPE.getId(this);
             return identifier == null ? "[unregistered]" : identifier.toString();
         }
     }

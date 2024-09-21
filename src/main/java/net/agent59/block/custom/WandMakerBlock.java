@@ -1,6 +1,6 @@
 package net.agent59.block.custom;
 
-import net.agent59.block.entity.ModBlockEntities;
+import net.agent59.block.entity.StSBlockEntities;
 import net.agent59.block.entity.WandMakerBlockEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -59,6 +59,6 @@ public class WandMakerBlock extends BlockWithEntity {
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return WandMakerBlock.checkType(type, ModBlockEntities.WANDMAKER_BLOCK_ENTITY, WandMakerBlockEntity::tick);
+        return WandMakerBlock.checkType(type, StSBlockEntities.WANDMAKER_BLOCK_ENTITY, WandMakerBlockEntity::tick);
     }
 }

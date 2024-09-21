@@ -1,6 +1,6 @@
 package net.agent59.item;
 
-import net.agent59.Main;
+import net.agent59.StSMain;
 import net.agent59.item.custom.GuideBookItem;
 import net.agent59.item.custom.WandItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 
-public class ModItems {
+public class StSItems {
 
     public static final Item WAND = registerItem("wand",
             new WandItem(new FabricItemSettings()));
@@ -27,7 +27,7 @@ public class ModItems {
             new GuideBookItem(new FabricItemSettings()), ItemGroups.TOOLS);
 
     private static Item registerItem(String name, Item item, @Nullable RegistryKey<ItemGroup> group) {
-        Item item1 = Registry.register(Registries.ITEM, new Identifier(Main.MOD_ID, name), item);
+        Item item1 = Registry.register(Registries.ITEM, StSMain.id(name), item);
         if (group != null) ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item1));
         return item1;
     }
@@ -44,10 +44,10 @@ public class ModItems {
     }
 
     private static Item registerDisplayIconItem(String path) {
-        return registerDisplayIconItem(Main.id(path));
+        return registerDisplayIconItem(StSMain.id(path));
     }
 
     public static void registerModItems() {
-        Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);
+        StSMain.LOGGER.info("Registering Mod Items for " + StSMain.MOD_NAME);
     }
 }
