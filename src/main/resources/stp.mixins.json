@@ -5,6 +5,7 @@
   "mixins": [
     "AbstractBlockStateMixin",
     "LootableContainerBlockEntityMixin",
+    "PlayerManagerMixin",
     "ViewerCountManagerMixin"
   ],
   "injectors": {
