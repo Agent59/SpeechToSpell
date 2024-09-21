@@ -3,7 +3,7 @@ package net.agent59.cardinal_component;
 import io.netty.handler.codec.EncoderException;
 import net.agent59.Main;
 import net.agent59.cardinal_component.player_magic_comp.PlayerMagicComponent;
-import net.agent59.network.Network;
+import net.agent59.network.StSNetwork;
 import net.agent59.spell.SpellManager;
 import net.agent59.spell.SpellState;
 import net.agent59.spell.spells.Spell;
@@ -86,7 +86,7 @@ public class ClientPlayerMagicComponent extends PlayerMagicComponent {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeEnumConstant(messageType);
         writer.accept(buf);
-        ClientPlayNetworking.send(Network.PLAYER_MAGIC_COMP_C2S_MESSAGE_ID, buf);
+        ClientPlayNetworking.send(StSNetwork.PLAYER_MAGIC_COMP_C2S_MESSAGE_ID, buf);
     }
 
     /**

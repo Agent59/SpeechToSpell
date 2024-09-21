@@ -16,6 +16,7 @@ public class Client implements ClientModInitializer {
         ModEntityRenderer.registerModEntityRenderers();
         ModBlockEntityRenderer.registerModBlockEntityRenderers();
         ClientNetwork.registerNetworkPackets();
+        StSClientNetwork.registerNetworkPackets();
         ModScreens.registerModScreens();
     }
 }

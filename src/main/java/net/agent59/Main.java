@@ -5,7 +5,7 @@ import net.agent59.block.entity.ModBlockEntities;
 import net.agent59.command.StSGameRules;
 import net.agent59.entity.ModEntities;
 import net.agent59.item.ModItems;
-import net.agent59.network.Network;
+import net.agent59.network.StSNetwork;
 import net.agent59.recipe.ModRecipes;
 import net.agent59.screen.ModScreenHandlers;
 import net.agent59.spell.SpellManager;
@@ -35,7 +35,7 @@ public class Main implements ModInitializer {
 		ModBlockEntities.registerModBlockEntities();
 		ModScreenHandlers.registerModScreenHandlers();
 		ModRecipes.registerModRecipes();
-		Network.registerNetworkPackets();
+		StSNetwork.registerNetworkPackets();
 		ModEntities.registerModEntities();
 		ModParticles.registerModParticles();
 
