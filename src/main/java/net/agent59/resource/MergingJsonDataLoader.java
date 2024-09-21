@@ -42,8 +42,8 @@ import java.util.Map;
  *
  * @see net.minecraft.resource.JsonDataLoader
  * @see SinglePreparationResourceReloader
- * @see SpellSchoolsLoader
- * @see SpellsLoader
+ * @see net.agent59.spell_school.SpellSchoolManager
+ * @see net.agent59.spell.SpellManager
  * @see #merge(List, HashMap, Identifier)
  */
 public abstract class MergingJsonDataLoader extends SinglePreparationResourceReloader<Map<Identifier, JsonObject>> {
