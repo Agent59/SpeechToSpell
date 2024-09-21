@@ -23,6 +23,9 @@
     ],
     "client": [
       "net.agent59.Client"
+    ],
+    "cardinal-components": [
+      "net.agent59.cardinal_component.Components"
     ]
   },
   "mixins": [
@@ -42,5 +45,11 @@
   },
   "suggests": {
     "another-mod": "*"
+  },
+
+  "custom": {
+    "cardinal-components": [
+      "speech_to_spell:magic"
+    ]
   }
 }
