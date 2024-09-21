@@ -10,6 +10,7 @@ import net.agent59.Main;
 import net.agent59.StSEventListeners;
 import net.agent59.codecs.OptionalFieldCodec;
 import net.agent59.resource.MergingJsonDataLoader;
+import net.agent59.resource.StSReloadChangesEvents;
 import net.agent59.spell.SpellManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -35,6 +36,7 @@ import java.util.Random;
  * @see SpellSchool
  * @see SpellManager
  * @see MergingJsonDataLoader
+ * @see StSReloadChangesEvents
  */
 public class SpellSchoolManager extends MergingJsonDataLoader implements IdentifiableResourceReloadListener {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -93,11 +95,13 @@ public class SpellSchoolManager extends MergingJsonDataLoader implements Identif
      * Creates {@link SpellSchool}s from the {@link JsonObject}s
      * that were merged from datapacks by the {@link MergingJsonDataLoader}.
      * <p>Codecs are used to parse the JsonObjects into SpellSchools.
-     * The SpellSchools are then added to the static {@link #spellSchools} map.
-     *
+     * The SpellSchools are then added to the static {@link #unAppliedSpellSchools} map.
+     * This means the changes are not fully applied yet.
+     * <p>The changes are actually fully applied in {@link #applyChanges()}.
      * @param prepared  Keys: resources ids; Values: SpellSchools data
      * @param manager the resource manager
      * @param profiler the apply profiler
+     * @see StSReloadChangesEvents
      */
     @Override
     protected void apply(Map<Identifier, JsonObject> prepared, ResourceManager manager, Profiler profiler) {
