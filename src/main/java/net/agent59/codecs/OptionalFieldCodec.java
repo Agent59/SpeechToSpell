@@ -11,7 +11,9 @@
 package net.agent59.codecs;
 
 import com.mojang.serialization.*;
-import net.agent59.Main;
+// additional imports
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -26,6 +28,8 @@ import java.util.stream.Stream;
  * @see <a href="https://github.com/Mojang/DataFixerUpper/blob/master/src/main/java/com/mojang/serialization/codecs/OptionalFieldCodec.java">Mojang DataFixerUpper OptionalFieldCodec</a>
  */
 public class OptionalFieldCodec<A> extends MapCodec<Optional<A>> {
+    // additional logger
+    private static final Logger LOGGER = LogManager.getLogger();
     private final String name;
     private final Codec<A> elementCodec;
     private final boolean lenient;
@@ -48,7 +52,7 @@ public class OptionalFieldCodec<A> extends MapCodec<Optional<A>> {
             return DataResult.success(Optional.empty());
         }
         //return parsed.map(Optional::of).setPartial(parsed.resultOrPartial());
-        return parsed.map(Optional::of).setPartial(parsed.resultOrPartial(Main.LOGGER::error));
+        return parsed.map(Optional::of).setPartial(parsed.resultOrPartial(LOGGER::error));
     }
 
     @Override
