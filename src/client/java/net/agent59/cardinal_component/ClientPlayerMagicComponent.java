@@ -67,6 +67,7 @@ public class ClientPlayerMagicComponent extends PlayerMagicComponent {
 
     @Override
     public void castSpell(Spell spell, boolean speechless) {
+        if (spell == this.activeSpell) return;
         sendC2SMessage(PlayerMagicComponent.C2SMessageType.CAST_SPELL, buf -> {
             buf.encodeAsJson(SpellManager.getCodec(), spell);
             buf.writeBoolean(speechless);

@@ -161,7 +161,7 @@ public class ServerPlayerMagicComponent extends PlayerMagicComponent {
 
     @Override
     public void castSpell(Spell spell, boolean speechless) {
-        if (!this.canCast(spell, speechless)) return;
+        if (!this.canCast(spell, speechless) || spell == this.activeSpell) return;
 
         if (this.activeSpell != null) {
             this.spellStates.get(this.activeSpell).endCastingEarly();
