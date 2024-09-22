@@ -16,7 +16,7 @@ import java.util.Collection;
 public class PlayerManagerMixin {
     /**
      * Called after {@code getPlayerManager().saveAllPlayerData()}
-     * in {@link net.minecraft.server.MinecraftServer#reloadResources(Collection)}.
+     * in {@link MinecraftServer#reloadResources(Collection)}.
      *
      * <p>After the PlayerData has been saved during the reload,
      * the reload-changes of the {@link SpellManager} and the {@link SpellSchoolManager} can be applied.
