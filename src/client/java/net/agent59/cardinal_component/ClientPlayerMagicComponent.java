@@ -1,7 +1,6 @@
 package net.agent59.cardinal_component;
 
 import io.netty.handler.codec.EncoderException;
-import net.agent59.StSMain;
 import net.agent59.cardinal_component.player_magic_comp.PlayerMagicComponent;
 import net.agent59.network.StSNetwork;
 import net.agent59.spell.SpellManager;
@@ -116,26 +115,26 @@ public class ClientPlayerMagicComponent extends PlayerMagicComponent {
                 case PlayerMagicComponent.SyncType.SELECTED_HOTBAR_SLOT -> {
                     int slot = buf.readInt();
                     if (this.spellHotbarSlotValid(slot)) this.selectedSpellHotbarSlot = slot;
-                    else StSMain.LOGGER.error("The slot {} is out of bounds {}, " +
+                    else LOGGER.error("The slot {} is out of bounds {}, " +
                             "when setting the selectedSpellHotbarSlot", slot, this.spellHotbar.length - 1);
                 }
                 case PlayerMagicComponent.SyncType.HOTBAR_SLOT -> {
                     int slot = buf.readInt();
                     if (this.spellHotbarSlotValid(slot)) {
                         this.spellHotbar[slot] = buf.decodeAsJson(SpellManager.getOptionalCodec()).orElse(null);
-                    } else StSMain.LOGGER.error("The slot {} is out of bounds {}, when updating the spellHotbar",
+                    } else LOGGER.error("The slot {} is out of bounds {}, when updating the spellHotbar",
                             slot, this.spellHotbar.length - 1);
                 }
                 case PlayerMagicComponent.SyncType.FULL -> {
                     NbtCompound tag = buf.readNbt();
                     if (tag != null) this.readFromNbt(tag);
-                    else StSMain.LOGGER.error("Could not read nbtCompound from packetByteBuf {}, " +
+                    else LOGGER.error("Could not read nbtCompound from packetByteBuf {}, " +
                             "", buf);
                 }
-                default -> StSMain.LOGGER.warn("Received unknown sync status {} with packet {}", status, buf);
+                default -> LOGGER.warn("Received unknown sync status {} with packet {}", status, buf);
             }
         } catch (EncoderException e) {
-            StSMain.LOGGER.error("Could not decode networking information for status {} from packetByteBuf {}, " +
+            LOGGER.error("Could not decode networking information for status {} from packetByteBuf {}, " +
                     "due to the following error:\n{}", status, buf, e);
         }
     }

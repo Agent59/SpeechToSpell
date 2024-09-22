@@ -1,6 +1,5 @@
 package net.agent59.cardinal_component.player_magic_comp;
 
-import net.agent59.Main;
 import net.agent59.cardinal_component.Components;
 import net.agent59.cardinal_component.MagicComponent;
 import net.agent59.command.StSGameRules;
@@ -15,6 +14,8 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.PacketByteBuf;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,6 +63,7 @@ public abstract class PlayerMagicComponent implements MagicComponent {
     public static final String SPELL_HOTBAR_FIELD = "spell_hotbar";
     public static final String SELECTED_SPELL_HOTBAR_SLOT_FIELD = "selected_spell_hotbar_slot";
     public static final String SPELL_HOTBAR_SIZE_FIELD = "spell_hotbar_size_field";
+    protected static final Logger LOGGER = LogManager.getLogger();
 
     protected final PlayerEntity player;
 
@@ -214,7 +216,7 @@ public abstract class PlayerMagicComponent implements MagicComponent {
                         if (!this.isClient()) {
                             SpellState oldState = new SpellState(spellState); // Copy is only used for logging.
                             if (spellState.update()) { // True if the update changed the state.
-                                Main.LOGGER.info("Updated the old spellState {} of player {} " +
+                                LOGGER.info("Updated the old spellState {} of player {} " +
                                         "to the new spellState {}.", oldState, this.player.getName(), spellState);
                             }
                         }
@@ -255,17 +257,17 @@ public abstract class PlayerMagicComponent implements MagicComponent {
     public void readFromNbt(NbtCompound tag) {
         this.readFromNbt(
                 tag,
-                (schoolTag, errMsg) -> Main.LOGGER.error("""
+                (schoolTag, errMsg) -> LOGGER.error("""
                         Could not read the SpellSchool {} of player {} from nbt, due to the following error(s):
                         {}
                         Setting the players school to null.
                         """, schoolTag, this.player, errMsg),
-                (stateTag, errMsg) -> Main.LOGGER.error("""
+                (stateTag, errMsg) -> LOGGER.error("""
                             Could not read the SpellState {} of player {} from nbt, due to the following error(s):
                             {}
                             If the spell is registered, its default state will be used, otherwise skipping it.
                             """, stateTag, this.player, errMsg),
-                (hotbarTag, errMsg) -> Main.LOGGER.error("""
+                (hotbarTag, errMsg) -> LOGGER.error("""
                             Could not read the spell {} of the spell-hotbar of player {} from nbt, \
                             due to the following error(s):
                             {}
@@ -285,7 +287,7 @@ public abstract class PlayerMagicComponent implements MagicComponent {
     @Override
     public void writeToNbt(NbtCompound tag) {
         SpellSchoolManager.getOptionalCodec().encodeStart(NbtOps.INSTANCE, Optional.ofNullable(this.spellSchool))
-                .resultOrPartial((errMsg) -> Main.LOGGER.error("""
+                .resultOrPartial((errMsg) -> LOGGER.error("""
                         Could not write the SpellSchool {} of player {} to nbt, due to the following error(s):
                         {}
                         The players school will not be saved.
@@ -295,7 +297,7 @@ public abstract class PlayerMagicComponent implements MagicComponent {
         NbtList spellStatesNbtList = new NbtList();
         for (SpellState spellState : this.spellStates.values()) {
             SpellState.CODEC.encodeStart(NbtOps.INSTANCE, spellState)
-                    .resultOrPartial((errMsg) -> Main.LOGGER.error("""
+                    .resultOrPartial((errMsg) -> LOGGER.error("""
                             Could not write the SpellState {} for spell {} of player {} to nbt, \
                             due to the following error(s):
                             {}
@@ -311,7 +313,7 @@ public abstract class PlayerMagicComponent implements MagicComponent {
         NbtList spellHotbarNbtList = new NbtList();
         for (Spell spell : this.spellHotbar) {
             SpellManager.getOptionalCodec().encodeStart(NbtOps.INSTANCE, Optional.ofNullable(spell))
-                    .resultOrPartial((errMsg) -> Main.LOGGER.error("""
+                    .resultOrPartial((errMsg) -> LOGGER.error("""
                             Could not write the spell {} from the spell-hotbar of player {} to nbt, \
                             due to the following error(s):
                             {}
@@ -325,7 +327,7 @@ public abstract class PlayerMagicComponent implements MagicComponent {
     }
 
     /**
-     * Used to specify what kind of information the {@link net.minecraft.network.PacketByteBuf}
+     * Used to specify what kind of information the {@link PacketByteBuf}
      * should contain, when the servers data is synced to the client.
      * <p><i>The {@code ClientPlayerMagicComponent} cannot be linked here,
      * because it is in the client source and the sources are split.</i><br>

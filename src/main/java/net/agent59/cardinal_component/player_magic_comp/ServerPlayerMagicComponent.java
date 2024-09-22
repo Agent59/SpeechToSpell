@@ -1,7 +1,6 @@
 package net.agent59.cardinal_component.player_magic_comp;
 
 import io.netty.handler.codec.EncoderException;
-import net.agent59.Main;
 import net.agent59.StSEventListeners;
 import net.agent59.cardinal_component.Components;
 import net.agent59.command.StSGameRules;
@@ -102,28 +101,28 @@ public class ServerPlayerMagicComponent extends PlayerMagicComponent {
      */
     public void onDataPacksReloaded() {
         assert this.reloadNbt != null;
-        BiConsumer<String, String> logError = (errorObj, errMsg) -> Main.LOGGER.error("""
+        BiConsumer<String, String> logError = (errorObj, errMsg) -> LOGGER.error("""
                 Error(s) when reloading {} of player {}:
                 {}""", errorObj, this.player, errMsg);
         this.readFromNbt(
                 this.reloadNbt,
                 (schoolTag, errMsg) -> {
                     if (errMsg.startsWith(SpellSchoolManager.NO_SUCH_REGISTERED_SPELL_SCHOOL_ERROR)) {
-                        Main.LOGGER.info("""
+                        LOGGER.info("""
                                 The SpellSchool {} was removed. Setting the SpellSchool of player {} to null.
                                 """, schoolTag, this.player);
                     } else logError.accept("the SpellSchool", errMsg);
                 },
                 (stateTag, errMsg) -> {
                     if (errMsg.startsWith(SpellManager.NO_SUCH_REGISTERED_SPELL_ERROR)) {
-                        Main.LOGGER.info("""
+                        LOGGER.info("""
                                 Removing the SpellState {} of player {}, because the spell was removed.
                                 """, stateTag, this.player);
                     } else logError.accept("a SpellState", errMsg);
                 },
                 (hotbarTag, errMsg) -> {
                     if (errMsg.startsWith(SpellManager.NO_SUCH_REGISTERED_SPELL_ERROR)) {
-                        Main.LOGGER.info("""
+                        LOGGER.info("""
                                 The spell {} was removed. Removing it from the spell-hotbar of player {}.
                                 """, hotbarTag, this.player);
                     } else logError.accept("the spell-hotbar", errMsg);
@@ -245,7 +244,7 @@ public class ServerPlayerMagicComponent extends PlayerMagicComponent {
      */
     @Override
     public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity recipient) {
-        Main.LOGGER.debug("Fully syncing the PlayerMagicComponent of player {} to the corresponding client.", this.player);
+        LOGGER.debug("Fully syncing the PlayerMagicComponent of player {} to the corresponding client.", this.player);
         buf.writeEnumConstant(SyncType.FULL);
         NbtCompound tag = new NbtCompound();
         this.writeToNbt(tag);
@@ -282,13 +281,13 @@ public class ServerPlayerMagicComponent extends PlayerMagicComponent {
                     int slot = buf.readInt();
                     Spell spell = buf.decodeAsJson(SpellManager.getOptionalCodec()).orElse(null);
                     if (this.spellHotbarSlotValid(slot)) this.setSpellHotbarSlot(spell, slot);
-                    else Main.LOGGER.error("The slot {} is out of bounds {}, " +
+                    else LOGGER.error("The slot {} is out of bounds {}, " +
                             "when setting the selectedSpellHotbarSlot", slot, this.spellHotbar.length - 1);
                 }
-                default -> Main.LOGGER.warn("Received unknown message type {} with packet {}", message, buf);
+                default -> LOGGER.warn("Received unknown message type {} with packet {}", message, buf);
             }
         } catch (EncoderException e) {
-            Main.LOGGER.error("Could not decode networking information for message {} from PacketByteBuf {}, " +
+            LOGGER.error("Could not decode networking information for message {} from PacketByteBuf {}, " +
                     "due to the following error(s):\n{}", message, buf, e);
         }
     }
