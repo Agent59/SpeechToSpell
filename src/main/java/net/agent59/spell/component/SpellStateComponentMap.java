@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Holds a map of {@link net.agent59.spell.component.SpellStateComponentTypes.SpellStateComponentType}s.
+ * Holds a map of {@link SpellStateComponentTypes.SpellStateComponentType}s.
  */
 public class SpellStateComponentMap implements Iterable<Reference2ObjectMap.Entry<SpellStateComponentTypes.SpellStateComponentType<?>, Object>> {
     public static final Codec<SpellStateComponentMap> ERROR_SKIPPING_CODEC =
