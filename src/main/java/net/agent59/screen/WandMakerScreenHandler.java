@@ -23,7 +23,7 @@ public class WandMakerScreenHandler extends SyncedGuiDescription {
     }
 
     public WandMakerScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context, PropertyDelegate delegate) {
-        super(ModScreenHandlers.WANDMAKER_SCREEN_HANDLER, syncId, playerInventory, getBlockInventory(context, INVENTORY_SIZE), getBlockPropertyDelegate(context));
+        super(StSScreenHandlers.WANDMAKER_SCREEN_HANDLER, syncId, playerInventory, getBlockInventory(context, INVENTORY_SIZE), getBlockPropertyDelegate(context));
         this.propertyDelegate = delegate;
 
 
