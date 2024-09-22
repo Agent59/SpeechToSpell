@@ -23,7 +23,7 @@ import java.util.Map;
  * The base class for spells,
  * which can be cast by entities that have a {@link net.agent59.cardinal_component.MagicComponent}.
  *
- * <p>Like {@link net.minecraft.item.Item} or {@link net.minecraft.block.Block},
+ * <p>Like {@link Item} or {@link net.minecraft.block.Block},
  * this class handles the logics for a spell and does not hold any data apart from its initial configuration.<br>
  * The dynamic data of a spell (e.g. the cooldown), in regard to a specific entity, is held by a {@link SpellState}.
  * Every magical entity stores a state for each spell in its {@link net.agent59.cardinal_component.MagicComponent}.
@@ -32,7 +32,7 @@ import java.util.Map;
  * There might be multiple instances of the same Spell-Class in the SpellManager, but every loaded spell
  * will have a unique id and incantation.
  *
- * <p>A spell should not be confused with its {@link net.agent59.spell.SpellTypes.SpellType},
+ * <p>A spell should not be confused with its {@link SpellTypes.SpellType},
  * which is used to determine which Spell-Class should be instantiated when loading the spell from json.
  * Unlike spells, SpellTypes are unique.<br>
  * For each Spell-Class there must be one registered SpellType, which the spell returns with {@link #getType()}.
@@ -57,7 +57,7 @@ public abstract class Spell {
     }
 
     /**
-     * Every spell needs to create a {@link net.agent59.spell.SpellTypes.SpellType} entry in {@link SpellTypes}.
+     * Every spell needs to create a {@link SpellTypes.SpellType} entry in {@link SpellTypes}.
      * <p> The SpellType entry is used to determine which Spell-Class should be used when loading a spell from json.
      * <p>The id of the SpellType entry is not to be confused
      * with the id, which the loaded spell will later have in its BaseConfiguration.
