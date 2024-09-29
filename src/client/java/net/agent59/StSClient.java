@@ -1,5 +1,6 @@
 package net.agent59;
 
+import net.agent59.gui.MagicHud;
 import net.agent59.gui.StSScreens;
 import net.agent59.render.StSEntityRenderer;
 import net.agent59.render.block.StSBlockEntityRenderer;
@@ -17,5 +18,6 @@ public class StSClient implements ClientModInitializer {
         StSBlockEntityRenderer.registerModBlockEntityRenderers();
         StSClientNetwork.registerNetworkPackets();
         StSScreens.registerModScreens();
+        MagicHud.initialize();
     }
 }

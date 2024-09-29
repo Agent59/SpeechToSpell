@@ -6,7 +6,6 @@
     "BipedEntityModelMixin",
     "ClientPlayerEntityMixin",
     "ComponentsMixin",
-    "InGameHudMixin",
     "MinecraftClientMixin"
   ],
   "injectors": {
