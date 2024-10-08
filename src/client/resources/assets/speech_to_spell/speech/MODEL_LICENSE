@@ -1,0 +1,3 @@
+The speech recognition model "vosk-model-small-eo-0.42" in this directory has its own license.
+The model can be found on https://alphacephei.com/vosk/models,
+and is licensed under the Apache 2.0 License as of this commit (https://www.apache.org/licenses/LICENSE-2.0.html).
