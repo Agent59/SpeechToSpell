@@ -2,7 +2,7 @@ package net.agent59.gui;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;
-import net.agent59.CustomKeybindings;
+import net.agent59.StSKeybindings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -15,7 +15,7 @@ public class WandScreen extends CottonClientScreen {
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         assert this.client != null;
-        if (this.client.options.inventoryKey.matchesKey(keyCode, scanCode) || CustomKeybindings.WAND_SETTINGS.matchesKey(keyCode, scanCode)) {
+        if (this.client.options.inventoryKey.matchesKey(keyCode, scanCode) || StSKeybindings.WAND_SETTINGS.matchesKey(keyCode, scanCode)) {
             this.close();
             return true;
         }
