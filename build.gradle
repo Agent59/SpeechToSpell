@@ -52,6 +52,9 @@ dependencies {
 	// Fabric API
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+	// Vosk
+	implementation include("com.alphacephei:vosk:${vosk_version}")
+
 	// LibGui
 	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
 
