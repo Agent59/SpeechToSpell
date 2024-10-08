@@ -14,7 +14,7 @@ public class StSClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        CustomKeybindings.registerCustomKeybindings();
+        StSKeybindings.registerCustomKeybindings();
         StSEntityRenderer.registerModEntityRenderers();
         StSBlockEntityRenderer.registerModBlockEntityRenderers();
         StSClientNetwork.registerNetworkPackets();

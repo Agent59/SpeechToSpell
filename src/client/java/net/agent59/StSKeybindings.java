@@ -16,7 +16,7 @@ import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
-public class CustomKeybindings {
+public class StSKeybindings {
     public static final KeyBinding WAND_SETTINGS = registerKeybinding("wand_settings", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_N);
 
     public static final KeyBinding CYCLE_SPELL_HOTBAR = registerKeybinding("cycle_spell_hotbar", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R);
