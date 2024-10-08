@@ -15,7 +15,7 @@ public class WandScreen extends CottonClientScreen {
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         assert this.client != null;
-        if (this.client.options.inventoryKey.matchesKey(keyCode, scanCode) || CustomKeybindings.WANDSETTINGS.matchesKey(keyCode, scanCode)) {
+        if (this.client.options.inventoryKey.matchesKey(keyCode, scanCode) || CustomKeybindings.WAND_SETTINGS.matchesKey(keyCode, scanCode)) {
             this.close();
             return true;
         }

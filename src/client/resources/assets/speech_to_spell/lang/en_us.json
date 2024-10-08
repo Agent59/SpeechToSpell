@@ -10,6 +10,7 @@
   "category.speech_to_spell_keys": "Wand",
 
   "key.speech_to_spell.wand_settings" : "Open Wand-Settings",
-  "key.speech_to_spell.cycle_spell_hotbar" : "Cycle trough the Spell-Hotbar",
-  "key.speech_to_spell.execute_spell_from_spell_hotbar" : "Execute the spell in the Spell-Hotbar"
+  "key.speech_to_spell.cycle_spell_hotbar" : "Cycle trough Spell-Hotbar",
+  "key.speech_to_spell.execute_spell_from_spell_hotbar" : "Cast Spell from Spell-Hotbar",
+  "key.speech_to_spell.listen_for_cast": "Hold to Recognize Spell"
 }
