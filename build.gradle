@@ -53,7 +53,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Vosk
-	implementation include("com.alphacephei:vosk:${vosk_version}")
+	implementation include("com.alphacephei:vosk:${project.vosk_version}")
 
 	// LibGui
 	modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
@@ -64,10 +64,16 @@ dependencies {
 }
 
 processResources {
-	inputs.property "version", project.version
+	Map<String, Object> properties = [
+	        "version": version,
+			"minecraft_version": minecraft_version,
+			"loader_version": loader_version,
+			"fabric_version": fabric_version
+	]
+	properties.forEach((k, v) -> inputs.property(k, v))
 
 	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+		expand properties
 	}
 }
 

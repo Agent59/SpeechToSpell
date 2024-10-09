@@ -10,6 +10,8 @@
   ],
   "contact": {
     "homepage": "",
+    "modrinth": "https://modrinth.com/mod/speech_to_spell",
+    "issues": "https://github.com/Agent59/SpeechToSpell/issues",
     "sources": "https://github.com/Agent59/SpeechToSpell"
   },
 
@@ -37,11 +39,10 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.15.11",
-    "fabric": "*",
-    "minecraft": "1.20.1",
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
     "java": ">=21",
-    "fabric-api": "*"
+    "fabric-api": ">=${fabric_version}"
   },
   "suggests": {
     "another-mod": "*"
