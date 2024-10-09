@@ -16,7 +16,7 @@
   },
 
   "license": "LGPL-3.0 License",
-  "icon": "stp-icon.png",
+  "icon": "sts_icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -31,9 +31,9 @@
     ]
   },
   "mixins": [
-    "stp.mixins.json",
+    "sts.mixins.json",
     {
-      "config": "stp.client.mixins.json",
+      "config": "sts.client.mixins.json",
       "environment": "client"
     }
   ],
