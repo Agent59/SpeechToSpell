@@ -68,7 +68,7 @@ public class StSKeybindings {
             }
 
             // Has to be held while talking and recognizing, otherwise the speech recognition canceled.
-            SpeechRecognizer.State state = SpeechRecognizer.getRecognitionState();
+            SpeechRecognizer.State state = SpeechRecognizer.getState();
             if (LISTEN_FOR_CAST.isPressed() && state == SpeechRecognizer.State.ACTIVATED) {
                 SpeechRecognizer.startRecognition();
             } else if (!LISTEN_FOR_CAST.isPressed() && state == SpeechRecognizer.State.RECOGNIZING) {
