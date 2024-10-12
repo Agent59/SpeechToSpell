@@ -3,7 +3,7 @@ package net.agent59.speech;
 import javax.sound.sampled.*;
 
 /**
- * Handles a data-line that represents a microphone, which the {@link SpeechRecognizer} uses.
+ * Handles a data-line that represents a microphone, which the {@link RecognitionThread} uses.
  */
 public class MicrophoneHandler {
     private final TargetDataLine line;
