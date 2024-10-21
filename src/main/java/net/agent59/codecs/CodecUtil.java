@@ -20,7 +20,7 @@ public class CodecUtil {
      */
     public static final Codec<Text> BETTER_TEXT = Codecs.TEXT.xmap(
             text -> {
-                MutableText result = Text.empty().append(text.copyContentOnly());
+                MutableText result = Text.empty().append(text.copyContentOnly().setStyle(text.getStyle()));
                 for (Text part : text.getSiblings()) result.append(part);
                 return result;
             },
