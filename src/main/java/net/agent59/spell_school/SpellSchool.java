@@ -10,7 +10,6 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.dynamic.Codecs;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,8 +35,8 @@ public record SpellSchool(
 
     public static final Codec<SpellSchool> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Identifier.CODEC.fieldOf(MergingJsonDataLoader.ID_FIELD).forGetter(SpellSchool::id),
-            Codecs.TEXT.fieldOf("name").forGetter(SpellSchool::name),
-            Codecs.TEXT.optionalFieldOf("description", Text.empty()).forGetter(SpellSchool::description),
+            CodecUtil.BETTER_TEXT.fieldOf("name").forGetter(SpellSchool::name),
+            CodecUtil.BETTER_TEXT.optionalFieldOf("description", Text.empty()).forGetter(SpellSchool::description),
             Registries.ITEM.getCodec().optionalFieldOf("icon", Items.AIR).forGetter(SpellSchool::displayItem),
             CodecUtil.getItemClassSpecificCodec(WandItem.class).listOf().optionalFieldOf("compatible_wands", new ArrayList<>()).forGetter(SpellSchool::compatibleWandsList)
     ).apply(instance, SpellSchool::new));

@@ -3,6 +3,7 @@ package net.agent59.spell.spells;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.agent59.codecs.CodecUtil;
 import net.agent59.resource.MergingJsonDataLoader;
 import net.agent59.spell.SpellState;
 import net.agent59.spell.SpellTypes;
@@ -243,8 +244,8 @@ public abstract class Spell {
         public static final MapCodec<BaseConfiguration> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Identifier.CODEC.fieldOf(MergingJsonDataLoader.ID_FIELD).forGetter(BaseConfiguration::id),
                 Codec.STRING.fieldOf("incantation").forGetter(BaseConfiguration::incantation),
-                Codecs.TEXT.fieldOf("name").forGetter(BaseConfiguration::name),
-                Codecs.TEXT.optionalFieldOf("description", Text.empty()).forGetter(BaseConfiguration::description),
+                CodecUtil.BETTER_TEXT.fieldOf("name").forGetter(BaseConfiguration::name),
+                CodecUtil.BETTER_TEXT.optionalFieldOf("description", Text.empty()).forGetter(BaseConfiguration::description),
                 Registries.ITEM.getCodec().optionalFieldOf("icon", Items.AIR).forGetter(BaseConfiguration::displayItem),
                 SpellState.UnlockState.CODEC.fieldOf("default_unlock_state").forGetter(BaseConfiguration::defaultUnlockState),
                 Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(BaseConfiguration::duration),
