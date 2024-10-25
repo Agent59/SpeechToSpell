@@ -35,7 +35,7 @@ public class StSClientNetwork {
     /**
      * @see SpellSchoolManager#syncToClient(ServerPlayerEntity)
      */
-    public static final boolean SPELL_SCHOOL_MANAGE_SYNC = ClientPlayNetworking.registerGlobalReceiver(
+    public static final boolean SPELL_SCHOOL_MANAGER_SYNC = ClientPlayNetworking.registerGlobalReceiver(
             SpellSchoolManager.SYNC_CHANNEL_NAME, (client, handler, buf, responseSender) -> {
                 // The buffer needs to be copied, because the original is freed when moving it to the main thread.
                 PacketByteBuf bufCopy = PacketByteBufs.copy(buf);
