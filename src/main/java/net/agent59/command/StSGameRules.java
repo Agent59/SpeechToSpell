@@ -12,7 +12,7 @@ import net.minecraft.world.GameRules;
 public class StSGameRules {
 
     public static final CustomGameRuleCategory MAGIC =
-            new CustomGameRuleCategory(StSMain.id("magic"), Text.translatable("gamerule.category.magic"));
+            new CustomGameRuleCategory(StSMain.id("magic"), Text.translatable("gamerule.category.speech_to_spell.magic"));
 
     /**
      * Determines how many slots a players spell-hotbar has.

@@ -1,4 +1,6 @@
 {
+  "gamerule.category.speech_to_spell.magic": "SpeechToSpell Magic",
+
   "gui.speech_to_spell.spell_hotbar_config.spell_hotbar": "Spell Hotbar",
   "gui.speech_to_spell.spell_hotbar_config.spells": "Spells",
   "gui.speech_to_spell.spell_hotbar_config.no_spell_selected": "No Spell Selected",
@@ -11,7 +13,7 @@
 
   "block.speech_to_spell.wand_maker": "Wand Maker",
 
-  "category.speech_to_spell_keys": "Wand",
+  "key.categories.speech_to_spell.magic": "SpeechToSpell Magic",
 
   "key.speech_to_spell.wand_settings" : "Open Wand-Settings",
   "key.speech_to_spell.cycle_spell_hotbar" : "Cycle trough Spell-Hotbar",

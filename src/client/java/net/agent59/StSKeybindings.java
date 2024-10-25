@@ -13,19 +13,18 @@ import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 public class StSKeybindings {
+    public static final String KEYBINDING_CATEGORY_BASE = "key.categories." + StSMain.MOD_ID;
+    public static final String MAGIC_KEYBINDING_CATEGORY = KEYBINDING_CATEGORY_BASE + ".magic";
+
     public static final KeyBinding SPELL_HOTBAR_CONFIG = registerKeybinding("spell_hotbar_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_N);
-
     public static final KeyBinding CYCLE_SPELL_HOTBAR = registerKeybinding("cycle_spell_hotbar", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R);
-
     public static final KeyBinding CAST_SPELL_FROM_SPELL_HOTBAR = registerKeybinding("execute_spell_from_spell_hotbar", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_G);
-
     public static final KeyBinding LISTEN_FOR_CAST = registerKeybinding("listen_for_cast", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_B);
 
     private static KeyBinding registerKeybinding(String name, InputUtil.Type inputType, int keycode) {
         return KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key." + StSMain.MOD_ID + "." + name, inputType, keycode,
-                "category." + StSMain.MOD_ID + "_keys")
-        );
+                "key." + StSMain.MOD_ID + "." + name, inputType, keycode, MAGIC_KEYBINDING_CATEGORY
+        ));
     }
 
     public static void registerCustomKeybindings() {
