@@ -1,13 +1,10 @@
 package net.agent59;
 
 import net.agent59.cardinal_component.ClientPlayerMagicComponent;
-import net.agent59.gui.WandScreen;
-import net.agent59.gui.cottonguis.WandSettingsGui;
-import net.agent59.item.custom.WandItem;
+import net.agent59.gui.StSClientScreen;
+import net.agent59.gui.cottonguis.SpellHotbarConfigGui;
 import net.agent59.speech.SpeechRecognizer;
 import net.agent59.spell.spells.Spell;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
@@ -15,9 +12,8 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
-@Environment(EnvType.CLIENT)
 public class StSKeybindings {
-    public static final KeyBinding WAND_SETTINGS = registerKeybinding("wand_settings", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_N);
+    public static final KeyBinding SPELL_HOTBAR_CONFIG = registerKeybinding("spell_hotbar_config", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_N);
 
     public static final KeyBinding CYCLE_SPELL_HOTBAR = registerKeybinding("cycle_spell_hotbar", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_R);
 
@@ -34,12 +30,11 @@ public class StSKeybindings {
 
     public static void registerCustomKeybindings() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            while (WAND_SETTINGS.wasPressed()) {
+            while (SPELL_HOTBAR_CONFIG.wasPressed()) {
                 assert client.player != null;
-                // Checks whether the player is holding a wand.
-                if (client.player.getMainHandStack().getItem() instanceof WandItem || client.player.getOffHandStack().getItem() instanceof WandItem) {
-                    MinecraftClient.getInstance().setScreen(new WandScreen(new WandSettingsGui(client.player)));
-                }
+                MinecraftClient.getInstance().setScreen(new StSClientScreen(
+                        new SpellHotbarConfigGui(client.player), false, StSKeybindings.SPELL_HOTBAR_CONFIG
+                ));
             }
 
             while (CYCLE_SPELL_HOTBAR.wasPressed()) {

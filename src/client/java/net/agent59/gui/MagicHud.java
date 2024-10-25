@@ -78,7 +78,7 @@ public class MagicHud {
     }
 
     private static void renderSpell(DrawContext context, ClientPlayerEntity player, int x, int y, Spell spell) {
-        context.drawItem(spell.getDisplayIcon().getDefaultStack(), x, y);
+        spell.getIcon().paint(context, x, y, 16);
 
         ClientPlayerMagicComponent playerMagicComp = ClientPlayerMagicComponent.getInstance(player);
         SpellState state = playerMagicComp.getSpellsState(spell);

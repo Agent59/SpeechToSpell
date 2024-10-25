@@ -1,4 +1,8 @@
 {
+  "gui.speech_to_spell.spell_hotbar_config.spell_hotbar": "Spell Hotbar",
+  "gui.speech_to_spell.spell_hotbar_config.spells": "Spells",
+  "gui.speech_to_spell.spell_hotbar_config.no_spell_selected": "No Spell Selected",
+
   "item.speech_to_spell.wand": "Wand",
   "item.speech_to_spell.crimson_wand": "Crimson Wand",
   "item.speech_to_spell.guide_book": "A Guide To Magic",
@@ -12,5 +16,6 @@
   "key.speech_to_spell.wand_settings" : "Open Wand-Settings",
   "key.speech_to_spell.cycle_spell_hotbar" : "Cycle trough Spell-Hotbar",
   "key.speech_to_spell.execute_spell_from_spell_hotbar" : "Cast Spell from Spell-Hotbar",
-  "key.speech_to_spell.listen_for_cast": "Hold to Recognize Spell"
+  "key.speech_to_spell.listen_for_cast": "Hold to Recognize Spell",
+  "key.speech_to_spell.spell_hotbar_config" : "Open Spell-Hotbar Configuration Gui"
 }

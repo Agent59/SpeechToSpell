@@ -3,6 +3,8 @@ package net.agent59.spell.spells;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.github.cottonmc.cotton.gui.widget.icon.Icon;
+import io.github.cottonmc.cotton.gui.widget.icon.ItemIcon;
 import net.agent59.codecs.CodecUtil;
 import net.agent59.resource.MergingJsonDataLoader;
 import net.agent59.spell.SpellState;
@@ -52,9 +54,15 @@ public abstract class Spell {
      * The basic configuration information every spell requires to properly function.
      */
     public final BaseConfiguration baseConfiguration;
+    /**
+     * Used so to not be needing to recreate {@link ItemIcon}s and thus ItemStacks when displaying icons of spells.
+     * @see #getIcon()
+     */
+    public final Icon icon;
 
     public Spell(BaseConfiguration baseConfiguration) {
         this.baseConfiguration = baseConfiguration;
+        this.icon = new ItemIcon(baseConfiguration.displayItem());
     }
 
     /**
@@ -177,8 +185,15 @@ public abstract class Spell {
     /**
      * @return The item whose icon is displayed.
      */
-    public Item getDisplayIcon() {
+    public Item getDisplayItem() {
         return this.getBaseConf().displayItem();
+    }
+
+    /**
+     * @return The spells {@link #icon}. Initially created with {@link #getDisplayItem()}.
+     */
+    public Icon getIcon() {
+        return this.icon;
     }
 
     /**
@@ -226,7 +241,7 @@ public abstract class Spell {
      * @param incantation See {@link #getIncantation()}
      * @param name See {@link #getName()}
      * @param description See {@link #getDescription()}
-     * @param displayItem See {@link #getDisplayIcon()}
+     * @param displayItem See {@link #getDisplayItem()}
      * @param defaultUnlockState See {@link #getDefaultUnlockState}
      * @param duration See {@link #getCastingTime()}
      * @param cooldown See {@link #getCooldownTime()}
