@@ -184,6 +184,7 @@ public abstract class Spell {
 
     /**
      * @return The item whose icon is displayed.
+     * @see #getIcon()
      */
     public Item getDisplayItem() {
         return this.getBaseConf().displayItem();

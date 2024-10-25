@@ -14,7 +14,6 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-
 public class StSItems {
 
     public static final Item WAND = registerItem("wand",
@@ -38,6 +37,7 @@ public class StSItems {
 
     /**
      * Registers an item whose purpose is only to be used for displaying an icon for a spell.
+     * @see net.agent59.spell.spells.Spell#getDisplayItem()
      */
     public static Item registerDisplayIconItem(Identifier id) {
         return Registry.register(Registries.ITEM, id, new Item(new FabricItemSettings()));
