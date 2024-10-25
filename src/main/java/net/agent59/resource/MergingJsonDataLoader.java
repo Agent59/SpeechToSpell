@@ -29,12 +29,12 @@ import java.util.Map;
  * <p>Similar to {@link net.minecraft.resource.JsonDataLoader}, but merges files with the same name instead of discarding them.
  * The resulting {@link JsonObject}s have every field of the files with the same name.
  * If files have declared the same field (apart from the priority field),
- * the {@code "priority"} field is used to resolve the conflict.
- * Files that have declared a higher priority (e.g. {@code "priority": 1})
- * override values from other files that have declared a lower priority (e.g. {@code "priority": 0}).
+ * the {@code "file_priority"} field is used to resolve the conflict.
+ * Files that have declared a higher priority (e.g. {@code "file_priority": 1})
+ * override values from other files that have declared a lower priority (e.g. {@code "file_priority": 0}).
  * If there is a conflict and files have the same priority, the fields of the file that is read first are used.
  *
- * <p>The json files that are read should contain a {@code "priority"} field with an integer as a value.
+ * <p>The json files that are read should contain a {@code "file_priority"} field with an integer as a value.
  * This mod uses {@code 0} as the default value for the builtin datapack.
  *
  * <p>A {@code "deactivate"} field can be used to deactivate a merged file.
@@ -48,7 +48,7 @@ import java.util.Map;
  */
 public abstract class MergingJsonDataLoader extends SinglePreparationResourceReloader<Map<Identifier, JsonObject>> {
     public static final String DEACTIVATION_FIELD = "deactivate";
-    public static final String PRIORITY_FIELD = "priority";
+    public static final String PRIORITY_FIELD = "file_priority";
     public static final String ID_FIELD = "id";
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -96,16 +96,16 @@ public abstract class MergingJsonDataLoader extends SinglePreparationResourceRel
      *
      * <p>The returned JsonObject has all the fields that are present in the resources.
      * If the resources have fields with the same name (apart from the priority field),
-     * the {@code "priority"} field is used to resolve the conflict.
+     * the {@code "file_priority"} field is used to resolve the conflict.
      * In this case the field from the resource with the highest priority will be used.
      *
      * <p>If there is a conflict but multiple resources have the same priority,
      * a warning will be logged and the value of the resource, that was first read, is used.
      *
-     * <p>A {@code "priority"} field is required in each of the resources to be able to resolve conflicts.
+     * <p>A {@code "file_priority"} field is required in each of the resources to be able to resolve conflicts.
      *
      * @param resources Contain the information of json files from datapacks.
-     * @param fieldsPriorities Used to track with which priority the fields values have been selected.
+     * @param fieldsPriorities Used to track with which priority the field's values have been selected.
      *                         Should be empty by default, but is set as a parameter,
      *                         so the hashmaps memory can be reused when calling merge in a loop.
      *                         Does also hold the name of the datapack a fields selected value is from.
@@ -129,8 +129,10 @@ public abstract class MergingJsonDataLoader extends SinglePreparationResourceRel
 
                 JsonElement priorityField = jsonObj.get(PRIORITY_FIELD);
                 if (priorityField == null) {
-                    LOGGER.warn("File {} in Resourcepack {} is missing a priority field and will be skipped.",
-                            resourcePath.getPath(), packName);
+                    LOGGER.warn("""
+                            File {} in Resourcepack {} is missing a "{}" field and will be skipped.
+                            """,
+                            resourcePath.getPath(), packName, PRIORITY_FIELD);
                     continue;
                 }
                 // Might throw an UnsupportedOperationException, NumberFormatException or IllegalStateException.
@@ -168,9 +170,9 @@ public abstract class MergingJsonDataLoader extends SinglePreparationResourceRel
                                 Skipping this entry.""", resourcePath.getPath(), packName, e);
             } catch (UnsupportedOperationException | NumberFormatException | IllegalStateException e) {
                 LOGGER.error("""
-                                Could not parse file {} from resourcepack {}, due an error with the priority field:
+                                Could not parse file {} from resourcepack {}, due to an error with the "{}" field:
                                 {}
-                                Skipping this entry.""", resourcePath.getPath(), packName, e);
+                                Skipping this entry.""", resourcePath.getPath(), PRIORITY_FIELD, packName, e);
             }
         }
         return mergedJsonObj;
@@ -185,10 +187,10 @@ public abstract class MergingJsonDataLoader extends SinglePreparationResourceRel
     public static void addIdField(JsonObject jsonObj, Identifier id) {
         jsonObj.add(ID_FIELD, Identifier.CODEC.encodeStart(JsonOps.INSTANCE, id)
                 .resultOrPartial((errMsg) -> StSMain.LOGGER.error("""
-                        Could not encode id {} when trying to add an "id" field to jsonObject {},\
+                        Could not encode id {} when trying to add an "{}" field to jsonObject {},\
                         due to the following error:
                         {}
-                        """, id, jsonObj, errMsg))
+                        """, id, ID_FIELD, jsonObj, errMsg))
                 .orElseThrow(() -> new JsonParseException("Could not encode identifier " + id)));
     }
 }
