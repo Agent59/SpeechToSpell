@@ -32,6 +32,9 @@ public class StSKeybindings {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (SPELL_HOTBAR_CONFIG.wasPressed()) {
                 assert client.player != null;
+                // When the spell hotbar is deactivated (length 0), the spell-hotbar config screen has no use.
+                if (ClientPlayerMagicComponent.getInstance(client.player).getSpellHotbar().length == 0) break;
+
                 MinecraftClient.getInstance().setScreen(new StSClientScreen(
                         new SpellHotbarConfigGui(client.player), false, StSKeybindings.SPELL_HOTBAR_CONFIG
                 ));
