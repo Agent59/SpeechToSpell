@@ -275,7 +275,9 @@ public class SpellState {
      */
     public boolean tickCasting() {
         assert this.phase == Phase.IS_BEING_CAST;
-        if (!this.canCast(this.isCastingSpeechless)) {
+        // Checks whether the spell can be cast, and if so ticks it.
+        // Otherwise, the spell is ended early. Though spell might end casting early as well.
+        if (!this.canCast(this.isCastingSpeechless) || this.spell.tickCasting(this)) {
             this.endCastingEarly();
             return true;
         }
@@ -284,11 +286,7 @@ public class SpellState {
             this.onCastingEnd();
             return true;
         }
-        boolean shouldFinishEarly = this.spell.tickCasting(this);
-        if (shouldFinishEarly) {
-            this.endCastingEarly();
-        }
-        return shouldFinishEarly;
+        return false;
     }
 
     /**
