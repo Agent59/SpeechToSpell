@@ -69,7 +69,7 @@ public enum PositionTarget {
                                 random.nextInt((int) box.minX, (int) box.maxX + 1), 0,
                                 random.nextInt((int) box.minZ, (int) box.maxZ + 1)
                         )
-                ); // If there is not enough clearance or the pred fails, we try again.
+                ); // If there is not enough clearance or the predicate fails, we try again.
                 if (except != null && PositionTarget.noClearance(except.getBlockPos(), randomTopPos, clearance)
                         || !posPredicate.test(randomTopPos)) continue;
                 return randomTopPos;
