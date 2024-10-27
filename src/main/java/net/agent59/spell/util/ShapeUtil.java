@@ -1,6 +1,5 @@
 package net.agent59.spell.util;
 
-import net.agent59.StSMain;
 import net.minecraft.util.math.Vec3i;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,8 +19,6 @@ public class ShapeUtil {
 
         int x = (int) ((Math.sqrt(1 - z * z) * Math.cos(theta)) * randomLength);
         int y = (int) (Math.sqrt(1 - z * z) * Math.cos(theta) * randomLength);
-        Vec3i vec = new Vec3i(x, y, (int) (z * randomLength));
-        StSMain.LOGGER.info("random vec: {}\tlength: {}", vec, Math.sqrt(x * x + y * y + vec.getZ() * vec.getZ()));
-        return vec;
+        return new Vec3i(x, y, (int) (z * randomLength));
     }
 }
