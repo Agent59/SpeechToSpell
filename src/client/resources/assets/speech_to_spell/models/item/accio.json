@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "speech_to_spell:item/accio"
-  }
-}

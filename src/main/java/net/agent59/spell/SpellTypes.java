@@ -22,6 +22,7 @@ import net.minecraft.util.Identifier;
  */
 public class SpellTypes {
     public static final SpellType<LightningSpell> LIGHTNING = register("lightning", LightningSpell.CODEC);
+    public static final SpellType<CollectSpell> COLLECT = register("collect", CollectSpell.CODEC);
 
     /**
      * This method may only be used to register the spells the SpeechToSpell mod implements directly.

@@ -1,0 +1,15 @@
+{
+  "incantation": "kolekti",
+  "name": {"translate": "spell.speech_to_spell.kolekti", "color": "gray"},
+  "description": {"translate":  "spell.speech_to_spell.kolekti.description"},
+  "icon": "speech_to_spell:attract_block",
+  "default_unlock_state": "speechless_and_wandless",
+  "duration": 10,
+  "cooldown": 250,
+  "spell_type": "speech_to_spell:collect",
+  "range": 20,
+  "collect_items": true,
+  "collect_xp": true,
+  "collect_projectiles": true,
+  "file_priority": 0
+}

@@ -26,6 +26,7 @@ public class StSItems {
             new GuideBookItem(new FabricItemSettings()), ItemGroups.TOOLS);
 
     public static final Item LIGHTNING_ICON_ITEM = registerDisplayIconItem("lightning");
+    public static final Item ATTRACT_BLOCK_ICON_ITEM = registerDisplayIconItem("attract_block");
 
     private static Item registerItem(String name, Item item, @Nullable RegistryKey<ItemGroup> group) {
         Item item1 = Registry.register(Registries.ITEM, StSMain.id(name), item);
