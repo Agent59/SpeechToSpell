@@ -8,6 +8,8 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.dynamic.Codecs;
 
+import java.util.List;
+
 public class CodecUtil {
 
     /**
@@ -40,12 +42,36 @@ public class CodecUtil {
         );
     }
 
+    @SafeVarargs
+    public static <E extends Enum<E>> Codec<E> getExcludingEnumCodec(Class<E> enumClass, E... excludes) {
+        return CodecUtil.getEnumCodec(enumClass).comapFlatMap(
+                e -> {
+                    if (!List.of(excludes).contains(e)) return DataResult.success(e);
+                    return DataResult.error(() -> "Enum type " + e.toString() + "of class " + enumClass +
+                            " not allowed here (excluded).");
+                },
+                e -> e
+        );
+    }
+
+    @SafeVarargs
+    public static <E extends Enum<E>> Codec<E> getIncludingEnumCodec(Class<E> enumClass, E... includes) {
+        return CodecUtil.getEnumCodec(enumClass).comapFlatMap(
+                e -> {
+                    if (List.of(includes).contains(e)) return DataResult.success(e);
+                    return DataResult.error(() -> "Enum type " + e.toString() + "of class " + enumClass +
+                            " not allowed here (not included).");
+                },
+                e -> e
+        );
+    }
+
     @SuppressWarnings("unchecked")
     public static <T extends Item> Codec<T> getItemClassSpecificCodec(Class<T> itemClass) {
         return Registries.ITEM.getCodec().comapFlatMap(
                 item -> itemClass.isInstance(item) ?
                         DataResult.success((T) item) :
-                        DataResult.error(() -> "Item " + item + " is not of class " + itemClass),
+                        DataResult.error(() -> "Item " + item + " is not of type " + itemClass),
                 item -> item
         );
     }
