@@ -25,6 +25,8 @@ public class StSItems {
     public static final Item GUIDE_BOOK = registerItem("guide_book",
             new GuideBookItem(new FabricItemSettings()), ItemGroups.TOOLS);
 
+    public static final Item LIGHTNING_ICON_ITEM = registerDisplayIconItem("lightning");
+
     private static Item registerItem(String name, Item item, @Nullable RegistryKey<ItemGroup> group) {
         Item item1 = Registry.register(Registries.ITEM, StSMain.id(name), item);
         if (group != null) ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item1));

@@ -1,0 +1,15 @@
+{
+  "incantation": "tempesto",
+  "name": {"translate": "spell.speech_to_spell.tempesto", "color": "#ffdf00"},
+  "description": {"translate":  "spell.speech_to_spell.tempesto.description"},
+  "icon": "speech_to_spell:lightning",
+  "default_unlock_state": "unlocked",
+  "duration": 200,
+  "cooldown": 800,
+  "spell_type": "speech_to_spell:lightning",
+  "range": 30,
+  "every_n_ticks": 25,
+  "target_type": "hostile_or_player",
+  "random_target": true,
+  "file_priority": 0
+}

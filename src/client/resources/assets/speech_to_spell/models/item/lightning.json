@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "speech_to_spell:item/tempest"
+    "layer0": "speech_to_spell:item/lightning"
   }
 }

@@ -9,7 +9,8 @@
   "item.speech_to_spell.crimson_wand": "Crimson Wand",
   "item.speech_to_spell.guide_book": "A Guide To Magic",
 
-  "item.speech_to_spell.aguamenti":  "Aguamenti",
+  "spell.speech_to_spell.tempesto": "Tempesto",
+  "spell.speech_to_spell.tempesto.description": "Summon lightnings",
 
   "block.speech_to_spell.wand_maker": "Wand Maker",
 

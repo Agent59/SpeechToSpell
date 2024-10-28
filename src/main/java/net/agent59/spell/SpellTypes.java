@@ -21,6 +21,7 @@ import net.minecraft.util.Identifier;
  * @see <a href="https://docs.fabricmc.net/1.20.4/develop/codecs#registry-dispatch">Fabric-Wiki Registry Dispatch</a>
  */
 public class SpellTypes {
+    public static final SpellType<LightningSpell> LIGHTNING = register("lightning", LightningSpell.CODEC);
 
     /**
      * This method may only be used to register the spells the SpeechToSpell mod implements directly.
