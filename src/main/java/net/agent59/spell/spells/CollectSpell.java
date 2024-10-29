@@ -2,7 +2,6 @@ package net.agent59.spell.spells;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.agent59.StSMain;
 import net.agent59.spell.SpellState;
 import net.agent59.spell.SpellTypes;
 import net.minecraft.entity.Entity;
@@ -62,7 +61,6 @@ public class CollectSpell extends Spell {
         if (this.collect_projectiles) canPickup = canPickup.or(e -> e instanceof ProjectileEntity);
 
         for (Entity entityInRange : caster.getWorld().getOtherEntities(null, box, canPickup)) {
-            StSMain.LOGGER.info("entity: {}", entityInRange);
             if (caster instanceof PlayerEntity) entityInRange.onPlayerCollision((PlayerEntity) caster);
             // TODO allow for non-player casters to pick up items.
         }
