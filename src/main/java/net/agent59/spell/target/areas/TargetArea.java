@@ -17,12 +17,12 @@ import java.util.function.Predicate;
  * The {@link TargetAreaTypes#CODEC} can be used in the codecs of spells
  * to allow for the configuration of the target area.
  * <p>TargetAreas need to return their corresponding type from {@link TargetAreaTypes} in {@link #getType()}.
+ * <p><b>This is not to be confused with {@link net.agent59.spell.target.targets.Target}.</b>
  * @see TargetAreaTypes
  */
 public interface TargetArea {
-
     /**
-     * @return The corresponding type from {@link net.agent59.spell.target.TargetTypes}.
+     * @return The corresponding type from {@link TargetAreaTypes}.
      */
     TargetAreaTypes.TargetAreaType<? extends TargetArea> getType();
 

@@ -12,6 +12,7 @@ import net.minecraft.util.Identifier;
 /**
  * A registry of {@link TargetArea}s.
  * <p>Spells may use the {@link #CODEC} to make their target area configurable.
+ * <p><b>Not to be confused with {@link TargetTypes}.</b>
  * @see <a href="https://docs.fabricmc.net/1.20.4/develop/codecs#registry-dispatch">Fabric-Wiki Registry Dispatch</a>
  */
 public class TargetAreaTypes {

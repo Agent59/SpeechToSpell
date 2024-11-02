@@ -12,9 +12,11 @@ import java.util.function.Predicate;
 
 /**
  * An area that always returns the caster as an entity or the reference position as the block position.
- * <p>It is advisable to default to this area if a spells target is {@link net.agent59.spell.target.targets.SelfTarget},
+ * <p>It is advisable to default to this area if a spells target is
+ * {@link net.agent59.spell.target.targets.entity.SelfTarget},
  * because this is much faster than other areas having to check every entity or block in their area,
  * while the only ones that could fulfill the target predicate are the caster and the reference position.
+ * @see net.agent59.spell.target.targets.entity.SelfTarget
  */
 public class SelfArea implements TargetArea {
     public static final Codec<SelfArea> CODEC = Codec.unit(SelfArea::new);
