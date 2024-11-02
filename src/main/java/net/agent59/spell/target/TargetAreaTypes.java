@@ -3,6 +3,8 @@ package net.agent59.spell.target;
 import com.mojang.serialization.Codec;
 import net.agent59.StSMain;
 import net.agent59.registry.StSRegistries;
+import net.agent59.spell.target.areas.FocusedArea;
+import net.agent59.spell.target.areas.SelfArea;
 import net.agent59.spell.target.areas.TargetArea;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -15,6 +17,9 @@ import net.minecraft.util.Identifier;
 public class TargetAreaTypes {
     public static final Codec<TargetArea> CODEC = StSRegistries.TARGET_AREA_TYPE.getCodec()
             .dispatch("type", TargetArea::getType, TargetAreaType::codec);
+
+    public static final TargetAreaType<SelfArea> SELF = register("self", SelfArea.CODEC);
+    public static final TargetAreaType<FocusedArea> FOCUSED = register("focused", FocusedArea.CODEC);
 
     /**
      * This method may only be used to register the TargetArea types, the SpeechToSpell mod implements directly.
