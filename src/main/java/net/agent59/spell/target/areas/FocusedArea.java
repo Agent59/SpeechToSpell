@@ -52,7 +52,7 @@ public record FocusedArea(int range, int clearance, boolean fluidsBlock, boolean
             case BLOCK -> pos = ((BlockHitResult) hit).getBlockPos();
             case ENTITY -> pos = ((EntityHitResult) hit).getEntity().getBlockPos();
         }
-        boolean invalidSky = needClearSky && !caster.getWorld().isSkyVisible(pos);
+        boolean invalidSky = needClearSky && !caster.getWorld().isSkyVisible(pos.up());
         return (invalidSky || pos.isWithinDistance(referencePos, this.clearance) || !predicate.test(pos)) ?
                 List.of() : List.of(pos);
     }
