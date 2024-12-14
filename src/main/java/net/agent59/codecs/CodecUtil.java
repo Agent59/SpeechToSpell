@@ -2,6 +2,7 @@ package net.agent59.codecs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
@@ -73,6 +74,16 @@ public class CodecUtil {
                         DataResult.success((T) item) :
                         DataResult.error(() -> "Item " + item + " is not of type " + itemClass),
                 item -> item
+        );
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Block> Codec<T> getBlockClassSpecificCodec(Class<T> blockClass) {
+        return Registries.BLOCK.getCodec().comapFlatMap(
+                block -> blockClass.isInstance(block) ?
+                        DataResult.success((T) block) :
+                        DataResult.error(() -> "Block " + block + " is not of type " + blockClass),
+                block -> block
         );
     }
 }
