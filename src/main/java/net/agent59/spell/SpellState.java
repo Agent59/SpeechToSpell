@@ -143,6 +143,16 @@ public class SpellState {
             madeChanges = true;
         }
 
+        if (this.remainingCooldown > this.spell.getCooldownTime()) { // If the cooldown got shortened
+            this.remainingCooldown = this.spell.getCooldownTime();
+            madeChanges = true;
+        }
+
+        if (this.remainingCastingTicks > this.spell.getCastingTime()) { // If the casting time got shortened
+            this.remainingCastingTicks = this.spell.getCastingTime();
+            madeChanges = true;
+        }
+
         return madeChanges;
     }
 
